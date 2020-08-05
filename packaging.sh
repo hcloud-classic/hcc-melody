@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PWD=$(pwd)
-FILE_LIST="$(ls $PWD/tmp_melody/*.proto)"
+FILE_LIST="$(ls $PWD/melody/*.proto)"
 
 if [ $# -ne 1 ]
 then
