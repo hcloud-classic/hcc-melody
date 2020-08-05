@@ -16,9 +16,10 @@ syntax = "proto3";
 
 package MsgType;
 import "google/protobuf/timestamp.proto";
-//import "google/protobuf/any.proto";
 
+message Empty {}
 
+// Flute
 message Node{
   string    uuid = 1;
   string    bmc_mac_addr = 2;
@@ -33,6 +34,7 @@ message Node{
   bool      force_off = 11;
 }
 
+// Violin
 message Server {
   string uuid = 1;
   string subnet_uuid = 2;
@@ -62,4 +64,41 @@ message ServerNode {
   string server_uuid = 2;
   string node_uuid = 3;
   google.protobuf.Timestamp create_at = 4;
+}
+
+// Harp
+message Subnet {
+  string uuid = 1;
+  string network_ip = 2;
+  string netmask = 3;
+  string gateway = 4;
+  string next_server = 5;
+  string name_server = 6;
+  string domain_name = 7;
+  string server_uuid = 8;
+  string leader_node_uuid = 9;
+  string os = 10;
+  string subnet_name = 11;
+  google.protobuf.Timestamp created_at = 12;
+}
+
+message AdaptiveIPSetting {
+  string ext_iface_ip_address = 1;
+  string netmask = 2;
+  string gateway = 3;
+  string start_ip_address = 4;
+  string end_ip_address = 5;
+}
+
+message AdaptiveIPAvailableIPList {
+  repeated string available_ip = 1;
+}
+
+message AdaptiveIPServer {
+  string server_uuid = 1;
+  string public_ip = 2;
+  string private_ip = 3;
+  string private_gateway = 4;
+  string status = 5;
+  string created_at = 6;
 }
