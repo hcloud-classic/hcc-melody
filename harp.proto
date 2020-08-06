@@ -135,11 +135,11 @@ message ResGetAdaptiveIPServerNum {
 }
 
 message ReqDeleteAdaptiveIPServer {
-  string UUID = 1;
+  string serverUUID = 1;
 }
 
 message ResDeleteAdaptiveIPServer {
-  string UUID = 1;
+  string serverUUID = 1;
 }
 
 // DHCPD
