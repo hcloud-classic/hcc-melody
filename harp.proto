@@ -1,12 +1,11 @@
 syntax = "proto3";
-option go_package = "hcc/harp";
 package pb;
 import "google/protobuf/timestamp.proto";
 
 service Harp {
   // Subnet
   rpc CreateSubnet (Subnet) returns (Subnet) {}
-  rpc GetSubnet (UUID) returns (Subnet) {}
+  rpc GetSubnet (ReqHarp) returns (ResHarp) {}
   rpc GetSubnetList (GetSubnetListRequest) returns (SubnetList) {}
   rpc GetSubnetNum (empty) returns (SubnetNum) {}
   rpc UpdateSubnet (Subnet) returns (Subnet) {}
@@ -27,6 +26,7 @@ service Harp {
 }
 
 message empty {}
+
 
 message UUID {
   string uuid = 1;
@@ -111,4 +111,12 @@ message AdaptiveIPServerNum {
 message CreateDHPCDConfRequest {
   string subnet_uuid = 1;
   string node_uuids = 2;
+}
+
+message ReqHarp {
+  repeated Subnet subnet = 1;
+}
+
+message ResHarp {
+  repeated Subnet subnet = 1;
 }
