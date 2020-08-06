@@ -103,7 +103,7 @@ message AdaptiveIPSetting {
   string    ext_ifaceIP_address = 1;
   string    netmask = 2;
   string    gateway_address = 3;
-  string    stratIP_address = 4;
+  string    startIP_address = 4;
   string    endIP_address = 5;
 }
 
