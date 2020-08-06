@@ -104,8 +104,8 @@ message ResGetAdaptiveIPAvailableIPList {
 }
 
 message ReqCreateAdaptiveIPServer {
-  string server_UUID = 1;
-  string public_IP = 2;
+  string serverUUID = 1;
+  string publicIP = 2;
 }
 
 message ResCreateAdaptiveIPServer {
@@ -144,8 +144,8 @@ message ResDeleteAdaptiveIPServer {
 
 // DHCPD
 message ReqCreateDHPCDConf {
-  string subnet_UUID = 1;
-  string node_UUIDs = 2;
+  string subnetUUID = 1;
+  string nodeUUIDs = 2;
 }
 
 message ResCreateDHPCDConf {
