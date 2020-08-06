@@ -35,7 +35,7 @@ message ResCreateSubnet {
 }
 
 message ReqGetSubnet {
-  string uuid = 1;
+  string UUID = 1;
 }
 
 message ResGetSubnet {
@@ -74,46 +74,46 @@ message ResDeleteSubnet {
 
 // AdaptiveIP
 message ReqCreateAdaptiveIPSetting {
-  MsgType.AdaptiveIPSetting adaptive_setting = 1;
+  MsgType.AdaptiveIPSetting adaptiveIP_setting = 1;
 }
 
 message ResCreateAdaptiveIPSetting {
-  MsgType.AdaptiveIPSetting adaptive_setting = 1;
+  MsgType.AdaptiveIPSetting adaptiveIP_setting = 1;
 }
 
 message ResGetAdaptiveIPSetting {
-  MsgType.AdaptiveIPSetting adaptive_setting = 1;
+  MsgType.AdaptiveIPSetting adaptiveIP_setting = 1;
 }
 
 message ResGetAdaptiveIPAvailableIPList {
-  MsgType.AdaptiveIPAvailableIPList adaptiveip_available_ip_list = 1;
+  MsgType.AdaptiveIPAvailableIPList adaptiveIP_available_IP_list = 1;
 }
 
 message ReqCreateAdaptiveIPServer {
-  string server_uuid = 1;
-  string public_ip = 2;
+  string server_UUID = 1;
+  string public_IP = 2;
 }
 
 message ResCreateAdaptiveIPServer {
-  MsgType.AdaptiveIPServer adaptiveip_server = 1;
+  MsgType.AdaptiveIPServer adaptiveIP_server = 1;
 }
 
 message ReqGetAdaptiveIPServer {
-  string uuid = 1;
+  string UUID = 1;
 }
 
 message ResGetAdaptiveIPServer {
-  MsgType.AdaptiveIPServer adaptiveip_server = 1;
+  MsgType.AdaptiveIPServer adaptiveIP_server = 1;
 }
 
 message ReqGetAdaptiveIPServerList {
-  MsgType.AdaptiveIPServer adaptiveip_server = 1;
+  MsgType.AdaptiveIPServer adaptiveIP_server = 1;
   int64 row = 2;
   int64 page = 3;
 }
 
 message ResGetAdaptiveIPServerList {
-  repeated MsgType.AdaptiveIPServer adaptiveip_server = 1;
+  repeated MsgType.AdaptiveIPServer adaptiveIP_server = 1;
 }
 
 message ResGetAdaptiveIPServerNum {
@@ -121,17 +121,17 @@ message ResGetAdaptiveIPServerNum {
 }
 
 message ReqDeleteAdaptiveIPServer {
-  string uuid = 1;
+  string UUID = 1;
 }
 
 message ResDeleteAdaptiveIPServer {
-  string uuid = 1;
+  string UUID = 1;
 }
 
 // DHCPD
 message ReqCreateDHPCDConf {
-  string subnet_uuid = 1;
-  string node_uuids = 2;
+  string subnet_UUID = 1;
+  string node_UUIDs = 2;
 }
 
 message ResCreateDHPCDConf {
