@@ -99,12 +99,16 @@ message Ipmi {
 }
 
 // Harp
-message AdaptiveIP {
+message AdaptiveIPSetting {
   string    ext_iface_IP_address = 1;
   string    netmask = 2;
   string    gateway_address = 3;
   string    strat_IP_address = 4;
   string    end_IP_address = 5;
+}
+
+message AdaptiveIPAvailableIPList {
+  repeated string available_ip = 1;
 }
 
 message AdaptiveIPServer {
