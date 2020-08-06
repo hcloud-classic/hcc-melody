@@ -45,7 +45,7 @@ message NodeDetail {
 // Violin
 message Server {
   string    UUID = 1;
-  string    subnet_UUID = 2;
+  string    subnetUUID = 2;
   string    OS = 3;
   string    server_name = 4;
   string    server_desc = 5;
@@ -53,20 +53,20 @@ message Server {
   int32     memory = 7;
   int32     disk_size = 8;
   string    status = 9;
-  string    user_UUID = 10;
+  string    userUUID = 10;
   google.protobuf.Timestamp create_at = 11;
 }
 
 message ServerNode {
   string    UUID = 1;
-  string    server_UUID = 2;
-  string    node_UUID = 3;
+  string    serverUUID = 2;
+  string    nodeUUID = 3;
   google.protobuf.Timestamp create_at = 4;
 }
 
 message VNC {
   string    session_id = 1;
-  string    server_UUID = 2;
+  string    serverUUID = 2;
   enum VNCAction {
     CREATE = 0;
     DELETE = 1;
@@ -79,17 +79,17 @@ message Volume {
   string    UUID = 1;
   string    size = 2;
   string    filesystem = 3;
-  string    server_UUID = 4;
+  string    serverUUID = 4;
   string    use_type = 5;
-  string    user_UUID = 6;
+  string    userUUID = 6;
   google.protobuf.Timestamp create_at = 7;
   string    network_IP = 8;
 }
 
 message VolumeAttachment {
   string    UUID = 1;
-  string    volume_UUID = 2;
-  string    server_UUID = 3;
+  string    volumeUUID = 2;
+  string    serverUUID = 3;
   google.protobuf.Timestamp create_at = 4;
   google.protobuf.Timestamp update_at = 5;
 }
@@ -100,11 +100,11 @@ message Ipmi {
 
 // Harp
 message AdaptiveIPSetting {
-  string    ext_iface_IP_address = 1;
+  string    ext_ifaceIP_address = 1;
   string    netmask = 2;
   string    gateway_address = 3;
-  string    strat_IP_address = 4;
-  string    end_IP_address = 5;
+  string    stratIP_address = 4;
+  string    endIP_address = 5;
 }
 
 message AdaptiveIPAvailableIPList {
@@ -112,9 +112,9 @@ message AdaptiveIPAvailableIPList {
 }
 
 message AdaptiveIPServer {
-  string    server_UUID = 1;
-  string    public_IP = 2;
-  string    private_IP = 3;
+  string    serverUUID = 1;
+  string    publicIP = 2;
+  string    privateIP = 3;
   string    private_gateway = 4;
   string    status = 5;
   google.protobuf.Timestamp create_at = 6;
@@ -122,14 +122,14 @@ message AdaptiveIPServer {
 
 message Subnet {
   string    UUID = 1;
-  string    network_IP = 2;
+  string    networkIP = 2;
   string    netmask = 3;
   string    gateway = 4;
   string    next_server = 5;
   string    name_server = 6;
   string    domain_name = 7;
-  string    server_UUID = 8;
-  string    leader_node_UUID = 9;
+  string    serverUUID = 8;
+  string    leader_nodeUUID = 9;
   string    OS = 10;
   string    subnet_name = 11;
   google.protobuf.Timestamp create_at = 12;
@@ -157,7 +157,7 @@ message HccAction {
   string    action_class = 2;
   string    action_scope = 3;
   string    IPrange = 4;
-  string    server_UUID = 5;
+  string    serverUUID = 5;
 }
 
 message Action {
