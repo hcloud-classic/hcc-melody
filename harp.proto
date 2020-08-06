@@ -113,7 +113,7 @@ message ResCreateAdaptiveIPServer {
 }
 
 message ReqGetAdaptiveIPServer {
-  string UUID = 1;
+  string serverUUID = 1;
 }
 
 message ResGetAdaptiveIPServer {
