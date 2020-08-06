@@ -126,7 +126,7 @@ message Subnet {
   string    domain_name = 7;
   string    server_UUID = 8;
   string    leader_node_UUID = 9;
-  string    OS  = 10;
+  string    OS = 10;
   string    subnet_name = 11;
   google.protobuf.Timestamp create_at = 12;
 }
@@ -145,15 +145,30 @@ message Telegraf {
 }
 
 // Viola
-message HccAction {
-  string    hcc_command = 1;
-  string    hcc_IP_range = 2;
-  string    server_UUID = 3;
+message NormalAction {
 }
 
-message Quota {
-  string    server_UUID = 1;
-  int32     CPU = 2;
-  int32     memory = 3;
-  int32     number_of_nodes = 4;
+message HccAction {
+  string    action_area = 1;
+  string    action_class = 2;
+  string    action_scope = 3;
+  string    IPrange = 4;
+  string    server_UUID = 5;
+}
+
+message Action {
+  string          action_type = 1;
+  NormalAction    normal_action = 2;
+  HccAction       hcc_action = 3;
+  string          action_result = 4;
+}
+
+message Control {
+  Action action = 1;
+  string publisher = 2;
+  string receiver = 3;
+}
+
+message Controls {
+  repeated Control control = 1;
 }
