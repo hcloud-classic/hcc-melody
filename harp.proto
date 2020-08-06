@@ -79,11 +79,11 @@ message ResUpdateSubnet {
 }
 
 message ReqDeleteSubnet {
-  string uuid = 1;
+  string UUID = 1;
 }
 
 message ResDeleteSubnet {
-  string uuid = 1;
+  string UUID = 1;
 }
 
 // AdaptiveIP
