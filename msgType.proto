@@ -25,7 +25,7 @@ message Node {
   string    UUID = 1;
   string    serverUUID = 2;
   string    bmc_mac_addr = 3;
-  string    bmc_ip = 4;
+  string    bmcIP = 4;
   string    PXE_mac_addr = 5;
   string    status = 6;
   int32     CPU_cores = 7;
