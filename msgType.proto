@@ -21,22 +21,23 @@ import "google/protobuf/timestamp.proto";
 message Empty {}
 
 // Flute
-message Node{
+message Node {
   string    UUID = 1;
-  string    bmc_mac_addr = 2;
-  string    bmc_ip = 3;
-  string    PXE_mac_addr = 4;
-  string    status = 5;
-  string    description = 6;
+  string    serverUUID = 2;
+  string    bmc_mac_addr = 3;
+  string    bmc_ip = 4;
+  string    PXE_mac_addr = 5;
+  string    status = 6;
   int32     CPU_cores = 7;
   int32     memory = 8;
-  int32     active = 9;
+  string    description = 9;
   google.protobuf.Timestamp created_at = 10;
-  bool      force_off = 11;
+  int32     active = 11;
+  bool      force_off = 12;
 }
 
 message NodeDetail {
-  string    node_UUID = 1;
+  string    nodeUUID = 1;
   string    CPU_model = 2;
   int32     CPU_processor = 3;
   int32     CPU_thread = 4;
@@ -92,10 +93,6 @@ message VolumeAttachment {
   string    serverUUID = 3;
   google.protobuf.Timestamp created_at = 4;
   google.protobuf.Timestamp updated_at = 5;
-}
-
-message Ipmi {
-  string    UUID = 1;
 }
 
 // Harp
