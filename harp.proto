@@ -22,6 +22,7 @@ service Harp {
   // Subnet
   rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet) {}
   rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet) {}
+  rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer) {}
   rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList) {}
   rpc GetSubnetNum (MsgType.Empty) returns (ResGetSubnetNum) {}
   rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet) {}
@@ -50,10 +51,17 @@ message ResCreateSubnet {
 
 message ReqGetSubnet {
   string UUID = 1;
-  string serverUUID = 2;
 }
 
 message ResGetSubnet {
+  MsgType.Subnet subnet = 1;
+}
+
+message ReqGetSubnetByServer {
+  string serverUUID = 1;
+}
+
+message ResGetSubnetByServer {
   MsgType.Subnet subnet = 1;
 }
 
