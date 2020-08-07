@@ -1,4 +1,4 @@
-// Copyright 2020 by YounSeok.Shim.
+// Copyright 2020 by YounSeok.Shim and ish.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,7 +19,14 @@ import public "msgType.proto";
 
 
 service Flute {
-  rpc CreateNode (ReqFlute) returns (ResFlute) {}
+  // Node
+  rpc CreateNode (ReqCreateNode) returns (ResCreateNode) {}
+  rpc GetNode (ReqGetNode) returns (ResGetNode) {}
+  rpc GetNodeList (ReqGetNodeList) returns (ResGetNodeList) {}
+  rpc GetNodeNum (MsgType.Empty) returns (ResGetNodeNum) {}
+  rpc UpdateNode (ReqUpdateNode) returns (ResUpdateNode) {}
+  rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode) {}
+  // IPMI
   rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl) {}
 }
 
@@ -38,6 +45,36 @@ message ReqGetNode {
 
 message ResGetNode {
   MsgType.Node node = 1;
+}
+
+message ReqGetNodeList {
+  MsgType.Node node = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetNodeList {
+  repeated MsgType.Node node = 1;
+}
+
+message ResGetNodeNum {
+  int64 num = 1;
+}
+
+message ReqUpdateNode {
+  MsgType.Node node = 1;
+}
+
+message ResUpdateNode {
+  MsgType.Node node = 1;
+}
+
+message ReqDeleteNode {
+  string UUID = 1;
+}
+
+message ResDeleteNode {
+  string UUID = 1;
 }
 
 // IPMI
