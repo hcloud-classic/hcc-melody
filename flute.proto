@@ -19,11 +19,11 @@ import public "msgType.proto";
 
 
 service Flute {
-  rpc OnOffNode (ReqOnOffNode) returns (ResOnOffNode) {}
+  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl) {}
   rpc CreateNode (ReqFlute) returns (ResFlute) {}
 }
 
-message ReqOnOffNode {
+message ReqNodePowerControl {
   repeated MsgType.Node nodes = 1;
   enum PowerState {
     ON = 0;
@@ -35,7 +35,7 @@ message ReqOnOffNode {
   PowerState power_state = 2;
 }
 
-message ResOnOffNode {
+message ResNodePowerControl {
   repeated MsgType.Node nodes = 1;
 }
 
