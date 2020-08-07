@@ -28,6 +28,7 @@ service Flute {
   rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode) {}
   // IPMI
   rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl) {}
+  rpc GetNodePowerState (ReqNodePowerState) returns (ResNodePowerState) {}
 }
 
 // Node
