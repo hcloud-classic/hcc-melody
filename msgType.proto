@@ -1,4 +1,4 @@
-// Copyright 2015 gRPC authors.
+// Copyright 2020 HCC authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,31 +18,35 @@ package MsgType;
 import "google/protobuf/timestamp.proto";
 //import "google/protobuf/any.proto";
 
+message Empty {}
 
-message Node{
+// Flute
+message Node {
   string    UUID = 1;
-  string    bmc_mac_addr = 2;
-  string    bmc_ip = 3;
-  string    PXE_mac_addr = 4;
-  string    status = 5;
-  string    description = 6;
+  string    serverUUID = 2;
+  string    bmc_mac_addr = 3;
+  string    bmc_ip = 4;
+  string    PXE_mac_addr = 5;
+  string    status = 6;
   int32     CPU_cores = 7;
   int32     memory = 8;
-  int32     active = 9;
-  google.protobuf.Timestamp create_at = 10;
-  bool      force_off = 11;
+  string    description = 9;
+  google.protobuf.Timestamp created_at = 10;
+  int32     active = 11;
+  bool      force_off = 12;
 }
 
 message NodeDetail {
-  string    node_UUID = 1;
+  string    nodeUUID = 1;
   string    CPU_model = 2;
   int32     CPU_processor = 3;
   int32     CPU_thread = 4;
 }
 
+// Violin
 message Server {
   string    UUID = 1;
-  string    subnet_UUID = 2;
+  string    subnetUUID = 2;
   string    OS = 3;
   string    server_name = 4;
   string    server_desc = 5;
@@ -50,15 +54,15 @@ message Server {
   int32     memory = 7;
   int32     disk_size = 8;
   string    status = 9;
-  string    user_UUID = 10;
-  google.protobuf.Timestamp create_at = 11;
+  string    userUUID = 10;
+  google.protobuf.Timestamp created_at = 11;
 }
 
 message ServerNode {
   string    UUID = 1;
-  string    server_UUID = 2;
-  string    node_UUID = 3;
-  google.protobuf.Timestamp create_at = 4;
+  string    serverUUID = 2;
+  string    nodeUUID = 3;
+  google.protobuf.Timestamp created_at = 4;
 }
 
 message VNC {
@@ -67,61 +71,64 @@ message VNC {
   string    action = 3;
 }
 
+// Cello
 message Volume {
   string    UUID = 1;
   string    size = 2;
   string    filesystem = 3;
-  string    server_UUID = 4;
+  string    serverUUID = 4;
   string    use_type = 5;
-  string    user_UUID = 6;
-  google.protobuf.Timestamp create_at = 7;
+  string    userUUID = 6;
+  google.protobuf.Timestamp created_at = 7;
   string    network_IP = 8;
 }
 
 message VolumeAttachment {
   string    UUID = 1;
-  string    volume_UUID = 2;
-  string    server_UUID = 3;
-  google.protobuf.Timestamp create_at = 4;
-  google.protobuf.Timestamp update_at = 5;
+  string    volumeUUID = 2;
+  string    serverUUID = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
 }
 
-message Ipmi {
-  string    UUID = 1;
-}
-
-message AdaptiveIP {
-  string    ext_iface_IP_address = 1;
+// Harp
+message AdaptiveIPSetting {
+  string    ext_ifaceIP_address = 1;
   string    netmask = 2;
   string    gateway_address = 3;
-  string    strat_IP_address = 4;
-  string    end_IP_address = 5;
+  string    startIP_address = 4;
+  string    endIP_address = 5;
+}
+
+message AdaptiveIPAvailableIPList {
+  repeated string available_ip = 1;
 }
 
 message AdaptiveIPServer {
-  string    server_UUID = 1;
-  string    public_IP = 2;
-  string    private_IP = 3;
+  string    serverUUID = 1;
+  string    publicIP = 2;
+  string    privateIP = 3;
   string    private_gateway = 4;
   string    status = 5;
-  google.protobuf.Timestamp create_at = 6;
+  google.protobuf.Timestamp created_at = 6;
 }
 
 message Subnet {
   string    UUID = 1;
-  string    network_IP = 2;
+  string    networkIP = 2;
   string    netmask = 3;
   string    gateway = 4;
   string    next_server = 5;
   string    name_server = 6;
   string    domain_name = 7;
-  string    server_UUID = 8;
-  string    leader_node_UUID = 9;
-  string    OS  = 10;
+  string    serverUUID = 8;
+  string    leader_nodeUUID = 9;
+  string    OS = 10;
   string    subnet_name = 11;
-  google.protobuf.Timestamp create_at = 12;
+  google.protobuf.Timestamp created_at = 12;
 }
 
+// Piano
 message Series {
   int64 time = 1;
   int64 value = 2;
@@ -134,16 +141,31 @@ message Telegraf {
   repeated Series series = 4;
 }
 
+// Viola
+message NormalAction {
+}
+
+message HccAction {
+  string    action_area = 1;
+  string    action_class = 2;
+  string    action_scope = 3;
+  string    IPrange = 4;
+  string    serverUUID = 5;
+}
+
+message Action {
+  string          action_type = 1;
+  NormalAction    normal_action = 2;
+  HccAction       hcc_action = 3;
+  string          action_result = 4;
+}
+
 message Control {
-  string    hcc_command = 1;
-  string    hcc_IP_range = 2;
-  string    server_UUID = 3;
+  Action action = 1;
+  string publisher = 2;
+  string receiver = 3;
 }
 
-message Quota {
-  string    server_UUID = 1;
-  int32     CPU = 2;
-  int32     memory = 3;
-  int32     number_of_nodes = 4;
+message Controls {
+  repeated Control control = 1;
 }
-

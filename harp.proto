@@ -1,122 +1,153 @@
+// Copyright 2020 by ish.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 syntax = "proto3";
-package pb;
-import "google/protobuf/timestamp.proto";
+
+package RpcHarp;
+
+import public "msgType.proto";
 
 service Harp {
   // Subnet
-  rpc CreateSubnet (Subnet) returns (Subnet) {}
-  rpc GetSubnet (ReqHarp) returns (ResHarp) {}
-  rpc GetSubnetList (GetSubnetListRequest) returns (SubnetList) {}
-  rpc GetSubnetNum (empty) returns (SubnetNum) {}
-  rpc UpdateSubnet (Subnet) returns (Subnet) {}
-  rpc DeleteSubnet (UUID) returns (UUID) {}
-
+  rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet) {}
+  rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet) {}
+  rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList) {}
+  rpc GetSubnetNum (MsgType.Empty) returns (ResGetSubnetNum) {}
+  rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet) {}
+  rpc DeleteSubnet (ReqDeleteSubnet) returns (ResDeleteSubnet) {}
   // AdaptiveIP
-  rpc CreateAdaptiveIPSetting (AdaptiveIPSetting) returns (AdaptiveIPSetting) {}
-  rpc GetAdaptiveIPSetting (empty) returns (AdaptiveIPSetting) {}
-  rpc GetAdaptiveIPAvailableIPList (empty) returns (AdaptiveIPAvailableIPList) {}
-  rpc CreateAdaptiveIPServer (CreateAdaptiveIPServerRequest) returns (AdaptiveIPServer) {}
-  rpc GetAdaptiveIPServer (UUID) returns (AdaptiveIPServer) {}
-  rpc GetAdaptiveIPServerList (GetAdaptiveIPServerListRequest) returns (AdaptiveIPServerList) {}
-  rpc GetAdaptiveIPServerNum (empty) returns (AdaptiveIPServerNum) {}
-  rpc DeleteAdaptiveIPServer (UUID) returns (UUID) {}
-
+  rpc CreateAdaptiveIPSetting (ReqCreateAdaptiveIPSetting) returns (ResCreateAdaptiveIPSetting) {}
+  rpc GetAdaptiveIPSetting (MsgType.Empty) returns (ResGetAdaptiveIPSetting) {}
+  rpc GetAdaptiveIPAvailableIPList (MsgType.Empty) returns (ResGetAdaptiveIPAvailableIPList) {}
+  rpc CreateAdaptiveIPServer (ReqCreateAdaptiveIPServer) returns (ResCreateAdaptiveIPServer) {}
+  rpc GetAdaptiveIPServer (ReqGetAdaptiveIPServer) returns (ResGetAdaptiveIPServer) {}
+  rpc GetAdaptiveIPServerList (ReqGetAdaptiveIPServerList) returns (ResGetAdaptiveIPServerList) {}
+  rpc GetAdaptiveIPServerNum (MsgType.Empty) returns (ResGetAdaptiveIPServerNum) {}
+  rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer) {}
   // DHCPD
-  rpc CreateDHPCDConf (CreateDHPCDConfRequest) returns (Result) {}
-}
-
-message empty {}
-
-
-message UUID {
-  string uuid = 1;
-}
-
-message Result {
-  string result = 1;
+  rpc CreateDHPCDConf (ReqCreateDHPCDConf) returns (ResCreateDHPCDConf) {}
 }
 
 // Subnet
-message Subnet {
-  UUID uuid = 1;
-  string network_ip = 2;
-  string netmask = 3;
-  string gateway = 4;
-  string next_server = 5;
-  string name_server = 6;
-  string domain_name = 7;
-  string server_uuid = 8;
-  string leader_node_uuid = 9;
-  string os = 10;
-  string subnet_name = 11;
-  google.protobuf.Timestamp created_at = 12;
+message ReqCreateSubnet {
+  MsgType.Subnet subnet = 1;
 }
 
-message SubnetList {
-  repeated Subnet subnet = 1;
+message ResCreateSubnet {
+  MsgType.Subnet subnet = 1;
 }
 
-message GetSubnetListRequest {
-  Subnet subnet = 1;
+message ReqGetSubnet {
+  string UUID = 1;
+}
+
+message ResGetSubnet {
+  MsgType.Subnet subnet = 1;
+}
+
+message ReqGetSubnetList {
+  MsgType.Subnet subnet = 1;
   int64 row = 2;
   int64 page = 3;
 }
 
-message SubnetNum {
+message ResGetSubnetList {
+  repeated MsgType.Subnet subnet = 1;
+}
+
+message ResGetSubnetNum {
   int64 num = 1;
+}
+
+message ReqUpdateSubnet {
+  MsgType.Subnet subnet = 1;
+}
+
+message ResUpdateSubnet {
+  MsgType.Subnet subnet = 1;
+}
+
+message ReqDeleteSubnet {
+  string UUID = 1;
+}
+
+message ResDeleteSubnet {
+  string UUID = 1;
 }
 
 // AdaptiveIP
-message AdaptiveIPSetting {
-  string ext_iface_ip_address = 1;
-  string netmask = 2;
-  string gateway = 3;
-  string start_ip_address = 4;
-  string end_ip_address = 5;
+message ReqCreateAdaptiveIPSetting {
+  MsgType.AdaptiveIPSetting adaptiveIP_setting = 1;
 }
 
-message AdaptiveIPAvailableIPList {
-  repeated string available_ip = 1;
+message ResCreateAdaptiveIPSetting {
+  MsgType.AdaptiveIPSetting adaptiveIP_setting = 1;
 }
 
-message AdaptiveIPServer {
-  string server_uuid = 1;
-  string public_ip = 2;
-  string private_ip = 3;
-  string private_gateway = 4;
-  string status = 5;
-  string created_at = 6;
+message ResGetAdaptiveIPSetting {
+  MsgType.AdaptiveIPSetting adaptiveIP_setting = 1;
 }
 
-message AdaptiveIPServerList {
-  repeated AdaptiveIPServer adaptive_ip_server = 1;
+message ResGetAdaptiveIPAvailableIPList {
+  MsgType.AdaptiveIPAvailableIPList adaptiveIP_available_IP_list = 1;
 }
 
-message CreateAdaptiveIPServerRequest {
-  string server_uuid = 1;
-  string public_ip = 2;
+message ReqCreateAdaptiveIPServer {
+  string serverUUID = 1;
+  string publicIP = 2;
 }
 
-message GetAdaptiveIPServerListRequest {
-  AdaptiveIPServer adaptive_ip_server = 1;
+message ResCreateAdaptiveIPServer {
+  MsgType.AdaptiveIPServer adaptiveIP_server = 1;
+}
+
+message ReqGetAdaptiveIPServer {
+  string serverUUID = 1;
+}
+
+message ResGetAdaptiveIPServer {
+  MsgType.AdaptiveIPServer adaptiveIP_server = 1;
+}
+
+message ReqGetAdaptiveIPServerList {
+  MsgType.AdaptiveIPServer adaptiveIP_server = 1;
   int64 row = 2;
   int64 page = 3;
 }
 
-message AdaptiveIPServerNum {
+message ResGetAdaptiveIPServerList {
+  repeated MsgType.AdaptiveIPServer adaptiveIP_server = 1;
+}
+
+message ResGetAdaptiveIPServerNum {
   int64 num = 1;
 }
 
+message ReqDeleteAdaptiveIPServer {
+  string serverUUID = 1;
+}
+
+message ResDeleteAdaptiveIPServer {
+  string serverUUID = 1;
+}
+
 // DHCPD
-message CreateDHPCDConfRequest {
-  string subnet_uuid = 1;
-  string node_uuids = 2;
+message ReqCreateDHPCDConf {
+  string subnetUUID = 1;
+  string nodeUUIDs = 2;
 }
 
-message ReqHarp {
-  repeated Subnet subnet = 1;
-}
-
-message ResHarp {
-  repeated Subnet subnet = 1;
+message ResCreateDHPCDConf {
+  string result = 1;
 }
