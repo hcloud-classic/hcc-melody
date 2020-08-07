@@ -100,11 +100,11 @@ message ResGetNodeDetail {
 }
 
 message ReqDeleteNodeDetail {
-  string UUID = 1;
+  string nodeUUID = 1;
 }
 
 message ResDeleteNodeDetail {
-  string UUID = 1;
+  string nodeUUID = 1;
 }
 
 // IPMI
