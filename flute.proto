@@ -29,14 +29,13 @@ message ReqNodePowerControl {
     ON = 0;
     OFF = 1;
     FORCE_OFF = 2;
-    RESTART = 3;
-    FORCE_RESTART = 4;
+    FORCE_RESTART = 3;
   }
   PowerState power_state = 2;
 }
 
 message ResNodePowerControl {
-  repeated MsgType.Node nodes = 1;
+  repeated string result = 1;
 }
 
 message ReqFlute {
