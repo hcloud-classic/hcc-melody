@@ -19,10 +19,28 @@ import public "msgType.proto";
 
 
 service Flute {
-  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl) {}
   rpc CreateNode (ReqFlute) returns (ResFlute) {}
+  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl) {}
 }
 
+// Node
+message ReqCreateNode {
+  MsgType.Node node = 1;
+}
+
+message ResCreateNode {
+  MsgType.Node node = 1;
+}
+
+message ReqGetNode {
+  string UUID = 1;
+}
+
+message ResGetNode {
+  MsgType.Node node = 1;
+}
+
+// IPMI
 message ReqNodePowerControl {
   repeated MsgType.Node nodes = 1;
   enum PowerState {
@@ -36,12 +54,4 @@ message ReqNodePowerControl {
 
 message ResNodePowerControl {
   repeated string result = 1;
-}
-
-message ReqFlute {
-  repeated MsgType.Node nodes = 1;
-}
-
-message ResFlute {
-  repeated MsgType.Node nodes = 1;
 }
