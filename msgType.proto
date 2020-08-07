@@ -62,13 +62,9 @@ message ServerNode {
 }
 
 message VNC {
-  string    session_id = 1;
+  string    token = 1;
   string    server_UUID = 2;
-  enum VNCAction {
-    CREATE = 0;
-    DELETE = 1;
-  }
-  VNCAction action = 3;
+  string    action = 3;
 }
 
 message Volume {
