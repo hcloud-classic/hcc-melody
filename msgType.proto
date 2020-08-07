@@ -67,7 +67,7 @@ message ServerNode {
 
 message VNC {
   string    token = 1;
-  string    server_UUID = 2;
+  string    serverUUID = 2;
   string    action = 3;
 }
 
