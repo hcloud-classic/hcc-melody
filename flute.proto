@@ -92,3 +92,11 @@ message ReqNodePowerControl {
 message ResNodePowerControl {
   repeated string result = 1;
 }
+
+message ReqNodePowerState {
+  string UUID = 1;
+}
+
+message ResNodePowerState {
+  string result = 1;
+}
