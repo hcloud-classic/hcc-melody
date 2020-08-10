@@ -25,7 +25,7 @@ message Node {
   string    UUID = 1;
   string    serverUUID = 2;
   string    bmc_mac_addr = 3;
-  string    bmc_ip = 4;
+  string    bmcIP = 4;
   string    PXE_mac_addr = 5;
   string    status = 6;
   int32     CPU_cores = 7;
@@ -39,8 +39,8 @@ message Node {
 message NodeDetail {
   string    nodeUUID = 1;
   string    CPU_model = 2;
-  int32     CPU_processor = 3;
-  int32     CPU_thread = 4;
+  int32     CPU_processors = 3;
+  int32     CPU_threads = 4;
 }
 
 // Violin
@@ -67,7 +67,7 @@ message ServerNode {
 
 message VNC {
   string    token = 1;
-  string    server_UUID = 2;
+  string    serverUUID = 2;
   string    action = 3;
 }
 

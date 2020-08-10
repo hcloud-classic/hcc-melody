@@ -1,4 +1,4 @@
-// Copyright 2020 by YounSeok.Shim.
+// Copyright 2020 by YounSeok.Shim and ish.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,28 +19,114 @@ import public "msgType.proto";
 
 
 service Flute {
-  rpc OnOffNode (ReqOnOffNode) returns (ResOnOffNode) {}
-  rpc CreateNode (ReqFlute) returns (ResFlute) {}
+  // Node
+  rpc CreateNode (ReqCreateNode) returns (ResCreateNode) {}
+  rpc GetNode (ReqGetNode) returns (ResGetNode) {}
+  rpc GetNodeList (ReqGetNodeList) returns (ResGetNodeList) {}
+  rpc GetNodeNum (MsgType.Empty) returns (ResGetNodeNum) {}
+  rpc UpdateNode (ReqUpdateNode) returns (ResUpdateNode) {}
+  rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode) {}
+  // NodeDetail
+  rpc CreateNodeDetail (ReqCreateNodeDetail) returns (ResCreateNodeDetail) {}
+  rpc GetNodeDetail (ReqGetNodeDetail) returns (ResGetNodeDetail) {}
+  rpc DeleteNodeDetail (ReqDeleteNodeDetail) returns (ResDeleteNodeDetail) {}
+  // IPMI
+  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl) {}
+  rpc GetNodePowerState (ReqNodePowerState) returns (ResNodePowerState) {}
 }
 
-message ReqOnOffNode {
+// Node
+message ReqCreateNode {
+  MsgType.Node node = 1;
+}
+
+message ResCreateNode {
+  MsgType.Node node = 1;
+}
+
+message ReqGetNode {
+  string UUID = 1;
+}
+
+message ResGetNode {
+  MsgType.Node node = 1;
+}
+
+message ReqGetNodeList {
+  MsgType.Node node = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetNodeList {
+  repeated MsgType.Node node = 1;
+}
+
+message ResGetNodeNum {
+  int64 num = 1;
+}
+
+message ReqUpdateNode {
+  MsgType.Node node = 1;
+}
+
+message ResUpdateNode {
+  MsgType.Node node = 1;
+}
+
+message ReqDeleteNode {
+  string UUID = 1;
+}
+
+message ResDeleteNode {
+  string UUID = 1;
+}
+
+// NodeDetail
+message ReqCreateNodeDetail {
+  MsgType.NodeDetail nodeDetail = 1;
+}
+
+message ResCreateNodeDetail {
+  MsgType.NodeDetail nodeDetail = 1;
+}
+
+message ReqGetNodeDetail {
+  string nodeUUID = 1;
+}
+
+message ResGetNodeDetail {
+  MsgType.NodeDetail nodeDetail = 1;
+}
+
+message ReqDeleteNodeDetail {
+  string nodeUUID = 1;
+}
+
+message ResDeleteNodeDetail {
+  string nodeUUID = 1;
+}
+
+// IPMI
+message ReqNodePowerControl {
   repeated MsgType.Node nodes = 1;
   enum PowerState {
     ON = 0;
     OFF = 1;
-    RESTART = 2;
+    FORCE_OFF = 2;
+    FORCE_RESTART = 3;
   }
   PowerState power_state = 2;
 }
 
-message ResOnOffNode {
-  repeated MsgType.Node nodes = 1;
+message ResNodePowerControl {
+  repeated string result = 1;
 }
 
-message ReqFlute {
-  repeated MsgType.Node nodes = 1;
+message ReqNodePowerState {
+  string UUID = 1;
 }
 
-message ResFlute {
-  repeated MsgType.Node nodes = 1;
+message ResNodePowerState {
+  string result = 1;
 }
