@@ -38,6 +38,7 @@ service Harp {
   rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer) {}
   // DHCPD
   rpc CreateDHPCDConf (ReqCreateDHPCDConf) returns (ResCreateDHPCDConf) {}
+  rpc DeleteDHPCDConf (ReqDeleteDHPCDConf) returns (ResDeleteDHPCDConf) {}
 }
 
 // Subnet
@@ -158,5 +159,13 @@ message ReqCreateDHPCDConf {
 }
 
 message ResCreateDHPCDConf {
+  string result = 1;
+}
+
+message ReqDeleteDHPCDConf {
+  string subnetUUID = 1;
+}
+
+message ResDeleteDHPCDConf {
   string result = 1;
 }
