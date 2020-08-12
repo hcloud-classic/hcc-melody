@@ -19,8 +19,8 @@ import public "msgType.proto";
 
 
 service novnc {
-  rpc CreateVNC (ReqNoVNC) returns (ResNoVNC) {}
-  rpc ControlVNC (ReqNoVNC) returns (ResNoVNC) {}
+  rpc CreateVNC  (ReqNoVNC) returns (ResNoVNC) {}
+  rpc ControlVNC (ReqControlVNC) returns (ResControlVNC) {}
 }
 
 message ReqNoVNC {
@@ -29,4 +29,12 @@ message ReqNoVNC {
 
 message ResNoVNC {
   repeated MsgType.VNC vncs = 1;
+}
+
+message ReqControlVNC {
+  MsgType.VNC vnc = 1;
+}
+
+message ResControlVNC {
+  string port = 1;
 }
