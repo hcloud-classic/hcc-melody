@@ -65,6 +65,13 @@ message ServerNode {
   google.protobuf.Timestamp created_at = 4;
 }
 
+message Quota {
+  string    ServerUUID = 1;
+  int32     CPU = 2;
+  int32     memory = 3;
+  int32     numberOfNodes = 4;
+}
+
 message VNC {
   string    token = 1;
   string    serverUUID = 2;
