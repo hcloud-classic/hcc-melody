@@ -37,6 +37,7 @@ service Violin {
 // Server
 message ReqCreateServer {
   MsgType.Server Server = 1;
+  int64 nrNode = 2;
 }
 
 message ResCreateServer {
