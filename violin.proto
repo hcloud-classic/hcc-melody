@@ -115,9 +115,9 @@ message ResGetServerNodeNum {
 }
 
 message ReqDeleteServerNode {
-  string UUID = 1;
+  string serverUUID = 1;
 }
 
 message ResDeleteServerNode {
-  string UUID = 1;
+  string serverUUID = 1;
 }
