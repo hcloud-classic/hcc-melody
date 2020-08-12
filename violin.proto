@@ -32,6 +32,7 @@ service Violin {
   rpc GetServerNodeList (ReqGetServerNodeList) returns (ResGetServerNodeList) {}
   rpc GetServerNodeNum (ReqGetServerNodeNum) returns (ResGetServerNodeNum) {}
   rpc DeleteServerNode (ReqDeleteServerNode) returns (ResDeleteServerNode) {}
+  rpc DeleteServerNodeByServerUUID (ReqDeleteServerNodeByServerUUID) returns (ResDeleteServerNodeByServerUUID) {}
 }
 
 // Server
@@ -120,4 +121,12 @@ message ReqDeleteServerNode {
 
 message ResDeleteServerNode {
   string UUID = 1;
+}
+
+message ReqDeleteServerNodeByServerUUID {
+  string serverUUID = 1;
+}
+
+message ResDeleteServerNodeByServerUUID {
+  string serverUUID = 1;
 }
