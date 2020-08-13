@@ -134,7 +134,7 @@ message Series {
   int64 value = 2;
 }
 
-message Telegraf {
+message MetricInfo {
   string    metric = 1;
   string    sub_metric = 2;
   string    UUID = 3;
