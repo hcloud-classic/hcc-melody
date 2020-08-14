@@ -17,28 +17,114 @@ syntax = "proto3";
 package RpcHarp;
 
 import public "msgType.proto";
+import "graphql.proto";
 
 service Harp {
+  option (graphql.service) = {
+    host: "192.168.110.10:7400"
+    insecure: true
+  };
+
   // Subnet
-  rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet) {}
-  rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet) {}
+  rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "create_subnet"
+    };
+  }
+  rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "subnet"
+    };
+  }
   rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer) {}
-  rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList) {}
-  rpc GetSubnetNum (MsgType.Empty) returns (ResGetSubnetNum) {}
-  rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet) {}
-  rpc DeleteSubnet (ReqDeleteSubnet) returns (ResDeleteSubnet) {}
+  rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "subnet_list"
+    };
+  }
+  rpc GetSubnetNum (MsgType.Empty) returns (ResGetSubnetNum) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "subnet_num"
+    };
+  }
+  rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "update_subnet"
+    };
+  }
+  rpc DeleteSubnet (ReqDeleteSubnet) returns (ResDeleteSubnet) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_subnet"
+    };
+  }
   // AdaptiveIP
-  rpc CreateAdaptiveIPSetting (ReqCreateAdaptiveIPSetting) returns (ResCreateAdaptiveIPSetting) {}
-  rpc GetAdaptiveIPSetting (MsgType.Empty) returns (ResGetAdaptiveIPSetting) {}
-  rpc GetAdaptiveIPAvailableIPList (MsgType.Empty) returns (ResGetAdaptiveIPAvailableIPList) {}
-  rpc CreateAdaptiveIPServer (ReqCreateAdaptiveIPServer) returns (ResCreateAdaptiveIPServer) {}
-  rpc GetAdaptiveIPServer (ReqGetAdaptiveIPServer) returns (ResGetAdaptiveIPServer) {}
-  rpc GetAdaptiveIPServerList (ReqGetAdaptiveIPServerList) returns (ResGetAdaptiveIPServerList) {}
-  rpc GetAdaptiveIPServerNum (MsgType.Empty) returns (ResGetAdaptiveIPServerNum) {}
-  rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer) {}
+  rpc CreateAdaptiveIPSetting (ReqCreateAdaptiveIPSetting) returns (ResCreateAdaptiveIPSetting) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "create_adaptiveip_setting"
+    };
+  }
+  rpc GetAdaptiveIPSetting (MsgType.Empty) returns (ResGetAdaptiveIPSetting) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "adaptiveip_setting"
+    };
+  }
+  rpc GetAdaptiveIPAvailableIPList (MsgType.Empty) returns (ResGetAdaptiveIPAvailableIPList) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "adaptiveip_availableip_list"
+    };
+  }
+  rpc CreateAdaptiveIPServer (ReqCreateAdaptiveIPServer) returns (ResCreateAdaptiveIPServer) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "create_adaptiveip_server"
+    };
+  }
+  rpc GetAdaptiveIPServer (ReqGetAdaptiveIPServer) returns (ResGetAdaptiveIPServer) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "adaptiveip_server"
+    };
+  }
+  rpc GetAdaptiveIPServerList (ReqGetAdaptiveIPServerList) returns (ResGetAdaptiveIPServerList) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "adaptiveip_server_list"
+    };
+  }
+  rpc GetAdaptiveIPServerNum (MsgType.Empty) returns (ResGetAdaptiveIPServerNum) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "adaptiveip_server_num"
+    };
+  }
+  rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_adaptiveip_server"
+    };
+  }
   // DHCPD
-  rpc CreateDHPCDConf (ReqCreateDHPCDConf) returns (ResCreateDHPCDConf) {}
-  rpc DeleteDHPCDConf (ReqDeleteDHPCDConf) returns (ResDeleteDHPCDConf) {}
+  rpc CreateDHPCDConf (ReqCreateDHPCDConf) returns (ResCreateDHPCDConf) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "create_dhcpd_conf"
+    };
+  }
+  rpc DeleteDHPCDConf (ReqDeleteDHPCDConf) returns (ResDeleteDHPCDConf) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_dhcpd_conf"
+    };
+  }
 }
 
 // Subnet
