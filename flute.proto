@@ -108,14 +108,15 @@ message ResDeleteNodeDetail {
 }
 
 // IPMI
+enum PowerState {
+  ON = 0;
+  OFF = 1;
+  FORCE_OFF = 2;
+  FORCE_RESTART = 3;
+}
+
 message ReqNodePowerControl {
   repeated MsgType.Node nodes = 1;
-  enum PowerState {
-    ON = 0;
-    OFF = 1;
-    FORCE_OFF = 2;
-    FORCE_RESTART = 3;
-  }
   PowerState power_state = 2;
 }
 
