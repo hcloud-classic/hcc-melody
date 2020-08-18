@@ -17,22 +17,88 @@ syntax = "proto3";
 package RpcViolin;
 
 import public "msgType.proto";
+import "graphql.proto";
 
 service Violin {
+  option (graphql.service) = {
+    host: "192.168.110.10:7500"
+    insecure: true
+  };
+
   // Server
-  rpc CreateServer (ReqCreateServer) returns (ResCreateServer) {}
-  rpc GetServer (ReqGetServer) returns (ResGetServer) {}
-  rpc GetServerList (ReqGetServerList) returns (ResGetServerList) {}
-  rpc GetServerNum (MsgType.Empty) returns (ResGetServerNum) {}
-  rpc UpdateServer (ReqUpdateServer) returns (ResUpdateServer) {}
-  rpc DeleteServer (ReqDeleteServer) returns (ResDeleteServer) {}
+  rpc CreateServer (ReqCreateServer) returns (ResCreateServer) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "create_server"
+    };
+  }
+  rpc GetServer (ReqGetServer) returns (ResGetServer) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server"
+    };
+  }
+  rpc GetServerList (ReqGetServerList) returns (ResGetServerList) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server_list"
+    };
+  }
+  rpc GetServerNum (MsgType.Empty) returns (ResGetServerNum) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server_num"
+    };
+  }
+  rpc UpdateServer (ReqUpdateServer) returns (ResUpdateServer) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "update_server"
+    };
+  }
+  rpc DeleteServer (ReqDeleteServer) returns (ResDeleteServer) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_server"
+    };
+  }
   // ServerNode
-  rpc CreateServerNode (ReqCreateServerNode) returns (ResCreateServerNode) {}
-  rpc GetServerNode (ReqGetServerNode) returns (ResGetServerNode) {}
-  rpc GetServerNodeList (ReqGetServerNodeList) returns (ResGetServerNodeList) {}
-  rpc GetServerNodeNum (ReqGetServerNodeNum) returns (ResGetServerNodeNum) {}
-  rpc DeleteServerNode (ReqDeleteServerNode) returns (ResDeleteServerNode) {}
-  rpc DeleteServerNodeByServerUUID (ReqDeleteServerNodeByServerUUID) returns (ResDeleteServerNodeByServerUUID) {}
+  rpc CreateServerNode (ReqCreateServerNode) returns (ResCreateServerNode) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "create_server_node"
+    };
+  }
+  rpc GetServerNode (ReqGetServerNode) returns (ResGetServerNode) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server_node"
+    };
+  }
+  rpc GetServerNodeList (ReqGetServerNodeList) returns (ResGetServerNodeList) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server_node_list"
+    };
+  }
+  rpc GetServerNodeNum (ReqGetServerNodeNum) returns (ResGetServerNodeNum) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server_node_num"
+    };
+  }
+  rpc DeleteServerNode (ReqDeleteServerNode) returns (ResDeleteServerNode) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_server_node"
+    };
+  }
+  rpc DeleteServerNodeByServerUUID (ReqDeleteServerNodeByServerUUID) returns (ResDeleteServerNodeByServerUUID) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_server_node_by_serverUUID"
+    };
+  }
 }
 
 // Server
