@@ -21,7 +21,7 @@ import "graphql.proto";
 
 service Violin {
   option (graphql.service) = {
-    host: "192.168.110.10:7500"
+    host: "127.0.0.1:7500"
     insecure: true
   };
 
