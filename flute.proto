@@ -145,11 +145,11 @@ message ResDeleteNode {
 
 // NodeDetail
 message ReqCreateNodeDetail {
-  MsgType.NodeDetail nodeDetail = 1;
+  MsgType.NodeDetail node_detail = 1;
 }
 
 message ResCreateNodeDetail {
-  MsgType.NodeDetail nodeDetail = 1;
+  MsgType.NodeDetail node_detail = 1;
 }
 
 message ReqGetNodeDetail {
@@ -157,7 +157,7 @@ message ReqGetNodeDetail {
 }
 
 message ResGetNodeDetail {
-  MsgType.NodeDetail nodeDetail = 1;
+  MsgType.NodeDetail node_detail = 1;
 }
 
 message ReqDeleteNodeDetail {
@@ -177,7 +177,7 @@ enum PowerState {
 }
 
 message ReqNodePowerControl {
-  repeated MsgType.Node nodes = 1;
+  repeated MsgType.Node node = 1;
   PowerState power_state = 2;
 }
 
