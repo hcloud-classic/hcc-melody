@@ -205,7 +205,7 @@ message ReqCreateAdaptiveIPServer {
 }
 
 message ResCreateAdaptiveIPServer {
-  MsgType.AdaptiveIPServer adaptiveIP_server = 1;
+  MsgType.AdaptiveIPServer adaptiveip_server = 1;
 }
 
 message ReqGetAdaptiveIPServer {
@@ -213,17 +213,17 @@ message ReqGetAdaptiveIPServer {
 }
 
 message ResGetAdaptiveIPServer {
-  MsgType.AdaptiveIPServer adaptiveIP_server = 1;
+  MsgType.AdaptiveIPServer adaptiveip_server = 1;
 }
 
 message ReqGetAdaptiveIPServerList {
-  MsgType.AdaptiveIPServer adaptiveIP_server = 1;
+  MsgType.AdaptiveIPServer adaptiveip_server = 1;
   int64 row = 2;
   int64 page = 3;
 }
 
 message ResGetAdaptiveIPServerList {
-  repeated MsgType.AdaptiveIPServer adaptiveIP_server = 1;
+  repeated MsgType.AdaptiveIPServer adaptiveip_server = 1;
 }
 
 message ResGetAdaptiveIPServerNum {
