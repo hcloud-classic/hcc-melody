@@ -184,19 +184,19 @@ message ResDeleteSubnet {
 
 // AdaptiveIP
 message ReqCreateAdaptiveIPSetting {
-  MsgType.AdaptiveIPSetting adaptiveIP_setting = 1;
+  MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
 }
 
 message ResCreateAdaptiveIPSetting {
-  MsgType.AdaptiveIPSetting adaptiveIP_setting = 1;
+  MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
 }
 
 message ResGetAdaptiveIPSetting {
-  MsgType.AdaptiveIPSetting adaptiveIP_setting = 1;
+  MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
 }
 
 message ResGetAdaptiveIPAvailableIPList {
-  MsgType.AdaptiveIPAvailableIPList adaptiveIP_available_IP_list = 1;
+  MsgType.AdaptiveIPAvailableIPList adaptiveip_availableip_list = 1;
 }
 
 message ReqCreateAdaptiveIPServer {
