@@ -103,12 +103,12 @@ service Violin {
 
 // Server
 message ReqCreateServer {
-  MsgType.Server Server = 1;
+  MsgType.Server server = 1;
   int32 nrNode = 2;
 }
 
 message ResCreateServer {
-  MsgType.Server Server = 1;
+  MsgType.Server server = 1;
 }
 
 message ReqGetServer {
@@ -116,7 +116,7 @@ message ReqGetServer {
 }
 
 message ResGetServer {
-  MsgType.Server Server = 1;
+  MsgType.Server server = 1;
 }
 
 message ReqGetServerList {
@@ -126,7 +126,7 @@ message ReqGetServerList {
 }
 
 message ResGetServerList {
-  repeated MsgType.Server Server = 1;
+  repeated MsgType.Server server = 1;
 }
 
 message ResGetServerNum {
@@ -134,11 +134,11 @@ message ResGetServerNum {
 }
 
 message ReqUpdateServer {
-  MsgType.Server Server = 1;
+  MsgType.Server server = 1;
 }
 
 message ResUpdateServer {
-  MsgType.Server Server = 1;
+  MsgType.Server server = 1;
 }
 
 message ReqDeleteServer {
@@ -150,11 +150,11 @@ message ResDeleteServer {
 }
 
 message ReqCreateServerNode {
-  MsgType.ServerNode ServerNode = 1;
+  MsgType.ServerNode server_node = 1;
 }
 
 message ResCreateServerNode {
-  MsgType.ServerNode ServerNode = 1;
+  MsgType.ServerNode server_node = 1;
 }
 
 message ReqGetServerNode {
@@ -162,7 +162,7 @@ message ReqGetServerNode {
 }
 
 message ResGetServerNode {
-  MsgType.ServerNode ServerNode = 1;
+  MsgType.ServerNode server_node = 1;
 }
 
 message ReqGetServerNodeList {
@@ -170,7 +170,7 @@ message ReqGetServerNodeList {
 }
 
 message ResGetServerNodeList {
-  repeated MsgType.ServerNode ServerNodeList = 1;
+  repeated MsgType.ServerNode server_node = 1;
 }
 
 message ReqGetServerNodeNum {
