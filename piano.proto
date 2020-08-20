@@ -18,13 +18,13 @@ package RpcPiano;
 import public "msgType.proto";
 
 service Piano {
-  rpc Telegraph (ReqMetricInfo) returns (ResSeries) {}
+  rpc Telegraph (ReqMetricInfo) returns (ResMonitoringData) {}
 }
 
 message ReqMetricInfo {
-    repeated MsgType.MetricInfo metricInfo = 1;
+    MsgType.MetricInfo metricInfo = 1;
 }
 
-message ResSeries {
-    repeated MsgType.Series series = 1;
+message ResMonitoringData {
+    MsgType.MonitoringData monitoringData = 1;
 }
