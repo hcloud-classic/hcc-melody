@@ -11,6 +11,6 @@ else
 	for file in $FILE_LIST
 	do
 		filename=$(basename -- $file)
-		echo "option go_package=\"hcc/$1/action/grpc/rpc${filename%.*}\";" >> $file
+		echo "option go_package=\"hcc/$1/action/grpc/pb/rpc${filename%.*}\";" >> $file
 	done
 fi
