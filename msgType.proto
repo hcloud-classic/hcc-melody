@@ -143,6 +143,15 @@ message Series {
 }
 
 message MetricInfo {
+  string metric = 1;
+  string subMetric = 2;
+  string period = 3;
+  string aggregateType = 4;
+  string duration = 5;
+  string uuid = 6;
+}
+
+message MonitoringData {
   string    metric = 1;
   string    sub_metric = 2;
   string    UUID = 3;
