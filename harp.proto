@@ -63,6 +63,7 @@ message ReqGetSubnetByServer {
 
 message ResGetSubnetByServer {
   MsgType.Subnet subnet = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqGetSubnetList {

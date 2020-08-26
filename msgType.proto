@@ -20,6 +20,12 @@ import "google/protobuf/timestamp.proto";
 
 message Empty {}
 
+// HccError
+message HccError {
+  uint64    ErrCode = 1;
+  string    ErrText = 2;
+}
+
 // Flute
 message Node {
   string    UUID = 1;
