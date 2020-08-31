@@ -15,24 +15,85 @@
 syntax = "proto3";
 
 package RpcFlute;
-import public "msgType.proto";
 
+import public "msgType.proto";
+import "graphql.proto";
 
 service Flute {
+  option (graphql.service) = {
+    host: "192.168.110.10:7000"
+    insecure: true
+  };
+
   // Node
-  rpc CreateNode (ReqCreateNode) returns (ResCreateNode) {}
-  rpc GetNode (ReqGetNode) returns (ResGetNode) {}
-  rpc GetNodeList (ReqGetNodeList) returns (ResGetNodeList) {}
-  rpc GetNodeNum (MsgType.Empty) returns (ResGetNodeNum) {}
-  rpc UpdateNode (ReqUpdateNode) returns (ResUpdateNode) {}
-  rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode) {}
+  rpc CreateNode (ReqCreateNode) returns (ResCreateNode) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "create_node"
+    };
+  }
+  rpc GetNode (ReqGetNode) returns (ResGetNode) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "node"
+    };
+  }
+  rpc GetNodeList (ReqGetNodeList) returns (ResGetNodeList) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "node_list"
+    };
+  }
+  rpc GetNodeNum (MsgType.Empty) returns (ResGetNodeNum) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "node_num"
+    };
+  }
+  rpc UpdateNode (ReqUpdateNode) returns (ResUpdateNode) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "update_node"
+    };
+  }
+  rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_node"
+    };
+  }
   // NodeDetail
-  rpc CreateNodeDetail (ReqCreateNodeDetail) returns (ResCreateNodeDetail) {}
-  rpc GetNodeDetail (ReqGetNodeDetail) returns (ResGetNodeDetail) {}
-  rpc DeleteNodeDetail (ReqDeleteNodeDetail) returns (ResDeleteNodeDetail) {}
+  rpc CreateNodeDetail (ReqCreateNodeDetail) returns (ResCreateNodeDetail) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "create_node_detail"
+    };
+  }
+  rpc GetNodeDetail (ReqGetNodeDetail) returns (ResGetNodeDetail) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "node_detail"
+    };
+  }
+  rpc DeleteNodeDetail (ReqDeleteNodeDetail) returns (ResDeleteNodeDetail) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_node_detail"
+    };
+  }
   // IPMI
-  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl) {}
-  rpc GetNodePowerState (ReqNodePowerState) returns (ResNodePowerState) {}
+  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "node_power_control"
+    };
+  }
+  rpc GetNodePowerState (ReqNodePowerState) returns (ResNodePowerState) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "node_power_state"
+    };
+  }
 }
 
 // Node
@@ -84,11 +145,11 @@ message ResDeleteNode {
 
 // NodeDetail
 message ReqCreateNodeDetail {
-  MsgType.NodeDetail nodeDetail = 1;
+  MsgType.NodeDetail node_detail = 1;
 }
 
 message ResCreateNodeDetail {
-  MsgType.NodeDetail nodeDetail = 1;
+  MsgType.NodeDetail node_detail = 1;
 }
 
 message ReqGetNodeDetail {
@@ -96,7 +157,7 @@ message ReqGetNodeDetail {
 }
 
 message ResGetNodeDetail {
-  MsgType.NodeDetail nodeDetail = 1;
+  MsgType.NodeDetail node_detail = 1;
 }
 
 message ReqDeleteNodeDetail {
@@ -108,14 +169,15 @@ message ResDeleteNodeDetail {
 }
 
 // IPMI
+enum PowerState {
+  ON = 0;
+  OFF = 1;
+  FORCE_OFF = 2;
+  FORCE_RESTART = 3;
+}
+
 message ReqNodePowerControl {
-  repeated MsgType.Node nodes = 1;
-  enum PowerState {
-    ON = 0;
-    OFF = 1;
-    FORCE_OFF = 2;
-    FORCE_RESTART = 3;
-  }
+  repeated MsgType.Node node = 1;
   PowerState power_state = 2;
 }
 

@@ -71,9 +71,18 @@ message ServerNode {
   google.protobuf.Timestamp created_at = 4;
 }
 
+message Quota {
+  string    ServerUUID = 1;
+  int32     CPU = 2;
+  int32     memory = 3;
+  int32     numberOfNodes = 4;
+}
+
+// Violin noVNC
 message VNC {
-  string    serverUUID = 1;
-  string    action = 2;
+  string    token = 1;
+  string    serverUUID = 2;
+  string    action = 3;
 }
 
 // Cello
@@ -139,7 +148,16 @@ message Series {
   int64 value = 2;
 }
 
-message Telegraf {
+message MetricInfo {
+  string metric = 1;
+  string subMetric = 2;
+  string period = 3;
+  string aggregateType = 4;
+  string duration = 5;
+  string uuid = 6;
+}
+
+message MonitoringData {
   string    metric = 1;
   string    sub_metric = 2;
   string    UUID = 3;
@@ -148,6 +166,7 @@ message Telegraf {
 
 // Viola
 message NormalAction {
+  int32 empty = 1;
 }
 
 message HccAction {

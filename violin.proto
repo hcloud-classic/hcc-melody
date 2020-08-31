@@ -1,0 +1,198 @@
+// Copyright 2020 by ish.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package RpcViolin;
+
+import public "msgType.proto";
+import "graphql.proto";
+
+service Violin {
+  option (graphql.service) = {
+    host: "127.0.0.1:7500"
+    insecure: true
+  };
+
+  // Server
+  rpc CreateServer (ReqCreateServer) returns (ResCreateServer) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "create_server"
+    };
+  }
+  rpc GetServer (ReqGetServer) returns (ResGetServer) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server"
+    };
+  }
+  rpc GetServerList (ReqGetServerList) returns (ResGetServerList) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server_list"
+    };
+  }
+  rpc GetServerNum (MsgType.Empty) returns (ResGetServerNum) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server_num"
+    };
+  }
+  rpc UpdateServer (ReqUpdateServer) returns (ResUpdateServer) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "update_server"
+    };
+  }
+  rpc DeleteServer (ReqDeleteServer) returns (ResDeleteServer) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_server"
+    };
+  }
+  // ServerNode
+  rpc CreateServerNode (ReqCreateServerNode) returns (ResCreateServerNode) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "create_server_node"
+    };
+  }
+  rpc GetServerNode (ReqGetServerNode) returns (ResGetServerNode) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server_node"
+    };
+  }
+  rpc GetServerNodeList (ReqGetServerNodeList) returns (ResGetServerNodeList) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server_node_list"
+    };
+  }
+  rpc GetServerNodeNum (ReqGetServerNodeNum) returns (ResGetServerNodeNum) {
+    option (graphql.schema) = {
+      type: QUERY
+      name: "server_node_num"
+    };
+  }
+  rpc DeleteServerNode (ReqDeleteServerNode) returns (ResDeleteServerNode) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_server_node"
+    };
+  }
+  rpc DeleteServerNodeByServerUUID (ReqDeleteServerNodeByServerUUID) returns (ResDeleteServerNodeByServerUUID) {
+    option (graphql.schema) = {
+      type: MUTATION
+      name: "delete_server_node_by_serverUUID"
+    };
+  }
+}
+
+// Server
+message ReqCreateServer {
+  MsgType.Server server = 1;
+  int32 nrNode = 2;
+}
+
+message ResCreateServer {
+  MsgType.Server server = 1;
+}
+
+message ReqGetServer {
+  string UUID = 1;
+}
+
+message ResGetServer {
+  MsgType.Server server = 1;
+}
+
+message ReqGetServerList {
+  MsgType.Server Server = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetServerList {
+  repeated MsgType.Server server = 1;
+}
+
+message ResGetServerNum {
+  int64 num = 1;
+}
+
+message ReqUpdateServer {
+  MsgType.Server server = 1;
+}
+
+message ResUpdateServer {
+  MsgType.Server server = 1;
+}
+
+message ReqDeleteServer {
+  string UUID = 1;
+}
+
+message ResDeleteServer {
+  string UUID = 1;
+}
+
+message ReqCreateServerNode {
+  MsgType.ServerNode server_node = 1;
+}
+
+message ResCreateServerNode {
+  MsgType.ServerNode server_node = 1;
+}
+
+message ReqGetServerNode {
+  string UUID = 1;
+}
+
+message ResGetServerNode {
+  MsgType.ServerNode server_node = 1;
+}
+
+message ReqGetServerNodeList {
+  string serverUUID = 1;
+}
+
+message ResGetServerNodeList {
+  repeated MsgType.ServerNode server_node = 1;
+}
+
+message ReqGetServerNodeNum {
+  string serverUUID = 1;
+}
+
+message ResGetServerNodeNum {
+  int64 num = 1;
+}
+
+message ReqDeleteServerNode {
+  string UUID = 1;
+}
+
+message ResDeleteServerNode {
+  string UUID = 1;
+}
+
+message ReqDeleteServerNodeByServerUUID {
+  string serverUUID = 1;
+}
+
+message ResDeleteServerNodeByServerUUID {
+  string serverUUID = 1;
+}
