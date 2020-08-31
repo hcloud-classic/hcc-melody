@@ -27,4 +27,5 @@ message ReqMetricInfo {
 
 message ResMonitoringData {
     MsgType.MonitoringData monitoringData = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
