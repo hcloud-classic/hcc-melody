@@ -29,6 +29,7 @@ message ReqNoVNC {
 
 message ResNoVNC {
   repeated MsgType.VNC vncs = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqControlVNC {
@@ -37,4 +38,5 @@ message ReqControlVNC {
 
 message ResControlVNC {
   string port = 1;
+   repeated MsgType.HccError hccErrorStack = 2;
 }
