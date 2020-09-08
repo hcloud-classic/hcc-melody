@@ -27,6 +27,7 @@ message ReqCello {
 }
 
 message ResCello {
-  int32 cello = 2;
+  int32 cello = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 

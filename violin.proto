@@ -43,6 +43,7 @@ message ReqCreateServer {
 
 message ResCreateServer {
   MsgType.Server server = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqGetServer {
@@ -51,6 +52,7 @@ message ReqGetServer {
 
 message ResGetServer {
   MsgType.Server server = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqGetServerList {
@@ -61,10 +63,12 @@ message ReqGetServerList {
 
 message ResGetServerList {
   repeated MsgType.Server server = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ResGetServerNum {
   int64 num = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqUpdateServer {
@@ -73,6 +77,7 @@ message ReqUpdateServer {
 
 message ResUpdateServer {
   MsgType.Server server = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqDeleteServer {
@@ -81,6 +86,7 @@ message ReqDeleteServer {
 
 message ResDeleteServer {
   string UUID = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqCreateServerNode {
@@ -89,6 +95,7 @@ message ReqCreateServerNode {
 
 message ResCreateServerNode {
   MsgType.ServerNode server_node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqGetServerNode {
@@ -97,6 +104,7 @@ message ReqGetServerNode {
 
 message ResGetServerNode {
   MsgType.ServerNode server_node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqGetServerNodeList {
@@ -113,6 +121,7 @@ message ReqGetServerNodeNum {
 
 message ResGetServerNodeNum {
   int64 num = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqDeleteServerNode {
@@ -121,6 +130,7 @@ message ReqDeleteServerNode {
 
 message ResDeleteServerNode {
   string UUID = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqDeleteServerNodeByServerUUID {
@@ -129,4 +139,5 @@ message ReqDeleteServerNodeByServerUUID {
 
 message ResDeleteServerNodeByServerUUID {
   string serverUUID = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }

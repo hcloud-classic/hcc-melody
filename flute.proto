@@ -103,6 +103,7 @@ message ReqCreateNode {
 
 message ResCreateNode {
   MsgType.Node node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqGetNode {
@@ -111,6 +112,7 @@ message ReqGetNode {
 
 message ResGetNode {
   MsgType.Node node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqGetNodeList {
@@ -121,10 +123,12 @@ message ReqGetNodeList {
 
 message ResGetNodeList {
   repeated MsgType.Node node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ResGetNodeNum {
   int64 num = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqUpdateNode {
@@ -133,6 +137,7 @@ message ReqUpdateNode {
 
 message ResUpdateNode {
   MsgType.Node node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqDeleteNode {
@@ -141,6 +146,7 @@ message ReqDeleteNode {
 
 message ResDeleteNode {
   string UUID = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 // NodeDetail
@@ -150,6 +156,7 @@ message ReqCreateNodeDetail {
 
 message ResCreateNodeDetail {
   MsgType.NodeDetail node_detail = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqGetNodeDetail {
@@ -158,6 +165,7 @@ message ReqGetNodeDetail {
 
 message ResGetNodeDetail {
   MsgType.NodeDetail node_detail = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqDeleteNodeDetail {
@@ -166,6 +174,7 @@ message ReqDeleteNodeDetail {
 
 message ResDeleteNodeDetail {
   string nodeUUID = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 // IPMI
@@ -183,6 +192,7 @@ message ReqNodePowerControl {
 
 message ResNodePowerControl {
   repeated string result = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqNodePowerState {
@@ -191,4 +201,5 @@ message ReqNodePowerState {
 
 message ResNodePowerState {
   string result = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
