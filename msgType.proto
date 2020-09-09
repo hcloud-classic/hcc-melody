@@ -80,9 +80,8 @@ message Quota {
 
 // Violin noVNC
 message VNC {
-  string    token = 1;
-  string    serverUUID = 2;
-  string    action = 3;
+  string    serverUUID = 1;
+  string    action = 2;
 }
 
 // Cello
