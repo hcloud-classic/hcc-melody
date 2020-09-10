@@ -113,6 +113,7 @@ message ReqGetServerNodeList {
 
 message ResGetServerNodeList {
   repeated MsgType.ServerNode server_node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
 }
 
 message ReqGetServerNodeNum {
