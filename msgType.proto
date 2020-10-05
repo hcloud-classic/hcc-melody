@@ -94,6 +94,11 @@ message Volume {
   string    userUUID = 6;
   google.protobuf.Timestamp created_at = 7;
   string    network_IP = 8;
+  string    gateway_ip = 9;
+  string    pool = 10;
+  int64        lun = 11;
+  string    action  = 12;
+
 }
 
 message VolumeAttachment {

@@ -14,20 +14,20 @@
 
 syntax = "proto3";
 
-package RpcCello;
 
 import public "msgType.proto";
+package RpcCello;
 
 service Cello {
-  rpc Cello(ReqCello) returns (ResCello) {}
+  rpc VolumeHandler (ReqVolumeHandler) returns (ResVolumeHandler) {}
+
 }
 
-message ReqCello {
-  int32 cello = 1;
+message ReqVolumeHandler {
+  MsgType.Volume volume = 1;
 }
 
-message ResCello {
-  int32 cello = 1;
+message ResVolumeHandler {
+  MsgType.Volume volume = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
-
