@@ -197,3 +197,16 @@ message Control {
 message Controls {
   repeated Control control = 1;
 }
+
+
+// For Return to Scheduled Nodes
+message ScheduledNodes {
+  repeated Node shceduledNode=1;
+}
+
+
+// For scheduling
+message ScheduleServer {
+  Server scheduleServer=1;
+  int32 numOfNodes =2;
+}
