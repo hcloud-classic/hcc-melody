@@ -37,9 +37,10 @@ message Node {
   int32     CPU_cores = 7;
   int32     memory = 8;
   string    description = 9;
-  google.protobuf.Timestamp created_at = 10;
-  int32     active = 11;
-  bool      force_off = 12;
+  int32     rack_number = 10;
+  google.protobuf.Timestamp created_at = 11;
+  int32     active = 12;
+  bool      force_off = 13;
 }
 
 message NodeDetail {
