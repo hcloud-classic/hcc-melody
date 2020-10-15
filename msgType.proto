@@ -41,6 +41,7 @@ message Node {
   google.protobuf.Timestamp created_at = 11;
   int32     active = 12;
   bool      force_off = 13;
+  string     bmcIP_subnet_mask = 14;
 }
 
 message NodeDetail {
