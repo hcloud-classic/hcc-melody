@@ -37,8 +37,8 @@ service Harp {
   rpc GetAdaptiveIPServerNum (MsgType.Empty) returns (ResGetAdaptiveIPServerNum) {}
   rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer) {}
   // DHCPD
-  rpc CreateDHPCDConf (ReqCreateDHPCDConf) returns (ResCreateDHPCDConf) {}
-  rpc DeleteDHPCDConf (ReqDeleteDHPCDConf) returns (ResDeleteDHPCDConf) {}
+  rpc CreateDHCPDConf (ReqCreateDHCPDConf) returns (ResCreateDHCPDConf) {}
+  rpc DeleteDHCPDConf (ReqDeleteDHCPDConf) returns (ResDeleteDHCPDConf) {}
 }
 
 // Subnet
@@ -168,21 +168,21 @@ message ResDeleteAdaptiveIPServer {
 }
 
 // DHCPD
-message ReqCreateDHPCDConf {
+message ReqCreateDHCPDConf {
   string subnetUUID = 1;
   string nodeUUIDs = 2;
 }
 
-message ResCreateDHPCDConf {
+message ResCreateDHCPDConf {
   string result = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
 
-message ReqDeleteDHPCDConf {
+message ReqDeleteDHCPDConf {
   string subnetUUID = 1;
 }
 
-message ResDeleteDHPCDConf {
+message ResDeleteDHCPDConf {
   string result = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }

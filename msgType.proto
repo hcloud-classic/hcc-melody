@@ -16,7 +16,6 @@ syntax = "proto3";
 
 package MsgType;
 import "google/protobuf/timestamp.proto";
-//import "google/protobuf/any.proto";
 
 message Empty {}
 
@@ -162,8 +161,7 @@ message Subnet {
 
 // Piano
 message Series {
-  int64 time = 1;
-  int64 value = 2;
+  repeated double values = 1;
 }
 
 message MetricInfo {
