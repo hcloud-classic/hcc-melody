@@ -111,6 +111,18 @@ message VolumeAttachment {
   google.protobuf.Timestamp updated_at = 5;
 }
 
+message Pool {
+  string    UUID = 1;
+  string    Size = 2;
+  string    Free = 3;
+  string    Capacity = 4;
+  string    Health = 5;
+  string    Name = 6;
+  string    AvailableSize = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
 // Harp
 message AdaptiveIPSetting {
   string    ext_ifaceIP_address = 1;

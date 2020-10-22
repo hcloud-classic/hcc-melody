@@ -31,3 +31,14 @@ message ResVolumeHandler {
   MsgType.Volume volume = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
+
+
+
+message ReqPoolHandler {
+  MsgType.Pool pool = 1;
+}
+
+message ResPoolHandler {
+  MsgType.Pool pool = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
