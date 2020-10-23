@@ -120,6 +120,7 @@ message Pool {
   string    AvailableSize = 7;
   google.protobuf.Timestamp created_at = 8;
   google.protobuf.Timestamp updated_at = 9;
+  string    action  = 10;
 }
 
 // Harp

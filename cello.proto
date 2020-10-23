@@ -20,6 +20,7 @@ package RpcCello;
 
 service Cello {
   rpc VolumeHandler (ReqVolumeHandler) returns (ResVolumeHandler) {}
+  rpc PoolHandler (ReqPoolHandler) returns (ResPoolHandler) {}
 
 }
 
