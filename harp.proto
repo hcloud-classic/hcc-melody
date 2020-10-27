@@ -99,7 +99,7 @@ message ReqDeleteSubnet {
 }
 
 message ResDeleteSubnet {
-  string UUID = 1;
+  MsgType.Subnet subnet = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
 

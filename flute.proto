@@ -84,7 +84,7 @@ message ReqDeleteNode {
 }
 
 message ResDeleteNode {
-  string UUID = 1;
+  MsgType.Node node = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
 
@@ -112,7 +112,7 @@ message ReqDeleteNodeDetail {
 }
 
 message ResDeleteNodeDetail {
-  string nodeUUID = 1;
+  MsgType.NodeDetail node_detail = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
 
