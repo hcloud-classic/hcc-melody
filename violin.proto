@@ -85,7 +85,7 @@ message ReqDeleteServer {
 }
 
 message ResDeleteServer {
-  string UUID = 1;
+  MsgType.Server server = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
 
@@ -130,7 +130,7 @@ message ReqDeleteServerNode {
 }
 
 message ResDeleteServerNode {
-  string UUID = 1;
+  MsgType.ServerNode server_node = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
 
