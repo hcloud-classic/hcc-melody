@@ -212,15 +212,21 @@ message Controls {
   repeated Control control = 1;
 }
 
-
 // For Return to Scheduled Nodes
 message ScheduledNodes {
   repeated Node shceduledNode=1;
 }
 
-
 // For scheduling
 message ScheduleServer {
   Server scheduleServer=1;
   int32 numOfNodes =2;
+}
+
+// piccolo
+message ServerAction {
+  string action = 1;
+  string result = 2;
+  string err_str = 3;
+  string token = 4;
 }
