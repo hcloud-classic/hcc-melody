@@ -24,6 +24,7 @@ service Harp {
   rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet) {}
   rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer) {}
   rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList) {}
+  rpc GetAvailableSubnetList (MsgType.Empty) returns (ResGetAvailableSubnetList) {}
   rpc GetSubnetNum (MsgType.Empty) returns (ResGetSubnetNum) {}
   rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet) {}
   rpc DeleteSubnet (ReqDeleteSubnet) returns (ResDeleteSubnet) {}
@@ -76,6 +77,11 @@ message ReqGetSubnetList {
 }
 
 message ResGetSubnetList {
+  repeated MsgType.Subnet subnet = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ResGetAvailableSubnetList {
   repeated MsgType.Subnet subnet = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
