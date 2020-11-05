@@ -23,7 +23,7 @@ service Cello {
   rpc PoolHandler (ReqPoolHandler) returns (ResPoolHandler) {}
   rpc GetVolume (ReqGetVolume) returns (ResGetVolume) {}
   rpc GetVolumeList (ReqGetVolumeList) returns (ResGetVolumeList) {}
-
+  rpc GetPoolList (ReqGetPoolList) returns (ResGetPoolList) {}
 }
 
 message ReqVolumeHandler {
@@ -35,8 +35,6 @@ message ResVolumeHandler {
   repeated MsgType.HccError hccErrorStack = 2;
 }
 
-
-
 message ReqPoolHandler {
   MsgType.Pool pool = 1;
 }
@@ -45,8 +43,6 @@ message ResPoolHandler {
   MsgType.Pool pool = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
-
-
 
 message ReqGetVolume {
   MsgType.Volume volume = 1;
@@ -59,7 +55,6 @@ message ResGetVolume {
   repeated MsgType.HccError hccErrorStack = 2;
 }
 
-
 message ReqGetVolumeList {
   MsgType.Volume volume = 1;
   int64 row = 2;
@@ -70,7 +65,6 @@ message ResGetVolumeList {
   repeated MsgType.Volume volume = 1;
   repeated MsgType.HccError hccErrorStack = 2;
 }
-
 
 message ReqGetPoolList {
   MsgType.Pool pool = 1;
