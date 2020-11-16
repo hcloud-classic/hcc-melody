@@ -162,24 +162,22 @@ message Subnet {
 }
 
 // Piano
-message Series {
-  repeated double values = 1;
-}
-
 message MetricInfo {
-  string metric = 1;
-  string subMetric = 2;
-  string period = 3;
-  string aggregateType = 4;
-  string duration = 5;
-  string uuid = 6;
+  string uuid = 1;
+  string metric = 2;
+  string subMetric = 3;
+  string period = 4;
+  string aggregateFn = 5;
+  string duration = 6;
+  string time = 7;
+  string groupBy = 8;
+  string orderBy = 9;
+  string limit = 10;
 }
 
 message MonitoringData {
-  string    metric = 1;
-  string    sub_metric = 2;
-  string    UUID = 3;
-  repeated Series series = 4;
+  string    uuid = 1;
+  bytes     result = 2;
 }
 
 // Viola
