@@ -14,12 +14,14 @@
 
 syntax = "proto3";
 
+option go_package = "hcc/pb";
+
 package RpcPiccolo;
 
-import public "msgType.proto";
+import public "msgtype.proto";
 
 service Piccolo {
-  rpc WriteServerAction (ReqWriteServerAction) returns (ResWriteServerAction) {}
+  rpc WriteServerAction (ReqWriteServerAction) returns (ResWriteServerAction);
 }
 
 message ReqWriteServerAction {

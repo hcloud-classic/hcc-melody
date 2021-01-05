@@ -14,12 +14,14 @@
 
 syntax = "proto3";
 
+option go_package = "hcc/pb";
 
-import public "msgType.proto";
 package RpcScheduler;
 
+import public "msgtype.proto";
+
 service Scheduler {
-  rpc ScheduleHandler (ReqScheduleHandler) returns (ResScheduleHandler) {}
+  rpc ScheduleHandler (ReqScheduleHandler) returns (ResScheduleHandler);
 
 }
 

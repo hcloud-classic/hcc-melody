@@ -14,16 +14,18 @@
 
 syntax = "proto3";
 
+option go_package = "hcc/pb";
 
-import public "msgType.proto";
 package RpcCello;
 
+import public "msgtype.proto";
+
 service Cello {
-  rpc VolumeHandler (ReqVolumeHandler) returns (ResVolumeHandler) {}
-  rpc PoolHandler (ReqPoolHandler) returns (ResPoolHandler) {}
-  rpc GetVolume (ReqGetVolume) returns (ResGetVolume) {}
-  rpc GetVolumeList (ReqGetVolumeList) returns (ResGetVolumeList) {}
-  rpc GetPoolList (ReqGetPoolList) returns (ResGetPoolList) {}
+  rpc VolumeHandler (ReqVolumeHandler) returns (ResVolumeHandler);
+  rpc PoolHandler (ReqPoolHandler) returns (ResPoolHandler);
+  rpc GetVolume (ReqGetVolume) returns (ResGetVolume);
+  rpc GetVolumeList (ReqGetVolumeList) returns (ResGetVolumeList);
+  rpc GetPoolList (ReqGetPoolList) returns (ResGetPoolList);
 }
 
 message ReqVolumeHandler {

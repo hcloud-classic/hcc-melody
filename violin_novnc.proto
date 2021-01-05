@@ -14,13 +14,16 @@
 
 syntax = "proto3";
 
+option go_package = "hcc/pb";
+
 package RpcNoVNC;
-import public "msgType.proto";
+
+import public "msgtype.proto";
 
 
 service novnc {
-  rpc CreateVNC  (ReqNoVNC) returns (ResNoVNC) {}
-  rpc ControlVNC (ReqControlVNC) returns (ResControlVNC) {}
+  rpc CreateVNC  (ReqNoVNC) returns (ResNoVNC);
+  rpc ControlVNC (ReqControlVNC) returns (ResControlVNC);
 }
 
 message ReqNoVNC {
@@ -38,5 +41,5 @@ message ReqControlVNC {
 
 message ResControlVNC {
   string port = 1;
-   repeated MsgType.HccError hccErrorStack = 2;
+   MsgType.HccErrorStack hccErrorStack = 2;
 }

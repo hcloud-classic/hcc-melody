@@ -14,11 +14,14 @@
 
 syntax = "proto3";
 
+option go_package = "hcc/pb";
+
 package RpcPiano;
-import public "msgType.proto";
+
+import public "msgtype.proto";
 
 service Piano {
-  rpc Telegraph (ReqMetricInfo) returns (ResMonitoringData) {}
+  rpc Telegraph (ReqMetricInfo) returns (ResMonitoringData);
 }
 
 message ReqMetricInfo {

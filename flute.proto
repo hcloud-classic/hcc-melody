@@ -14,25 +14,27 @@
 
 syntax = "proto3";
 
+option go_package = "hcc/pb";
+
 package RpcFlute;
 
-import public "msgType.proto";
+import public "msgtype.proto";
 
 service Flute {
   // Node
-  rpc CreateNode (ReqCreateNode) returns (ResCreateNode) {}
-  rpc GetNode (ReqGetNode) returns (ResGetNode) {}
-  rpc GetNodeList (ReqGetNodeList) returns (ResGetNodeList) {}
-  rpc GetNodeNum (MsgType.Empty) returns (ResGetNodeNum) {}
-  rpc UpdateNode (ReqUpdateNode) returns (ResUpdateNode) {}
-  rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode) {}
+  rpc CreateNode (ReqCreateNode) returns (ResCreateNode);
+  rpc GetNode (ReqGetNode) returns (ResGetNode);
+  rpc GetNodeList (ReqGetNodeList) returns (ResGetNodeList);
+  rpc GetNodeNum (MsgType.Empty) returns (ResGetNodeNum);
+  rpc UpdateNode (ReqUpdateNode) returns (ResUpdateNode);
+  rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode);
   // NodeDetail
-  rpc CreateNodeDetail (ReqCreateNodeDetail) returns (ResCreateNodeDetail) {}
-  rpc GetNodeDetail (ReqGetNodeDetail) returns (ResGetNodeDetail) {}
-  rpc DeleteNodeDetail (ReqDeleteNodeDetail) returns (ResDeleteNodeDetail) {}
+  rpc CreateNodeDetail (ReqCreateNodeDetail) returns (ResCreateNodeDetail);
+  rpc GetNodeDetail (ReqGetNodeDetail) returns (ResGetNodeDetail);
+  rpc DeleteNodeDetail (ReqDeleteNodeDetail) returns (ResDeleteNodeDetail);
   // IPMI
-  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl) {}
-  rpc GetNodePowerState (ReqNodePowerState) returns (ResNodePowerState) {}
+  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl);
+  rpc GetNodePowerState (ReqNodePowerState) returns (ResNodePowerState);
 }
 
 // Node

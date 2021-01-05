@@ -14,25 +14,27 @@
 
 syntax = "proto3";
 
+option go_package = "hcc/pb";
+
 package RpcViolin;
 
-import public "msgType.proto";
+import public "msgtype.proto";
 
 service Violin {
   // Server
-  rpc CreateServer (ReqCreateServer) returns (ResCreateServer) {}
-  rpc GetServer (ReqGetServer) returns (ResGetServer) {}
-  rpc GetServerList (ReqGetServerList) returns (ResGetServerList) {}
-  rpc GetServerNum (MsgType.Empty) returns (ResGetServerNum) {}
-  rpc UpdateServer (ReqUpdateServer) returns (ResUpdateServer) {}
-  rpc DeleteServer (ReqDeleteServer) returns (ResDeleteServer) {}
+  rpc CreateServer (ReqCreateServer) returns (ResCreateServer);
+  rpc GetServer (ReqGetServer) returns (ResGetServer);
+  rpc GetServerList (ReqGetServerList) returns (ResGetServerList);
+  rpc GetServerNum (MsgType.Empty) returns (ResGetServerNum);
+  rpc UpdateServer (ReqUpdateServer) returns (ResUpdateServer);
+  rpc DeleteServer (ReqDeleteServer) returns (ResDeleteServer);
   // ServerNode
-  rpc CreateServerNode (ReqCreateServerNode) returns (ResCreateServerNode) {}
-  rpc GetServerNode (ReqGetServerNode) returns (ResGetServerNode) {}
-  rpc GetServerNodeList (ReqGetServerNodeList) returns (ResGetServerNodeList) {}
-  rpc GetServerNodeNum (ReqGetServerNodeNum) returns (ResGetServerNodeNum) {}
-  rpc DeleteServerNode (ReqDeleteServerNode) returns (ResDeleteServerNode) {}
-  rpc DeleteServerNodeByServerUUID (ReqDeleteServerNodeByServerUUID) returns (ResDeleteServerNodeByServerUUID) {}
+  rpc CreateServerNode (ReqCreateServerNode) returns (ResCreateServerNode);
+  rpc GetServerNode (ReqGetServerNode) returns (ResGetServerNode);
+  rpc GetServerNodeList (ReqGetServerNodeList) returns (ResGetServerNodeList);
+  rpc GetServerNodeNum (ReqGetServerNodeNum) returns (ResGetServerNodeNum);
+  rpc DeleteServerNode (ReqDeleteServerNode) returns (ResDeleteServerNode);
+  rpc DeleteServerNodeByServerUUID (ReqDeleteServerNodeByServerUUID) returns (ResDeleteServerNodeByServerUUID);
 }
 
 // Server

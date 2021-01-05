@@ -14,7 +14,10 @@
 
 syntax = "proto3";
 
+option go_package = "hcc/pb";
+
 package MsgType;
+
 import "google/protobuf/timestamp.proto";
 
 message Empty {}
@@ -23,6 +26,12 @@ message Empty {}
 message HccError {
   uint64    ErrCode = 1;
   string    ErrText = 2;
+}
+
+message HccErrorStack {
+  string   Version = 1;
+  repeated HccError ErrStack = 2;
+  bool     IsMixed = 3;
 }
 
 // Flute
@@ -40,7 +49,7 @@ message Node {
   google.protobuf.Timestamp created_at = 11;
   int32     active = 12;
   bool      force_off = 13;
-  string     bmcIP_subnet_mask = 14;
+  string    bmcIP_subnet_mask = 14;
 }
 
 message NodeDetail {

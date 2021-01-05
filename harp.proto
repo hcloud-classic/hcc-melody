@@ -14,32 +14,34 @@
 
 syntax = "proto3";
 
+option go_package = "hcc/pb";
+
 package RpcHarp;
 
-import public "msgType.proto";
+import public "msgtype.proto";
 
 service Harp {
   // Subnet
-  rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet) {}
-  rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet) {}
-  rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer) {}
-  rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList) {}
-  rpc GetAvailableSubnetList (MsgType.Empty) returns (ResGetAvailableSubnetList) {}
-  rpc GetSubnetNum (MsgType.Empty) returns (ResGetSubnetNum) {}
-  rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet) {}
-  rpc DeleteSubnet (ReqDeleteSubnet) returns (ResDeleteSubnet) {}
+  rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet);
+  rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet);
+  rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer);
+  rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList);
+  rpc GetAvailableSubnetList (MsgType.Empty) returns (ResGetAvailableSubnetList);
+  rpc GetSubnetNum (MsgType.Empty) returns (ResGetSubnetNum);
+  rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet);
+  rpc DeleteSubnet (ReqDeleteSubnet) returns (ResDeleteSubnet);
   // AdaptiveIP
-  rpc CreateAdaptiveIPSetting (ReqCreateAdaptiveIPSetting) returns (ResCreateAdaptiveIPSetting) {}
-  rpc GetAdaptiveIPSetting (MsgType.Empty) returns (ResGetAdaptiveIPSetting) {}
-  rpc GetAdaptiveIPAvailableIPList (MsgType.Empty) returns (ResGetAdaptiveIPAvailableIPList) {}
-  rpc CreateAdaptiveIPServer (ReqCreateAdaptiveIPServer) returns (ResCreateAdaptiveIPServer) {}
-  rpc GetAdaptiveIPServer (ReqGetAdaptiveIPServer) returns (ResGetAdaptiveIPServer) {}
-  rpc GetAdaptiveIPServerList (ReqGetAdaptiveIPServerList) returns (ResGetAdaptiveIPServerList) {}
-  rpc GetAdaptiveIPServerNum (MsgType.Empty) returns (ResGetAdaptiveIPServerNum) {}
-  rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer) {}
+  rpc CreateAdaptiveIPSetting (ReqCreateAdaptiveIPSetting) returns (ResCreateAdaptiveIPSetting);
+  rpc GetAdaptiveIPSetting (MsgType.Empty) returns (ResGetAdaptiveIPSetting);
+  rpc GetAdaptiveIPAvailableIPList (MsgType.Empty) returns (ResGetAdaptiveIPAvailableIPList);
+  rpc CreateAdaptiveIPServer (ReqCreateAdaptiveIPServer) returns (ResCreateAdaptiveIPServer);
+  rpc GetAdaptiveIPServer (ReqGetAdaptiveIPServer) returns (ResGetAdaptiveIPServer);
+  rpc GetAdaptiveIPServerList (ReqGetAdaptiveIPServerList) returns (ResGetAdaptiveIPServerList);
+  rpc GetAdaptiveIPServerNum (MsgType.Empty) returns (ResGetAdaptiveIPServerNum);
+  rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer);
   // DHCPD
-  rpc CreateDHCPDConf (ReqCreateDHCPDConf) returns (ResCreateDHCPDConf) {}
-  rpc DeleteDHCPDConf (ReqDeleteDHCPDConf) returns (ResDeleteDHCPDConf) {}
+  rpc CreateDHCPDConf (ReqCreateDHCPDConf) returns (ResCreateDHCPDConf);
+  rpc DeleteDHCPDConf (ReqDeleteDHCPDConf) returns (ResDeleteDHCPDConf);
 }
 
 // Subnet
@@ -67,7 +69,7 @@ message ReqGetSubnetByServer {
 
 message ResGetSubnetByServer {
   MsgType.Subnet subnet = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqGetSubnetList {
