@@ -2,6 +2,11 @@
 
 all: build
 
+copy_dir: ## Copy project folder to GOPATH
+	@mkdir -p $(GOPATH)/src/${ROOT_PROJECT_NAME}
+	@rm -rf $(GOPATH)/src/${ROOT_PROJECT_NAME}/${PROJECT_NAME}
+	@cp -Rp `pwd` $(GOPATH)/src/${ROOT_PROJECT_NAME}/${PROJECT_NAME}
+
 build: ## Build the binary file
 	@protoc -I ./ --go_out=${GOPATH}/src --go-grpc_out=${GOPATH}/src *.proto
 	@cd ../pb; go mod init; go mod vendor;
