@@ -12,7 +12,7 @@ copy_dir: ## Copy project folder to GOPATH
 
 build: ## Build the binary file
 	@protoc -I ./ --go_out=${GOPATH}/src --go-grpc_out=${GOPATH}/src *.proto
-	@cd ../pb; go mod init; go mod vendor;
+	@cd $(GOPATH)/src/${ROOT_PROJECT_NAME}/pb; go mod init; go mod vendor;
 
 clean:
 	@rm -rf ../pb
