@@ -1,3 +1,6 @@
+ROOT_PROJECT_NAME := "hcc"
+PROJECT_NAME := "melody"
+
 .PHONY: all build clean
 
 all: build
