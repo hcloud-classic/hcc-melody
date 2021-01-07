@@ -10,12 +10,15 @@ before_script:
 copy_dir:
     stage: init
     script:
-    - gmake copy_dir
+        - gmake copy_dir
+    only:
+        - master
 
 build:
-  stage: build
-  script:
-    - gmake
-    - echo "Finished"
-
+    stage: build
+    script:
+        - gmake
+        - echo "Finished"
+    only:
+        - master
 
