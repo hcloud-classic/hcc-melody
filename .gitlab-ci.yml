@@ -1,23 +1,24 @@
 stages:
-    - init
-    - build
+        - init
+        - build
 
 before_script:
-    - export GOROOT="/opt/go"
-    - export GOPATH="/home/gitlab-runner/go"
-    - export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+        - export GOROOT="/opt/go"
+        - export GOPATH="/home/gitlab-runner/go"
+        - export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
 
 copy_dir:
-    stage: init
-    script:
-        - gmake copy_dir
-    only:
-        - master
+        stage: init
+        script:
+                - gmake copy_dir
+        only:
+                - master
 
 build:
-    stage: build
-    script:
-        - gmake
-        - echo "Finished"
-    only:
-        - master
+        stage: build
+        script:
+                - gmake
+                - echo "Finished"
+        only:
+                - master
+

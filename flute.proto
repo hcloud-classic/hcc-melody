@@ -1,0 +1,146 @@
+// Copyright 2020 by YounSeok.Shim and ish.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+option go_package = "hcc/pb";
+
+package RpcFlute;
+
+import public "msgtype.proto";
+
+service Flute {
+  // Node
+  rpc CreateNode (ReqCreateNode) returns (ResCreateNode);
+  rpc GetNode (ReqGetNode) returns (ResGetNode);
+  rpc GetNodeList (ReqGetNodeList) returns (ResGetNodeList);
+  rpc GetNodeNum (MsgType.Empty) returns (ResGetNodeNum);
+  rpc UpdateNode (ReqUpdateNode) returns (ResUpdateNode);
+  rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode);
+  // NodeDetail
+  rpc CreateNodeDetail (ReqCreateNodeDetail) returns (ResCreateNodeDetail);
+  rpc GetNodeDetail (ReqGetNodeDetail) returns (ResGetNodeDetail);
+  rpc DeleteNodeDetail (ReqDeleteNodeDetail) returns (ResDeleteNodeDetail);
+  // IPMI
+  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl);
+  rpc GetNodePowerState (ReqNodePowerState) returns (ResNodePowerState);
+}
+
+// Node
+message ReqCreateNode {
+  MsgType.Node node = 1;
+}
+
+message ResCreateNode {
+  MsgType.Node node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqGetNode {
+  string UUID = 1;
+}
+
+message ResGetNode {
+  MsgType.Node node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqGetNodeList {
+  MsgType.Node node = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetNodeList {
+  repeated MsgType.Node node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ResGetNodeNum {
+  int64 num = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqUpdateNode {
+  MsgType.Node node = 1;
+}
+
+message ResUpdateNode {
+  MsgType.Node node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqDeleteNode {
+  string UUID = 1;
+}
+
+message ResDeleteNode {
+  MsgType.Node node = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+// NodeDetail
+message ReqCreateNodeDetail {
+  MsgType.NodeDetail node_detail = 1;
+}
+
+message ResCreateNodeDetail {
+  MsgType.NodeDetail node_detail = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqGetNodeDetail {
+  string nodeUUID = 1;
+}
+
+message ResGetNodeDetail {
+  MsgType.NodeDetail node_detail = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqDeleteNodeDetail {
+  string nodeUUID = 1;
+}
+
+message ResDeleteNodeDetail {
+  MsgType.NodeDetail node_detail = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+// IPMI
+enum PowerState {
+  ON = 0;
+  OFF = 1;
+  FORCE_OFF = 2;
+  FORCE_RESTART = 3;
+}
+
+message ReqNodePowerControl {
+  repeated MsgType.Node node = 1;
+  PowerState power_state = 2;
+}
+
+message ResNodePowerControl {
+  repeated string result = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqNodePowerState {
+  string UUID = 1;
+}
+
+message ResNodePowerState {
+  string result = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}

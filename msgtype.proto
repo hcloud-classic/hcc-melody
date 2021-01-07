@@ -1,0 +1,239 @@
+// Copyright 2020 HCC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+option go_package = "hcc/pb";
+
+package MsgType;
+
+import "google/protobuf/timestamp.proto";
+
+message Empty {}
+
+// HccError
+message HccError {
+  uint64    ErrCode = 1;
+  string    ErrText = 2;
+}
+
+message HccErrorStack {
+  string   Version = 1;
+  repeated HccError ErrStack = 2;
+  bool     IsMixed = 3;
+}
+
+// Flute
+message Node {
+  string    UUID = 1;
+  string    serverUUID = 2;
+  string    bmc_mac_addr = 3;
+  string    bmcIP = 4;
+  string    PXE_mac_addr = 5;
+  string    status = 6;
+  int32     CPU_cores = 7;
+  int32     memory = 8;
+  string    description = 9;
+  int32     rack_number = 10;
+  google.protobuf.Timestamp created_at = 11;
+  int32     active = 12;
+  bool      force_off = 13;
+  string    bmcIP_subnet_mask = 14;
+}
+
+message NodeDetail {
+  string    nodeUUID = 1;
+  string    CPU_model = 2;
+  int32     CPU_processors = 3;
+  int32     CPU_threads = 4;
+}
+
+// Violin
+message Server {
+  string    UUID = 1;
+  string    subnetUUID = 2;
+  string    OS = 3;
+  string    server_name = 4;
+  string    server_desc = 5;
+  int32     CPU = 6;
+  int32     memory = 7;
+  int32     disk_size = 8;
+  string    status = 9;
+  string    userUUID = 10;
+  google.protobuf.Timestamp created_at = 11;
+}
+
+message ServerNode {
+  string    UUID = 1;
+  string    serverUUID = 2;
+  string    nodeUUID = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message Quota {
+  string    ServerUUID = 1;
+  int32     CPU = 2;
+  int32     memory = 3;
+  int32     numberOfNodes = 4;
+}
+
+// Violin noVNC
+message VNC {
+  string    serverUUID = 1;
+  string    action = 2;
+}
+
+// Cello
+message Volume {
+  string    UUID = 1;
+  string    size = 2;
+  string    filesystem = 3;
+  string    serverUUID = 4;
+  string    use_type = 5;
+  string    userUUID = 6;
+  google.protobuf.Timestamp created_at = 7;
+  string    network_IP = 8;
+  string    gateway_ip = 9;
+  string    pool = 10;
+  int64        lun = 11;
+  string    action  = 12;
+
+}
+
+message VolumeAttachment {
+  string    UUID = 1;
+  string    volumeUUID = 2;
+  string    serverUUID = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message Pool {
+  string    UUID = 1;
+  string    Size = 2;
+  string    Free = 3;
+  string    Capacity = 4;
+  string    Health = 5;
+  string    Name = 6;
+  string    AvailableSize = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+  string    action  = 10;
+  string Used=11;
+}
+
+// Harp
+message AdaptiveIPSetting {
+  string    ext_ifaceIP_address = 1;
+  string    netmask = 2;
+  string    gateway_address = 3;
+  string    startIP_address = 4;
+  string    endIP_address = 5;
+}
+
+message AdaptiveIPAvailableIPList {
+  repeated string available_ip = 1;
+}
+
+message AdaptiveIPServer {
+  string    serverUUID = 1;
+  string    publicIP = 2;
+  string    privateIP = 3;
+  string    private_gateway = 4;
+  string    status = 5;
+  google.protobuf.Timestamp created_at = 6;
+}
+
+message Subnet {
+  string    UUID = 1;
+  string    networkIP = 2;
+  string    netmask = 3;
+  string    gateway = 4;
+  string    next_server = 5;
+  string    name_server = 6;
+  string    domain_name = 7;
+  string    serverUUID = 8;
+  string    leader_nodeUUID = 9;
+  string    OS = 10;
+  string    subnet_name = 11;
+  google.protobuf.Timestamp created_at = 12;
+}
+
+// Piano
+message MetricInfo {
+  string uuid = 1;
+  string metric = 2;
+  string subMetric = 3;
+  string period = 4;
+  string aggregateFn = 5;
+  string duration = 6;
+  string time = 7;
+  string groupBy = 8;
+  string orderBy = 9;
+  string limit = 10;
+}
+
+message MonitoringData {
+  string    uuid = 1;
+  bytes     result = 2;
+}
+
+// Viola
+message NormalAction {
+  int32 empty = 1;
+}
+
+message HccAction {
+  string    action_area = 1;
+  string    action_class = 2;
+  string    action_scope = 3;
+  string    IPrange = 4;
+  string    serverUUID = 5;
+}
+
+message Action {
+  string          action_type = 1;
+  NormalAction    normal_action = 2;
+  HccAction       hcc_action = 3;
+  string          action_result = 4;
+}
+
+message Control {
+  Action action = 1;
+  string publisher = 2;
+  string receiver = 3;
+}
+
+message Controls {
+  repeated Control control = 1;
+}
+
+// For Return to Scheduled Nodes
+message ScheduledNodes {
+  repeated Node shceduledNode=1;
+}
+
+// For scheduling
+message ScheduleServer {
+  Server scheduleServer=1;
+  int32 numOfNodes =2;
+}
+
+// piccolo
+message ServerAction {
+  string action = 1;
+  string result = 2;
+  string err_str = 3;
+  string token = 4;
+}

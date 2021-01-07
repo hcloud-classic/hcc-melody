@@ -1,0 +1,196 @@
+// Copyright 2020 by ish.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+option go_package = "hcc/pb";
+
+package RpcHarp;
+
+import public "msgtype.proto";
+
+service Harp {
+  // Subnet
+  rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet);
+  rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet);
+  rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer);
+  rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList);
+  rpc GetAvailableSubnetList (MsgType.Empty) returns (ResGetAvailableSubnetList);
+  rpc GetSubnetNum (MsgType.Empty) returns (ResGetSubnetNum);
+  rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet);
+  rpc DeleteSubnet (ReqDeleteSubnet) returns (ResDeleteSubnet);
+  // AdaptiveIP
+  rpc CreateAdaptiveIPSetting (ReqCreateAdaptiveIPSetting) returns (ResCreateAdaptiveIPSetting);
+  rpc GetAdaptiveIPSetting (MsgType.Empty) returns (ResGetAdaptiveIPSetting);
+  rpc GetAdaptiveIPAvailableIPList (MsgType.Empty) returns (ResGetAdaptiveIPAvailableIPList);
+  rpc CreateAdaptiveIPServer (ReqCreateAdaptiveIPServer) returns (ResCreateAdaptiveIPServer);
+  rpc GetAdaptiveIPServer (ReqGetAdaptiveIPServer) returns (ResGetAdaptiveIPServer);
+  rpc GetAdaptiveIPServerList (ReqGetAdaptiveIPServerList) returns (ResGetAdaptiveIPServerList);
+  rpc GetAdaptiveIPServerNum (MsgType.Empty) returns (ResGetAdaptiveIPServerNum);
+  rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer);
+  // DHCPD
+  rpc CreateDHCPDConf (ReqCreateDHCPDConf) returns (ResCreateDHCPDConf);
+  rpc DeleteDHCPDConf (ReqDeleteDHCPDConf) returns (ResDeleteDHCPDConf);
+}
+
+// Subnet
+message ReqCreateSubnet {
+  MsgType.Subnet subnet = 1;
+}
+
+message ResCreateSubnet {
+  MsgType.Subnet subnet = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqGetSubnet {
+  string UUID = 1;
+}
+
+message ResGetSubnet {
+  MsgType.Subnet subnet = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqGetSubnetByServer {
+  string serverUUID = 1;
+}
+
+message ResGetSubnetByServer {
+  MsgType.Subnet subnet = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetSubnetList {
+  MsgType.Subnet subnet = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetSubnetList {
+  repeated MsgType.Subnet subnet = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ResGetAvailableSubnetList {
+  repeated MsgType.Subnet subnet = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ResGetSubnetNum {
+  int64 num = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqUpdateSubnet {
+  MsgType.Subnet subnet = 1;
+}
+
+message ResUpdateSubnet {
+  MsgType.Subnet subnet = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqDeleteSubnet {
+  string UUID = 1;
+}
+
+message ResDeleteSubnet {
+  MsgType.Subnet subnet = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+// AdaptiveIP
+message ReqCreateAdaptiveIPSetting {
+  MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
+}
+
+message ResCreateAdaptiveIPSetting {
+  MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ResGetAdaptiveIPSetting {
+  MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ResGetAdaptiveIPAvailableIPList {
+  MsgType.AdaptiveIPAvailableIPList adaptiveip_availableip_list = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqCreateAdaptiveIPServer {
+  string serverUUID = 1;
+  string publicIP = 2;
+}
+
+message ResCreateAdaptiveIPServer {
+  MsgType.AdaptiveIPServer adaptiveip_server = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqGetAdaptiveIPServer {
+  string serverUUID = 1;
+}
+
+message ResGetAdaptiveIPServer {
+  MsgType.AdaptiveIPServer adaptiveip_server = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqGetAdaptiveIPServerList {
+  MsgType.AdaptiveIPServer adaptiveip_server = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetAdaptiveIPServerList {
+  repeated MsgType.AdaptiveIPServer adaptiveip_server = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ResGetAdaptiveIPServerNum {
+  int64 num = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqDeleteAdaptiveIPServer {
+  string serverUUID = 1;
+}
+
+message ResDeleteAdaptiveIPServer {
+  string serverUUID = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+// DHCPD
+message ReqCreateDHCPDConf {
+  string subnetUUID = 1;
+  string nodeUUIDs = 2;
+}
+
+message ResCreateDHCPDConf {
+  string result = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
+
+message ReqDeleteDHCPDConf {
+  string subnetUUID = 1;
+}
+
+message ResDeleteDHCPDConf {
+  string result = 1;
+  repeated MsgType.HccError hccErrorStack = 2;
+}
