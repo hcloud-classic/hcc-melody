@@ -15,7 +15,7 @@ build: ## Build the binary file
 	@cd $(GOPATH)/src/${ROOT_PROJECT_NAME}/pb; go mod init; go mod vendor;
 
 clean:
-	@rm -rf ../pb
+	@rm -rf $(GOPATH)/src/${ROOT_PROJECT_NAME}/pb
 
 help: ## Display this help screen
 	@grep -h -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
