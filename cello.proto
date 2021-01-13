@@ -34,7 +34,7 @@ message ReqVolumeHandler {
 
 message ResVolumeHandler {
   MsgType.Volume volume = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqPoolHandler {
@@ -43,7 +43,7 @@ message ReqPoolHandler {
 
 message ResPoolHandler {
   MsgType.Pool pool = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqGetVolume {
@@ -54,7 +54,7 @@ message ReqGetVolume {
 
 message ResGetVolume {
   repeated MsgType.Volume volume = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqGetVolumeList {
@@ -65,7 +65,7 @@ message ReqGetVolumeList {
 
 message ResGetVolumeList {
   repeated MsgType.Volume volume = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqGetPoolList {
@@ -76,5 +76,5 @@ message ReqGetPoolList {
 
 message ResGetPoolList {
   repeated  MsgType.Pool pool = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
