@@ -31,5 +31,5 @@ message ReqScheduleHandler {
 
 message ResScheduleHandler {
   MsgType.ScheduledNodes nodes = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
