@@ -25,10 +25,10 @@ service Piano {
 }
 
 message ReqMetricInfo {
-    MsgType.MetricInfo metricInfo = 1;
+  MsgType.MetricInfo metricInfo = 1;
 }
 
 message ResMonitoringData {
-    MsgType.MonitoringData monitoringData = 1;
+  MsgType.MonitoringData monitoringData = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
 }
