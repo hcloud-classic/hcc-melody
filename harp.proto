@@ -51,7 +51,7 @@ message ReqCreateSubnet {
 
 message ResCreateSubnet {
   MsgType.Subnet subnet = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqGetSubnet {
@@ -60,7 +60,7 @@ message ReqGetSubnet {
 
 message ResGetSubnet {
   MsgType.Subnet subnet = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqGetSubnetByServer {
@@ -69,7 +69,7 @@ message ReqGetSubnetByServer {
 
 message ResGetSubnetByServer {
   MsgType.Subnet subnet = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqGetSubnetList {
@@ -80,17 +80,17 @@ message ReqGetSubnetList {
 
 message ResGetSubnetList {
   repeated MsgType.Subnet subnet = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ResGetAvailableSubnetList {
   repeated MsgType.Subnet subnet = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ResGetSubnetNum {
   int64 num = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqUpdateSubnet {
@@ -99,7 +99,7 @@ message ReqUpdateSubnet {
 
 message ResUpdateSubnet {
   MsgType.Subnet subnet = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqDeleteSubnet {
@@ -108,7 +108,7 @@ message ReqDeleteSubnet {
 
 message ResDeleteSubnet {
   MsgType.Subnet subnet = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 // AdaptiveIP
@@ -118,17 +118,17 @@ message ReqCreateAdaptiveIPSetting {
 
 message ResCreateAdaptiveIPSetting {
   MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ResGetAdaptiveIPSetting {
   MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ResGetAdaptiveIPAvailableIPList {
   MsgType.AdaptiveIPAvailableIPList adaptiveip_availableip_list = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqCreateAdaptiveIPServer {
@@ -138,7 +138,7 @@ message ReqCreateAdaptiveIPServer {
 
 message ResCreateAdaptiveIPServer {
   MsgType.AdaptiveIPServer adaptiveip_server = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqGetAdaptiveIPServer {
@@ -147,7 +147,7 @@ message ReqGetAdaptiveIPServer {
 
 message ResGetAdaptiveIPServer {
   MsgType.AdaptiveIPServer adaptiveip_server = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqGetAdaptiveIPServerList {
@@ -158,12 +158,12 @@ message ReqGetAdaptiveIPServerList {
 
 message ResGetAdaptiveIPServerList {
   repeated MsgType.AdaptiveIPServer adaptiveip_server = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ResGetAdaptiveIPServerNum {
   int64 num = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqDeleteAdaptiveIPServer {
@@ -172,7 +172,7 @@ message ReqDeleteAdaptiveIPServer {
 
 message ResDeleteAdaptiveIPServer {
   string serverUUID = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 // DHCPD
@@ -183,7 +183,7 @@ message ReqCreateDHCPDConf {
 
 message ResCreateDHCPDConf {
   string result = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqDeleteDHCPDConf {
@@ -192,5 +192,5 @@ message ReqDeleteDHCPDConf {
 
 message ResDeleteDHCPDConf {
   string result = 1;
-  repeated MsgType.HccError hccErrorStack = 2;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
