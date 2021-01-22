@@ -10,14 +10,14 @@ before_script:
 copy_dir:
         stage: init
         script:
-                - gmake copy_dir
+                - make copy_dir
         only:
                 - master
 
 build:
         stage: build
         script:
-                - gmake
+                - make
                 - echo "Finished"
         only:
                 - master
