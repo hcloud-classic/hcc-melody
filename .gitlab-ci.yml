@@ -30,8 +30,8 @@ build:
 trigger_violin_novnc:
     stage: trigger-middlewares
     script:
-        - "curl -X POST -F token=$(TOKNOVNC) -F ref=master http://210.207.104.150:8100/api/v4/projects/63/trigger/pipeline"
-        - "curl -X POST -F token=$(TOKCLARINET) -F ref=master http://210.207.104.150:8100/api/v4/projects/63/trigger/pipeline"
-        - "curl -X POST -F token=$(TOKPIANO) -F ref=master http://210.207.104.150:8100/api/v4/projects/63/trigger/pipeline"
+        - curl -X POST -F token=$TOKNOVNC -F ref=master http://210.207.104.150:8100/api/v4/projects/63/trigger/pipeline;
+        - curl -X POST -F token=$TOKCLARINET -F ref=master http://210.207.104.150:8100/api/v4/projects/63/trigger/pipeline;
+        - curl -X POST -F token=$TOKPIANO -F ref=master http://210.207.104.150:8100/api/v4/projects/63/trigger/pipeline;
     only:
         - master
