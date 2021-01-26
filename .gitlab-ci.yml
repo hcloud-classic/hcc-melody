@@ -1,11 +1,13 @@
 stages:
         - init
         - build
+        - trigger-middlewares
 
 before_script:
         - export GOROOT="/usr/local/go"
         - export GOPATH="/home/gitlab-runner/go"
         - export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+        - export HCCPATH="$GOPATH/src/hcc"
 
 copy_dir:
         stage: init
@@ -22,3 +24,9 @@ build:
         only:
                 - master
 
+trigger_violin_novnc:
+    stage: trigger-middlewares
+    trigger:
+        include: $HCCPATH/violin-novnc/.gitlab-ci.yml
+    only:
+        - master
