@@ -44,3 +44,10 @@ trigger_clarinet:
         - "curl -X POST -F token=2e3188778e405f731bc2f52776d65c -F ref=master http://210.207.104.150:8100/api/v4/projects/112/trigger/pipeline"
     only:
         - master
+
+trigger_harp:
+  stage: trigger-middlewares
+  script:
+    - "curl -X POST -F token=1e2375b74e96d14e8503748bda2eda -F ref=master http://210.207.104.150:8100/api/v4/projects/64/trigger/pipeline"
+  only:
+    - master
