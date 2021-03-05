@@ -230,6 +230,18 @@ message ScheduleServer {
   int32 numOfNodes =2;
 }
 
+// tuba
+message Process {
+  int64     PID = 1;
+  int64     PPID = 2;
+  string    EXE = 3;
+  string    CPUUsage = 4;
+  string    Stat = 5;
+  string    EPMType = 6;
+  int64     EPMSource = 7;
+  int64     EPMTarget = 8;
+}
+
 // piccolo
 message ServerAction {
   string action = 1;
