@@ -231,15 +231,24 @@ message ScheduleServer {
 }
 
 // tuba
-message Process {
-  int64     PID = 1;
-  int64     PPID = 2;
-  string    EXE = 3;
-  string    CPUUsage = 4;
-  string    Stat = 5;
-  string    EPMType = 6;
-  int64     EPMSource = 7;
-  int64     EPMTarget = 8;
+message Task {
+  string    CMD        = 1;
+  string    state      = 2;
+  int64     PID        = 3;
+  int64     PPID       = 4;
+  int64     PGID       = 5;
+  int64     SID        = 6;
+  int64     priority   = 7;
+  int64     nice       = 8;
+  int64     numThreads = 9;
+  string    startTime  = 10;
+  repeated MsgType.Task children = 11;
+  repeated MsgType.Task threads  = 12;
+  string    CPUUsage   = 13;
+  string    memUsage   = 14;
+  string    EPMType    = 15;
+  int64     EPMSource  = 16;
+  int64     EPMTarget  = 17;
 }
 
 // piccolo

@@ -21,19 +21,22 @@ package RpcTuba;
 import public "msgtype.proto";
 
 service Tuba {
-  // Process
-  rpc GetProcessList (ReqGetProcessList) returns (ResGetProcessList);
+  // Task
+  rpc GetTaskList (ReqGetTaskList) returns (ResGetTaskList);
 }
 
-// Process
-message ReqGetProcessList {
-  MsgType.Process process = 1;
-  int64 row = 2;
-  int64 page = 3;
+// Task
+message ReqGetTaskList {
+  MsgType.Task task = 1;
+  bool showChildren = 2;
+  bool showThreads  = 3;
 }
 
-message ResGetProcessList {
-  repeated MsgType.Process process = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+message ResGetTaskList {
+  repeated MsgType.Task tasks         = 1;
+  int64  totalTasks                   = 2;
+  string totalMemUsage                = 3;
+  string totalMem                     = 4;
+  string totalMemUsagePercent         = 5;
+  MsgType.HccErrorStack hccErrorStack = 6;
 }
-
