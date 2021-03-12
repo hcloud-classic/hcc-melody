@@ -28,8 +28,6 @@ service Tuba {
 // Task
 message ReqGetTaskList {
   MsgType.Task task = 1;
-  bool showChildren = 2;
-  bool showThreads  = 3;
 }
 
 message ResGetTaskList {
@@ -38,5 +36,6 @@ message ResGetTaskList {
   string totalMemUsage                = 3;
   string totalMem                     = 4;
   string totalMemUsagePercent         = 5;
-  MsgType.HccErrorStack hccErrorStack = 6;
+  string totalCPUUsage                = 6;
+  MsgType.HccErrorStack hccErrorStack = 7;
 }
