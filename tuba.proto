@@ -22,20 +22,11 @@ import public "msgtype.proto";
 
 service Tuba {
   // Task
-  rpc GetTaskList (ReqGetTaskList) returns (ResGetTaskList);
+  rpc GetTaskList (MsgType.Empty) returns (ResGetTaskList);
 }
 
 // Task
-message ReqGetTaskList {
-  MsgType.Task task = 1;
-}
-
 message ResGetTaskList {
-  repeated MsgType.Task tasks         = 1;
-  int64  totalTasks                   = 2;
-  string totalMemUsage                = 3;
-  string totalMem                     = 4;
-  string totalMemUsagePercent         = 5;
-  string totalCPUUsage                = 6;
-  MsgType.HccErrorStack hccErrorStack = 7;
+  string  result                      = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
