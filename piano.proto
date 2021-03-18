@@ -22,6 +22,7 @@ import public "msgtype.proto";
 
 service Piano {
   rpc Telegraph (ReqMetricInfo) returns (ResMonitoringData);
+  rpc GetBillingData (ReqBillingData) returns (ResBillingData);
 }
 
 message ReqMetricInfo {
@@ -31,4 +32,18 @@ message ReqMetricInfo {
 message ResMonitoringData {
   MsgType.MonitoringData monitoringData = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqBillingData {
+  string billingType = 1;
+  repeated int32 groupID = 2;
+  int32 dateStart = 3;
+  int32 dateEnd = 4;
+}
+
+message ResBillingData {
+  string billingType = 1;
+  repeated int32 groupID = 2;
+  bytes result = 3;
+  MsgType.HccErrorStack hccErrorStack = 4;
 }
