@@ -59,6 +59,13 @@ trigger_flute:
   only:
     - master
 
+trigger_violin:
+  stage: trigger-middlewares
+  script:
+    - "curl -X POST -F token=01b04b509b4b548213f81b4310eac6 -F ref=master http://210.207.104.150:8100/api/v4/projects/62/trigger/pipeline"
+  only:
+    - master
+
 trigger_tuba:
   stage: trigger-middlewares
   script:
