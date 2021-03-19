@@ -154,26 +154,28 @@ message AdaptiveIPAvailableIPList {
 
 message AdaptiveIPServer {
   string    serverUUID = 1;
-  string    publicIP = 2;
-  string    privateIP = 3;
-  string    private_gateway = 4;
-  string    status = 5;
-  google.protobuf.Timestamp created_at = 6;
+  int64     groupID = 2;
+  string    publicIP = 3;
+  string    privateIP = 4;
+  string    private_gateway = 5;
+  string    status = 6;
+  google.protobuf.Timestamp created_at = 7;
 }
 
 message Subnet {
   string    UUID = 1;
-  string    networkIP = 2;
-  string    netmask = 3;
-  string    gateway = 4;
-  string    next_server = 5;
-  string    name_server = 6;
-  string    domain_name = 7;
-  string    serverUUID = 8;
-  string    leader_nodeUUID = 9;
-  string    OS = 10;
-  string    subnet_name = 11;
-  google.protobuf.Timestamp created_at = 12;
+  int64     groupID = 2;
+  string    networkIP = 3;
+  string    netmask = 4;
+  string    gateway = 5;
+  string    next_server = 6;
+  string    name_server = 7;
+  string    domain_name = 8;
+  string    serverUUID = 9;
+  string    leader_nodeUUID = 10;
+  string    OS = 11;
+  string    subnet_name = 12;
+  google.protobuf.Timestamp created_at = 13;
 }
 
 // Piano
