@@ -37,19 +37,24 @@ message HccErrorStack {
 // Flute
 message Node {
   string    UUID = 1;
-  string    serverUUID = 2;
-  string    bmc_mac_addr = 3;
-  string    bmcIP = 4;
-  string    PXE_mac_addr = 5;
-  string    status = 6;
-  int32     CPU_cores = 7;
-  int32     memory = 8;
-  string    description = 9;
-  int32     rack_number = 10;
-  google.protobuf.Timestamp created_at = 11;
-  int32     active = 12;
-  bool      force_off = 13;
-  string    bmcIP_subnet_mask = 14;
+  int64     groupID = 2;
+  string    serverUUID = 3;
+  string    bmc_mac_addr = 4;
+  string    bmcIP = 5;
+  string    PXE_mac_addr = 6;
+  string    status = 7;
+  int32     CPU_cores = 8;
+  int32     memory = 9;
+  int32     nic_speed_mbps = 10;
+  string    description = 11;
+  int32     chargeCPU = 12;
+  int32     chargeMemory = 13;
+  int32     chargeNIC = 14;
+  int32     rack_number = 15;
+  google.protobuf.Timestamp created_at = 16;
+  int32     active = 17;
+  bool      force_off = 18;
+  string    bmcIP_subnet_mask = 19;
 }
 
 message NodeDetail {
