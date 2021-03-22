@@ -27,6 +27,6 @@ service Tuba {
 
 // Task
 message ResGetTaskList {
-  string  result                      = 1;
+  bytes   result                      = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
 }
