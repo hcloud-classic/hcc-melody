@@ -21,7 +21,15 @@ package RpcPiccolo;
 import public "msgtype.proto";
 
 service Piccolo {
+  // Group
+  rpc GetGroupList(MsgType.Empty) returns (ResGetGroupList);
+  // ServerAction
   rpc WriteServerAction (ReqWriteServerAction) returns (ResWriteServerAction);
+}
+
+message ResGetGroupList {
+  repeated MsgType.Group group = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
 
 message ReqWriteServerAction {
