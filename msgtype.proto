@@ -67,16 +67,17 @@ message NodeDetail {
 // Violin
 message Server {
   string    UUID = 1;
-  string    subnetUUID = 2;
-  string    OS = 3;
-  string    server_name = 4;
-  string    server_desc = 5;
-  int32     CPU = 6;
-  int32     memory = 7;
-  int32     disk_size = 8;
-  string    status = 9;
-  string    userUUID = 10;
-  google.protobuf.Timestamp created_at = 11;
+  int64     groupID = 2;
+  string    subnetUUID = 3;
+  string    OS = 4;
+  string    server_name = 5;
+  string    server_desc = 6;
+  int32     CPU = 7;
+  int32     memory = 8;
+  int32     disk_size = 9;
+  string    status = 10;
+  string    userUUID = 11;
+  google.protobuf.Timestamp created_at = 12;
 }
 
 message ServerNode {
