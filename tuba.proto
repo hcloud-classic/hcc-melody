@@ -22,10 +22,15 @@ import public "msgtype.proto";
 
 service Tuba {
   // Task
-  rpc GetTaskList (MsgType.Empty) returns (ResGetTaskList);
+  rpc GetTaskList (ReqGetTaskList) returns (ResGetTaskList);
 }
 
 // Task
+message ReqGetTaskList {
+  string sort_by = 1;
+  bool   reverse_sorting = 2;
+}
+
 message ResGetTaskList {
   bytes   result                      = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
