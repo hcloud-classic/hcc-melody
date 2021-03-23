@@ -29,7 +29,7 @@ service Tuba {
 message ReqGetTaskList {
   string sort_by = 1;
   bool   reverse_sorting = 2;
-  bool   show_threads = 3;
+  bool   hide_threads = 3;
 }
 
 message ResGetTaskList {
