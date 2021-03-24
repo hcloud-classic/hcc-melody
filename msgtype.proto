@@ -39,22 +39,24 @@ message Node {
   string    UUID = 1;
   int64     groupID = 2;
   string    serverUUID = 3;
-  string    bmc_mac_addr = 4;
-  string    bmcIP = 5;
-  string    PXE_mac_addr = 6;
-  string    status = 7;
-  int32     CPU_cores = 8;
-  int32     memory = 9;
-  int32     nic_speed_mbps = 10;
-  string    description = 11;
-  int32     chargeCPU = 12;
-  int32     chargeMemory = 13;
-  int32     chargeNIC = 14;
-  int32     rack_number = 15;
-  google.protobuf.Timestamp created_at = 16;
-  int32     active = 17;
-  bool      force_off = 18;
-  string    bmcIP_subnet_mask = 19;
+  int32     nodeNum = 4;
+  string    nodeIP = 5;
+  string    bmc_mac_addr = 6;
+  string    bmcIP = 7;
+  string    PXE_mac_addr = 8;
+  string    status = 9;
+  int32     CPU_cores = 10;
+  int32     memory = 11;
+  int32     nic_speed_mbps = 12;
+  string    description = 13;
+  int32     chargeCPU = 14;
+  int32     chargeMemory = 15;
+  int32     chargeNIC = 16;
+  int32     rack_number = 17;
+  google.protobuf.Timestamp created_at = 18;
+  int32     active = 19;
+  bool      force_off = 20;
+  string    bmcIP_subnet_mask = 21;
 }
 
 message NodeDetail {
