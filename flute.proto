@@ -25,7 +25,7 @@ service Flute {
   rpc CreateNode (ReqCreateNode) returns (ResCreateNode);
   rpc GetNode (ReqGetNode) returns (ResGetNode);
   rpc GetNodeList (ReqGetNodeList) returns (ResGetNodeList);
-  rpc GetNodeNum (MsgType.Empty) returns (ResGetNodeNum);
+  rpc GetNodeNum (ReqGetNodeNum) returns (ResGetNodeNum);
   rpc UpdateNode (ReqUpdateNode) returns (ResUpdateNode);
   rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode);
   // NodeDetail
@@ -65,6 +65,10 @@ message ReqGetNodeList {
 message ResGetNodeList {
   repeated MsgType.Node node = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetNodeNum {
+  int64 groupID = 1;
 }
 
 message ResGetNodeNum {
