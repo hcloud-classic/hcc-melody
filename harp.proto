@@ -26,8 +26,8 @@ service Harp {
   rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet);
   rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer);
   rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList);
-  rpc GetAvailableSubnetList (MsgType.Empty) returns (ResGetAvailableSubnetList);
-  rpc GetSubnetNum (MsgType.Empty) returns (ResGetSubnetNum);
+  rpc GetAvailableSubnetList (ReqGetAvailableSubnetList) returns (ResGetAvailableSubnetList);
+  rpc GetSubnetNum (ReqGetSubnetNum) returns (ResGetSubnetNum);
   rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet);
   rpc DeleteSubnet (ReqDeleteSubnet) returns (ResDeleteSubnet);
   // AdaptiveIP
@@ -83,9 +83,17 @@ message ResGetSubnetList {
   MsgType.HccErrorStack hccErrorStack = 2;
 }
 
+message ReqGetAvailableSubnetList {
+  int64 groupID = 1;
+}
+
 message ResGetAvailableSubnetList {
   repeated MsgType.Subnet subnet = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetSubnetNum {
+  int64 groupID = 1;
 }
 
 message ResGetSubnetNum {
