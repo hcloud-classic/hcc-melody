@@ -25,7 +25,7 @@ service Violin {
   rpc CreateServer (ReqCreateServer) returns (ResCreateServer);
   rpc GetServer (ReqGetServer) returns (ResGetServer);
   rpc GetServerList (ReqGetServerList) returns (ResGetServerList);
-  rpc GetServerNum (MsgType.Empty) returns (ResGetServerNum);
+  rpc GetServerNum (ReqGetServerNum) returns (ResGetServerNum);
   rpc UpdateServer (ReqUpdateServer) returns (ResUpdateServer);
   rpc DeleteServer (ReqDeleteServer) returns (ResDeleteServer);
   // ServerNode
@@ -67,6 +67,10 @@ message ReqGetServerList {
 message ResGetServerList {
   repeated MsgType.Server server = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetServerNum {
+  int64 groupID = 1;
 }
 
 message ResGetServerNum {
