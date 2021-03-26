@@ -23,6 +23,7 @@ import public "msgtype.proto";
 service Piano {
   rpc Telegraph (ReqMetricInfo) returns (ResMonitoringData);
   rpc GetBillingData (ReqBillingData) returns (ResBillingData);
+  rpc GetBillingDetail (ReqBillingData) returns (ResBillingData);
 }
 
 message ReqMetricInfo {
@@ -39,6 +40,8 @@ message ReqBillingData {
   repeated int32 groupID = 2;
   int32 dateStart = 3;
   int32 dateEnd = 4;
+  int64 row = 5;
+  int64 page = 6;
 }
 
 message ResBillingData {
