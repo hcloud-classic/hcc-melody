@@ -61,9 +61,7 @@ message Node {
 
 message NodeDetail {
   string    nodeUUID = 1;
-  string    CPU_model = 2;
-  int32     CPU_processors = 3;
-  int32     CPU_threads = 4;
+  string    node_detail_data = 2;
 }
 
 // Violin

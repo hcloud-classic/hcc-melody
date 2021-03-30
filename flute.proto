@@ -31,6 +31,7 @@ service Flute {
   // NodeDetail
   rpc CreateNodeDetail (ReqCreateNodeDetail) returns (ResCreateNodeDetail);
   rpc GetNodeDetail (ReqGetNodeDetail) returns (ResGetNodeDetail);
+  rpc UpdateNodeDetail (ReqUpdateNodeDetail) returns (ResUpdateNodeDetail);
   rpc DeleteNodeDetail (ReqDeleteNodeDetail) returns (ResDeleteNodeDetail);
   // IPMI
   rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl);
@@ -109,6 +110,15 @@ message ReqGetNodeDetail {
 }
 
 message ResGetNodeDetail {
+  MsgType.NodeDetail node_detail = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqUpdateNodeDetail {
+  MsgType.NodeDetail node_detail = 1;
+}
+
+message ResUpdateNodeDetail {
   MsgType.NodeDetail node_detail = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
 }
