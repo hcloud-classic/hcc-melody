@@ -62,6 +62,9 @@ message Node {
 message NodeDetail {
   string    nodeUUID = 1;
   string    node_detail_data = 2;
+  string    nic_model = 3;
+  string    bmc_nic_model = 4;
+  int32     bmc_nic_speed_mbps = 12;
 }
 
 // Violin
