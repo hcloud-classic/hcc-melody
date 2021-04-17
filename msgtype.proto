@@ -37,29 +37,30 @@ message HccErrorStack {
 // Flute
 message Node {
   string    UUID = 1;
-  int64     groupID = 2;
-  string    serverUUID = 3;
-  int32     nodeNum = 4;
-  string    nodeIP = 5;
-  string    bmc_mac_addr = 6;
-  string    bmcIP = 7;
-  string    PXE_mac_addr = 8;
-  string    status = 9;
-  int32     CPU_cores = 10;
-  int32     memory = 11;
-  string    nic_model = 12;
-  int32     nic_speed_mbps = 13;
-  string    bmc_nic_model = 14;
-  int32     bmc_nic_speed_mbps = 15;
-  string    description = 16;
-  int32     chargeCPU = 17;
-  int32     chargeMemory = 18;
-  int32     chargeNIC = 19;
-  int32     rack_number = 20;
-  google.protobuf.Timestamp created_at = 21;
-  int32     active = 22;
-  bool      force_off = 23;
-  string    bmcIP_subnet_mask = 24;
+  string    nodeName = 2;
+  int64     groupID = 3;
+  string    serverUUID = 4;
+  int32     nodeNum = 5;
+  string    nodeIP = 6;
+  string    bmc_mac_addr = 7;
+  string    bmcIP = 8;
+  string    PXE_mac_addr = 9;
+  string    status = 10;
+  int32     CPU_cores = 11;
+  int32     memory = 12;
+  string    nic_model = 13;
+  int32     nic_speed_mbps = 14;
+  string    bmc_nic_model = 15;
+  int32     bmc_nic_speed_mbps = 16;
+  string    description = 17;
+  int32     chargeCPU = 18;
+  int32     chargeMemory = 19;
+  int32     chargeNIC = 20;
+  int32     rack_number = 21;
+  google.protobuf.Timestamp created_at = 22;
+  int32     active = 23;
+  bool      force_off = 24;
+  string    bmcIP_subnet_mask = 25;
 }
 
 message NodeDetail {
