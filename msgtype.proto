@@ -48,27 +48,22 @@ message Node {
   string    status = 10;
   int32     CPU_cores = 11;
   int32     memory = 12;
-  string    nic_model = 13;
-  int32     nic_speed_mbps = 14;
-  string    bmc_nic_model = 15;
-  int32     bmc_nic_speed_mbps = 16;
-  string    description = 17;
-  int32     chargeCPU = 18;
-  int32     chargeMemory = 19;
-  int32     chargeNIC = 20;
-  int32     rack_number = 21;
-  google.protobuf.Timestamp created_at = 22;
-  int32     active = 23;
-  bool      force_off = 24;
-  string    bmcIP_subnet_mask = 25;
+  int32     nic_speed_mbps = 13;
+  string    description = 14;
+  int32     chargeCPU = 15;
+  int32     chargeMemory = 16;
+  int32     chargeNIC = 17;
+  int32     rack_number = 18;
+  google.protobuf.Timestamp created_at = 19;
+  int32     active = 20;
+  bool      force_off = 21;
+  string    bmcIP_subnet_mask = 22;
 }
 
 message NodeDetail {
   string    nodeUUID = 1;
   string    node_detail_data = 2;
-  string    nic_model = 3;
-  string    bmc_nic_model = 4;
-  int32     bmc_nic_speed_mbps = 12;
+  string    nic_detail_data = 3;
 }
 
 // Violin
