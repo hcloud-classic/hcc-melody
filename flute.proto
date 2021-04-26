@@ -41,7 +41,7 @@ service Flute {
 // Node
 message ReqCreateNode {
   MsgType.Node node = 1;
-  string    nic_detail_data = 2;
+  string nic_detail_data = 2;
 }
 
 message ResCreateNode {
