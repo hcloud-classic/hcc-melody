@@ -165,6 +165,15 @@ message AdaptiveIPServer {
   google.protobuf.Timestamp created_at = 7;
 }
 
+message PortForwarding {
+  string     serverUUID = 1;
+  bool       forwardTCP = 2;
+  bool       forwardUDP = 3;
+  int64      external_port = 4;
+  int64      internal_port = 5;
+  string     description = 6;
+}
+
 message Subnet {
   string    UUID = 1;
   int64     groupID = 2;
