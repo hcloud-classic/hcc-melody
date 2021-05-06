@@ -223,7 +223,6 @@ message ResDeletePortForwarding {
 // DHCPD
 message ReqCreateDHCPDConf {
   string subnetUUID = 1;
-  string nodeUUIDs = 2;
 }
 
 message ResCreateDHCPDConf {
