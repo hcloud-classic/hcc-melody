@@ -50,14 +50,11 @@ message Node {
   int32     memory = 12;
   int32     nic_speed_mbps = 13;
   string    description = 14;
-  int32     chargeCPU = 15;
-  int32     chargeMemory = 16;
-  int32     chargeNIC = 17;
-  int32     rack_number = 18;
-  google.protobuf.Timestamp created_at = 19;
-  int32     active = 20;
-  bool      force_off = 21;
-  string    bmcIP_subnet_mask = 22;
+  int32     rack_number = 15;
+  google.protobuf.Timestamp created_at = 16;
+  int32     active = 17;
+  bool      force_off = 18;
+  string    bmcIP_subnet_mask = 19;
 }
 
 message NodeDetail {
