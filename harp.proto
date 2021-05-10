@@ -23,6 +23,7 @@ import public "msgtype.proto";
 service Harp {
   // Subnet
   rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet);
+  rpc ValidCheckSubnet (ReqValidCheckSubnet) returns (ResValidCheckSubnet);
   rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet);
   rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer);
   rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList);
@@ -54,6 +55,15 @@ message ReqCreateSubnet {
 
 message ResCreateSubnet {
   MsgType.Subnet subnet = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqValidCheckSubnet {
+  MsgType.Subnet subnet = 1;
+}
+
+message ResValidCheckSubnet {
+  bool valid = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
 }
 
