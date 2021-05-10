@@ -63,8 +63,7 @@ message ReqValidCheckSubnet {
 }
 
 message ResValidCheckSubnet {
-  bool valid = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  int64 errorCode = 1;
 }
 
 message ReqGetSubnet {
