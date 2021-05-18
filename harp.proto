@@ -43,6 +43,8 @@ service Harp {
   rpc CreatePortForwarding (ReqCreatePortForwarding) returns (ResCreatePortForwarding);
   rpc GetPortForwardingList (ReqGetPortForwardingList) returns (ResGetPortForwardingList);
   rpc DeletePortForwarding (ReqDeletePortForwarding) returns (ResDeletePortForwarding);
+  // Traffic
+  rpc GetTraffic (ReqGetTraffic) returns (ResGetTraffic);
   // DHCPD
   rpc CreateDHCPDConf (ReqCreateDHCPDConf) returns (ResCreateDHCPDConf);
   rpc DeleteDHCPDConf (ReqDeleteDHCPDConf) returns (ResDeleteDHCPDConf);
@@ -226,6 +228,17 @@ message ReqDeletePortForwarding {
 
 message ResDeletePortForwarding {
   string serverUUID = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+// Traffic
+message ReqGetTraffic {
+  string serverUUID = 1;
+  string day = 2;
+}
+
+message ResGetTraffic {
+  MsgType.Traffic traffic = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
 }
 
