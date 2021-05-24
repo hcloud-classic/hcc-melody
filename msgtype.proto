@@ -290,14 +290,15 @@ message Group {
 }
 
 message Charge {
-  int64 groupID = 1;
-  int64 chargeCPUPerCore = 2;
-  int64 chargeMemoryPerGB = 3;
+  int64  groupID = 1;
+  int64  chargeCPUPerCore = 2;
+  int64  chargeMemoryPerGB = 3;
   string chargeNicList = 4;
-  int64 chargeSubnetPerCnt = 5;
-  int64 chargeAdaptiveIPPerCnt = 6;
-  int64 chargeSSDPerGB = 7;
-  int64 chargeHDDPerGB = 8;
+  int64  chargeSubnetPerCnt = 5;
+  int64  chargeAdaptiveIPPerCnt = 6;
+  int64  chargeSSDPerGB = 7;
+  int64  chargeHDDPerGB = 8;
+  int64  chargeTrafficPerKB = 9;
 }
 
 message ServerAction {
