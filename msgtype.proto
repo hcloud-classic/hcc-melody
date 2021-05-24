@@ -63,6 +63,13 @@ message NodeDetail {
   string    nic_detail_data = 3;
 }
 
+message NodeUptime {
+  string nodeUUID = 1;
+  int64  groupID = 2;
+  string day = 3;
+  int64  uptime = 4;
+}
+
 // Violin
 message Server {
   string    UUID = 1;
