@@ -67,7 +67,7 @@ message NodeUptime {
   string nodeUUID = 1;
   int64  groupID = 2;
   string day = 3;
-  int64  uptime = 4;
+  int64  uptimeMs = 4;
 }
 
 // Violin
