@@ -298,7 +298,7 @@ message Charge {
   int64  chargeAdaptiveIPPerCnt = 6;
   int64  chargeSSDPerGB = 7;
   int64  chargeHDDPerGB = 8;
-  int64  chargeTrafficPerKB = 9;
+  float  chargeTrafficPerKB = 9;
 }
 
 message ServerAction {
