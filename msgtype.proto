@@ -37,31 +37,33 @@ message HccErrorStack {
 // Flute
 message Node {
   string    UUID = 1;
-  int64     groupID = 2;
-  string    serverUUID = 3;
-  int32     nodeNum = 4;
-  string    nodeIP = 5;
-  string    bmc_mac_addr = 6;
-  string    bmcIP = 7;
-  string    PXE_mac_addr = 8;
-  string    status = 9;
-  int32     CPU_cores = 10;
-  int32     memory = 11;
-  int32     nic_speed_mbps = 12;
-  string    description = 13;
-  int32     chargeCPU = 14;
-  int32     chargeMemory = 15;
-  int32     chargeNIC = 16;
-  int32     rack_number = 17;
-  google.protobuf.Timestamp created_at = 18;
-  int32     active = 19;
-  bool      force_off = 20;
-  string    bmcIP_subnet_mask = 21;
+  string    nodeName = 2;
+  int64     groupID = 3;
+  string    serverUUID = 4;
+  int32     nodeNum = 5;
+  string    nodeIP = 6;
+  string    bmc_mac_addr = 7;
+  string    bmcIP = 8;
+  string    PXE_mac_addr = 9;
+  string    status = 10;
+  int32     CPU_cores = 11;
+  int32     memory = 12;
+  int32     nic_speed_mbps = 13;
+  string    description = 14;
+  int32     chargeCPU = 15;
+  int32     chargeMemory = 16;
+  int32     chargeNIC = 17;
+  int32     rack_number = 18;
+  google.protobuf.Timestamp created_at = 19;
+  int32     active = 20;
+  bool      force_off = 21;
+  string    bmcIP_subnet_mask = 22;
 }
 
 message NodeDetail {
   string    nodeUUID = 1;
   string    node_detail_data = 2;
+  string    nic_detail_data = 3;
 }
 
 // Violin
@@ -161,6 +163,15 @@ message AdaptiveIPServer {
   string    private_gateway = 5;
   string    status = 6;
   google.protobuf.Timestamp created_at = 7;
+}
+
+message PortForwarding {
+  string     serverUUID = 1;
+  bool       forwardTCP = 2;
+  bool       forwardUDP = 3;
+  int64      external_port = 4;
+  int64      internal_port = 5;
+  string     description = 6;
 }
 
 message Subnet {

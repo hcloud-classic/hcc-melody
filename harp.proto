@@ -39,6 +39,9 @@ service Harp {
   rpc GetAdaptiveIPServerList (ReqGetAdaptiveIPServerList) returns (ResGetAdaptiveIPServerList);
   rpc GetAdaptiveIPServerNum (ReqGetAdaptiveIPServerNum) returns (ResGetAdaptiveIPServerNum);
   rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer);
+  rpc CreatePortForwarding (ReqCreatePortForwarding) returns (ResCreatePortForwarding);
+  rpc GetPortForwardingList (ReqGetPortForwardingList) returns (ResGetPortForwardingList);
+  rpc DeletePortForwarding (ReqDeletePortForwarding) returns (ResDeletePortForwarding);
   // DHCPD
   rpc CreateDHCPDConf (ReqCreateDHCPDConf) returns (ResCreateDHCPDConf);
   rpc DeleteDHCPDConf (ReqDeleteDHCPDConf) returns (ResDeleteDHCPDConf);
@@ -184,6 +187,35 @@ message ReqDeleteAdaptiveIPServer {
 }
 
 message ResDeleteAdaptiveIPServer {
+  string serverUUID = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqCreatePortForwarding {
+  MsgType.PortForwarding portForwarding = 1;
+}
+
+message ResCreatePortForwarding {
+  MsgType.PortForwarding portForwarding = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetPortForwardingList {
+  MsgType.PortForwarding portForwarding = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetPortForwardingList {
+  repeated MsgType.PortForwarding portForwarding = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqDeletePortForwarding {
+  MsgType.PortForwarding portForwarding = 1;
+}
+
+message ResDeletePortForwarding {
   string serverUUID = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
 }
