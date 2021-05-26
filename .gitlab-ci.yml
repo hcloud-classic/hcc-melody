@@ -1,0 +1,81 @@
+stages:
+        - init
+        - build
+        - trigger-middlewares
+
+before_script:
+        - export GOROOT="/usr/local/go"
+        - export GOPATH="/home/gitlab-runner/go"
+        - export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
+        - export HCCPATH="$GOPATH/src/hcc"
+
+copy_dir:
+        stage: init
+        script:
+                - make copy_dir
+        only:
+                - master
+
+build:
+        stage: build
+        script:
+                - make
+                - echo "Finished"
+        only:
+                - master
+
+trigger_violin_novnc:
+    stage: trigger-middlewares
+    script:
+        - "curl -X POST -F token=5923fd713d02257b3106a7a0edf6d3 -F ref=master http://210.207.104.150:8100/api/v4/projects/63/trigger/pipeline"
+    only:
+        - master
+        
+trigger_piano:
+    stage: trigger-middlewares
+    script:
+        - "curl -X POST -F token=0edd217133f45d8bf561f4fb9ac8ea -F ref=master http://210.207.104.150:8100/api/v4/projects/65/trigger/pipeline"
+    only:
+        - master
+        
+trigger_clarinet:
+    stage: trigger-middlewares
+    script:
+        - "curl -X POST -F token=2e3188778e405f731bc2f52776d65c -F ref=master http://210.207.104.150:8100/api/v4/projects/112/trigger/pipeline"
+    only:
+        - master
+
+trigger_harp:
+  stage: trigger-middlewares
+  script:
+    - "curl -X POST -F token=1e2375b74e96d14e8503748bda2eda -F ref=master http://210.207.104.150:8100/api/v4/projects/64/trigger/pipeline"
+  only:
+    - master
+
+trigger_flute:
+  stage: trigger-middlewares
+  script:
+    - "curl -X POST -F token=d146c98d2e6d86c311961b8a6aa525 -F ref=master http://210.207.104.150:8100/api/v4/projects/68/trigger/pipeline"
+  only:
+    - master
+
+trigger_violin:
+  stage: trigger-middlewares
+  script:
+    - "curl -X POST -F token=01b04b509b4b548213f81b4310eac6 -F ref=master http://210.207.104.150:8100/api/v4/projects/62/trigger/pipeline"
+  only:
+    - master
+
+trigger_tuba:
+  stage: trigger-middlewares
+  script:
+    - "curl -X POST -F token=af2fc12923904a67d0c7716a7120bd -F ref=master http://210.207.104.150:8100/api/v4/projects/270/trigger/pipeline"
+  only:
+    - master
+
+trigger_piccolo:
+  stage: trigger-middlewares
+  script:
+    - "curl -X POST -F token=68d67a5f6f8c46dcaa4f2a42b91dc6 -F ref=master http://210.207.104.150:8100/api/v4/projects/109/trigger/pipeline"
+  only:
+    - master

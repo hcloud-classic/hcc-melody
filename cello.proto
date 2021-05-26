@@ -1,0 +1,80 @@
+// Copyright 2020 by codex.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+option go_package = "hcc/pb";
+
+package RpcCello;
+
+import public "msgtype.proto";
+
+service Cello {
+  rpc VolumeHandler (ReqVolumeHandler) returns (ResVolumeHandler);
+  rpc PoolHandler (ReqPoolHandler) returns (ResPoolHandler);
+  rpc GetVolume (ReqGetVolume) returns (ResGetVolume);
+  rpc GetVolumeList (ReqGetVolumeList) returns (ResGetVolumeList);
+  rpc GetPoolList (ReqGetPoolList) returns (ResGetPoolList);
+}
+
+message ReqVolumeHandler {
+  MsgType.Volume volume = 1;
+}
+
+message ResVolumeHandler {
+  MsgType.Volume volume = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqPoolHandler {
+  MsgType.Pool pool = 1;
+}
+
+message ResPoolHandler {
+  MsgType.Pool pool = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetVolume {
+  MsgType.Volume volume = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetVolume {
+  repeated MsgType.Volume volume = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetVolumeList {
+  MsgType.Volume volume = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetVolumeList {
+  repeated MsgType.Volume volume = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetPoolList {
+  MsgType.Pool pool = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetPoolList {
+  repeated  MsgType.Pool pool = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}

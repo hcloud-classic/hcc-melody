@@ -1,0 +1,151 @@
+// Copyright 2020 by ish.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+option go_package = "hcc/pb";
+
+package RpcViolin;
+
+import public "msgtype.proto";
+
+service Violin {
+  // Server
+  rpc CreateServer (ReqCreateServer) returns (ResCreateServer);
+  rpc GetServer (ReqGetServer) returns (ResGetServer);
+  rpc GetServerList (ReqGetServerList) returns (ResGetServerList);
+  rpc GetServerNum (ReqGetServerNum) returns (ResGetServerNum);
+  rpc UpdateServer (ReqUpdateServer) returns (ResUpdateServer);
+  rpc DeleteServer (ReqDeleteServer) returns (ResDeleteServer);
+  // ServerNode
+  rpc CreateServerNode (ReqCreateServerNode) returns (ResCreateServerNode);
+  rpc GetServerNode (ReqGetServerNode) returns (ResGetServerNode);
+  rpc GetServerNodeList (ReqGetServerNodeList) returns (ResGetServerNodeList);
+  rpc GetServerNodeNum (ReqGetServerNodeNum) returns (ResGetServerNodeNum);
+  rpc DeleteServerNode (ReqDeleteServerNode) returns (ResDeleteServerNode);
+  rpc DeleteServerNodeByServerUUID (ReqDeleteServerNodeByServerUUID) returns (ResDeleteServerNodeByServerUUID);
+}
+
+// Server
+message ReqCreateServer {
+  MsgType.Server server = 1;
+  int32 nrNode = 2;
+  string token = 3;
+}
+
+message ResCreateServer {
+  MsgType.Server server = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetServer {
+  string UUID = 1;
+}
+
+message ResGetServer {
+  MsgType.Server server = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetServerList {
+  MsgType.Server Server = 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetServerList {
+  repeated MsgType.Server server = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetServerNum {
+  int64 groupID = 1;
+}
+
+message ResGetServerNum {
+  int64 num = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqUpdateServer {
+  MsgType.Server server = 1;
+}
+
+message ResUpdateServer {
+  MsgType.Server server = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqDeleteServer {
+  string UUID = 1;
+}
+
+message ResDeleteServer {
+  MsgType.Server server = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqCreateServerNode {
+  MsgType.ServerNode server_node = 1;
+}
+
+message ResCreateServerNode {
+  MsgType.ServerNode server_node = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetServerNode {
+  string UUID = 1;
+}
+
+message ResGetServerNode {
+  MsgType.ServerNode server_node = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetServerNodeList {
+  string serverUUID = 1;
+}
+
+message ResGetServerNodeList {
+  repeated MsgType.ServerNode server_node = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetServerNodeNum {
+  string serverUUID = 1;
+}
+
+message ResGetServerNodeNum {
+  int64 num = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqDeleteServerNode {
+  string UUID = 1;
+}
+
+message ResDeleteServerNode {
+  MsgType.ServerNode server_node = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqDeleteServerNodeByServerUUID {
+  string serverUUID = 1;
+}
+
+message ResDeleteServerNodeByServerUUID {
+  string serverUUID = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
