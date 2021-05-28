@@ -38,8 +38,8 @@ message ResMonitoringData {
 message ReqBillingData {
   string billingType = 1;
   repeated int32 groupID = 2;
-  int32 dateStart = 3;
-  int32 dateEnd = 4;
+  string dateStart = 3;
+  string dateEnd = 4;
   int64 row = 5;
   int64 page = 6;
 }

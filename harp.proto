@@ -23,6 +23,7 @@ import public "msgtype.proto";
 service Harp {
   // Subnet
   rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet);
+  rpc ValidCheckSubnet (ReqValidCheckSubnet) returns (ResValidCheckSubnet);
   rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet);
   rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer);
   rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList);
@@ -42,6 +43,8 @@ service Harp {
   rpc CreatePortForwarding (ReqCreatePortForwarding) returns (ResCreatePortForwarding);
   rpc GetPortForwardingList (ReqGetPortForwardingList) returns (ResGetPortForwardingList);
   rpc DeletePortForwarding (ReqDeletePortForwarding) returns (ResDeletePortForwarding);
+  // Traffic
+  rpc GetTraffic (ReqGetTraffic) returns (ResGetTraffic);
   // DHCPD
   rpc CreateDHCPDConf (ReqCreateDHCPDConf) returns (ResCreateDHCPDConf);
   rpc DeleteDHCPDConf (ReqDeleteDHCPDConf) returns (ResDeleteDHCPDConf);
@@ -55,6 +58,14 @@ message ReqCreateSubnet {
 message ResCreateSubnet {
   MsgType.Subnet subnet = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqValidCheckSubnet {
+  MsgType.Subnet subnet = 1;
+}
+
+message ResValidCheckSubnet {
+  int64 errorCode = 1;
 }
 
 message ReqGetSubnet {
@@ -220,10 +231,20 @@ message ResDeletePortForwarding {
   MsgType.HccErrorStack hccErrorStack = 2;
 }
 
+// Traffic
+message ReqGetTraffic {
+  string serverUUID = 1;
+  string day = 2;
+}
+
+message ResGetTraffic {
+  MsgType.Traffic traffic = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
 // DHCPD
 message ReqCreateDHCPDConf {
   string subnetUUID = 1;
-  string nodeUUIDs = 2;
 }
 
 message ResCreateDHCPDConf {

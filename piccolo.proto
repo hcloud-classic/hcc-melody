@@ -23,12 +23,23 @@ import public "msgtype.proto";
 service Piccolo {
   // Group
   rpc GetGroupList(MsgType.Empty) returns (ResGetGroupList);
+  // Charge
+  rpc GetCharge(ReqGetCharge) returns (ResGetCharge);
   // ServerAction
   rpc WriteServerAction (ReqWriteServerAction) returns (ResWriteServerAction);
 }
 
 message ResGetGroupList {
   repeated MsgType.Group group = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetCharge {
+  int64 groupID = 1;
+}
+
+message ResGetCharge {
+  MsgType.Charge charge = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
 }
 

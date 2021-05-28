@@ -50,20 +50,24 @@ message Node {
   int32     memory = 12;
   int32     nic_speed_mbps = 13;
   string    description = 14;
-  int32     chargeCPU = 15;
-  int32     chargeMemory = 16;
-  int32     chargeNIC = 17;
-  int32     rack_number = 18;
-  google.protobuf.Timestamp created_at = 19;
-  int32     active = 20;
-  bool      force_off = 21;
-  string    bmcIP_subnet_mask = 22;
+  int32     rack_number = 15;
+  google.protobuf.Timestamp created_at = 16;
+  int32     active = 17;
+  bool      force_off = 18;
+  string    bmcIP_subnet_mask = 19;
 }
 
 message NodeDetail {
   string    nodeUUID = 1;
   string    node_detail_data = 2;
   string    nic_detail_data = 3;
+}
+
+message NodeUptime {
+  string nodeUUID = 1;
+  int64  groupID = 2;
+  string day = 3;
+  int64  uptimeMs = 4;
 }
 
 // Violin
@@ -174,6 +178,14 @@ message PortForwarding {
   string     description = 6;
 }
 
+message Traffic {
+  string serverUUID = 1;
+  int64  groupID = 2;
+  string day = 3;
+  int64  txKB = 4;
+  int64  rxKB = 5;
+}
+
 message Subnet {
   string    UUID = 1;
   int64     groupID = 2;
@@ -275,6 +287,18 @@ message Task {
 message Group {
   int64  id = 1;
   string name = 2;
+}
+
+message Charge {
+  int64  groupID = 1;
+  int64  chargeCPUPerCore = 2;
+  int64  chargeMemoryPerGB = 3;
+  string chargeNicList = 4;
+  int64  chargeSubnetPerCnt = 5;
+  int64  chargeAdaptiveIPPerCnt = 6;
+  int64  chargeSSDPerGB = 7;
+  int64  chargeHDDPerGB = 8;
+  float  chargeTrafficPerKB = 9;
 }
 
 message ServerAction {

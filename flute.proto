@@ -36,6 +36,8 @@ service Flute {
   // IPMI
   rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl);
   rpc GetNodePowerState (ReqNodePowerState) returns (ResNodePowerState);
+  // NodeUptime
+  rpc GetNodeUptime (ReqGetNodeUptime) returns (ResGetNodeUptime);
 }
 
 // Node
@@ -157,5 +159,16 @@ message ReqNodePowerState {
 
 message ResNodePowerState {
   string result = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+// NodeUptime
+message ReqGetNodeUptime {
+  string nodeUUID = 1;
+  string day = 2;
+}
+
+message ResGetNodeUptime {
+  MsgType.NodeUptime nodeUptime = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
 }
