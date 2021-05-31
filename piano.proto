@@ -37,7 +37,7 @@ message ResMonitoringData {
 
 message ReqBillingData {
   string billingType = 1;
-  repeated int32 groupID = 2;
+  repeated int64 groupID = 2;
   string dateStart = 3;
   string dateEnd = 4;
   int64 row = 5;
@@ -46,7 +46,8 @@ message ReqBillingData {
 
 message ResBillingData {
   string billingType = 1;
-  repeated int32 groupID = 2;
+  repeated int64 groupID = 2;
   bytes result = 3;
   MsgType.HccErrorStack hccErrorStack = 4;
+  int32 totalNum = 5;
 }
