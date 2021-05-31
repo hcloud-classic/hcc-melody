@@ -49,4 +49,5 @@ message ResBillingData {
   repeated int64 groupID = 2;
   bytes result = 3;
   MsgType.HccErrorStack hccErrorStack = 4;
+  int32 totalNum = 5;
 }
