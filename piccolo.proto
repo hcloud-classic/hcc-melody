@@ -23,6 +23,8 @@ import public "msgtype.proto";
 service Piccolo {
   // Group
   rpc GetGroupList(MsgType.Empty) returns (ResGetGroupList);
+  // Quota
+  rpc GetQuota(ReqGetQuota) returns (ResGetQuota);
   // Charge
   rpc GetCharge(ReqGetCharge) returns (ResGetCharge);
   // ServerAction
@@ -40,6 +42,15 @@ message ReqGetCharge {
 
 message ResGetCharge {
   MsgType.Charge charge = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqGetQuota {
+  int64 groupID = 1;
+}
+
+message ResGetQuota {
+  MsgType.GroupQuota quota = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
 }
 

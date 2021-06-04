@@ -301,6 +301,18 @@ message Charge {
   float  chargeTrafficPerKB = 9;
 }
 
+message GroupQuota {
+  int64  groupID = 1;
+  string groupName = 2;
+  int32  limitCPUCores = 3;
+  int32  limitMemoryGB = 4;
+  int32  limitSubnetCnt = 5;
+  int32  limitAdaptiveIPCnt = 6;
+  string poolName = 7;
+  int32  limitSSDGB = 8;
+  int32  limitHDDGB = 9;
+}
+
 message ServerAction {
   string action = 1;
   string result = 2;
