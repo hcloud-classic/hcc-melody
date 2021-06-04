@@ -14,8 +14,8 @@ build: clean ## Build the binary file
 	@protoc -I ./ --go_out=${GOPATH}/src --go-grpc_out=${GOPATH}/src *.proto
 	@cd $(GOPATH)/src/${ROOT_PROJECT_NAME}/pb;\
 		go mod init;\
-		go get github.com/golang/protobuf@v1.4.3;\
-		go get google.golang.org/grpc@v1.34.0;\
+		go get github.com/golang/protobuf;\
+		go get google.golang.org/grpc;\
 		go mod vendor;
 
 clean:
