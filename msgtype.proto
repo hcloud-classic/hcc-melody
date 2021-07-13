@@ -55,6 +55,8 @@ message Node {
   int32     active = 17;
   bool      force_off = 18;
   string    bmcIP_subnet_mask = 19;
+  string    ipmiUserID = 20;
+  string    ipmiUserPassword = 21;
 }
 
 message NodeDetail {
