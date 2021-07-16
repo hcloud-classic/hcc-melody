@@ -57,6 +57,7 @@ message Node {
   string    bmcIP_subnet_mask = 19;
   string    ipmiUserID = 20;
   string    ipmiUserPassword = 21;
+  bytes     ipmiUserPasswordEncryptedBytes = 22;
 }
 
 message NodeDetail {
