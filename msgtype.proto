@@ -118,12 +118,12 @@ message Volume {
   string    serverUUID = 4;
   string    use_type = 5;
   string    userUUID = 6;
-  int64    groupID = 7;
+  int64     groupID = 7;
   google.protobuf.Timestamp created_at = 8;
   string    network_IP = 9;
   string    gateway_ip = 10;
   string    pool = 11;
-  int64        lun = 12;
+  int64     lun  = 12;
   string    action  = 13;
 
 }
