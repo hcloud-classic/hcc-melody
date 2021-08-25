@@ -50,8 +50,8 @@ message ResPoolHandler {
 message ReqGetVolumeList {
   MsgType.Volume volume = 1;
   MsgType.Group group = 2;
-  int64 row = 2;
-  int64 page = 3;
+  int64 row = 3;
+  int64 page = 4;
 }
 
 message ResGetVolumeList {
@@ -62,8 +62,8 @@ message ResGetVolumeList {
 message ReqGetPoolList {
   MsgType.Pool pool = 1;
   MsgType.Group group = 2;
-  int64 row = 2;
-  int64 page = 3;
+  int64 row = 3;
+  int64 page = 4;
 }
 
 message ResGetPoolList {
