@@ -29,6 +29,7 @@ service Cello {
 
 message ReqVolumeHandler {
   MsgType.Volume volume = 1;
+  MsgType.Group group = 2;
 }
 
 message ResVolumeHandler {
@@ -38,6 +39,7 @@ message ResVolumeHandler {
 
 message ReqPoolHandler {
   MsgType.Pool pool = 1;
+  MsgType.Group group = 2;
 }
 
 message ResPoolHandler {
@@ -47,6 +49,7 @@ message ResPoolHandler {
 
 message ReqGetVolumeList {
   MsgType.Volume volume = 1;
+  MsgType.Group group = 2;
   int64 row = 2;
   int64 page = 3;
 }
@@ -58,6 +61,7 @@ message ResGetVolumeList {
 
 message ReqGetPoolList {
   MsgType.Pool pool = 1;
+  MsgType.Group group = 2;
   int64 row = 2;
   int64 page = 3;
 }
