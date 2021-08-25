@@ -55,6 +55,9 @@ message Node {
   int32     active = 17;
   bool      force_off = 18;
   string    bmcIP_subnet_mask = 19;
+  string    ipmiUserID = 20;
+  string    ipmiUserPassword = 21;
+  bytes     ipmiUserPasswordEncryptedBytes = 22;
 }
 
 message NodeDetail {
@@ -309,9 +312,10 @@ message GroupQuota {
   int32  limitMemoryGB = 4;
   int32  limitSubnetCnt = 5;
   int32  limitAdaptiveIPCnt = 6;
-  string poolName = 7;
-  int32  limitSSDGB = 8;
-  int32  limitHDDGB = 9;
+  int32  limitNodeCnt = 7;
+  string poolName = 8;
+  int32  limitSSDGB = 9;
+  int32  limitHDDGB = 10;
 }
 
 message ServerAction {
