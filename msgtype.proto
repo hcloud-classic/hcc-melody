@@ -155,8 +155,10 @@ message AdaptiveIPSetting {
   string    ext_ifaceIP_address = 1;
   string    netmask = 2;
   string    gateway_address = 3;
-  string    startIP_address = 4;
-  string    endIP_address = 5;
+  string    internal_startIP_address = 4;
+  string    internal_endIP_address = 5;
+  string    external_startIP_address = 6;
+  string    external_endIP_address = 7;
 }
 
 message AdaptiveIPAvailableIPList {
