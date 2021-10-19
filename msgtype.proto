@@ -326,3 +326,8 @@ message ServerAction {
   string err_str = 3;
   string token = 4;
 }
+
+message ServerAlarm {
+  string reason = 1;
+  string detail = 2;
+}
