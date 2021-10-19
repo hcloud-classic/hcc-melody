@@ -29,6 +29,8 @@ service Piccolo {
   rpc GetCharge(ReqGetCharge) returns (ResGetCharge);
   // ServerAction
   rpc WriteServerAction (ReqWriteServerAction) returns (ResWriteServerAction);
+  // ServerAlarm
+  rpc WriteServerAlarm (ReqWriteServerAlarm) returns (ResWriteServerAlarm);
 }
 
 message ResGetGroupList {
@@ -63,3 +65,11 @@ message ResWriteServerAction {
   string result = 1;
 }
 
+message ReqWriteServerAlarm {
+  string serverUUID = 1;
+  MsgType.ServerAlarm server_alarm = 2;
+}
+
+message ResWriteServerAlarm {
+  string result = 1;
+}
