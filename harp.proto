@@ -62,6 +62,7 @@ message ResCreateSubnet {
 
 message ReqValidCheckSubnet {
   MsgType.Subnet subnet = 1;
+  bool isUpdate = 2;
 }
 
 message ResValidCheckSubnet {
