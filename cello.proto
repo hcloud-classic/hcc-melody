@@ -25,6 +25,8 @@ service Cello {
   rpc PoolHandler (ReqPoolHandler) returns (ResPoolHandler);
   rpc GetVolumeList (ReqGetVolumeList) returns (ResGetVolumeList);
   rpc GetPoolList (ReqGetPoolList) returns (ResGetPoolList);
+  rpc GetLunList (ReqGetLunList) returns (ResGetLunList);
+  rpc MountHandler (ReqMountHandler) returns (ResMountHandler);
 }
 
 message ReqVolumeHandler {
@@ -69,4 +71,44 @@ message ReqGetPoolList {
 message ResGetPoolList {
   repeated  MsgType.Pool pool = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+
+
+message ReqVolumeQuotaHandler {
+  MsgType.VolumeQuota quota=1;
+  MsgType.Group group = 2;
+  int64 row = 3;
+  int64 page = 4;
+}
+
+message ResVolumeQuotaHandler {
+  repeated  MsgType.VolumeQuota quota = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+
+
+message ReqGetLunList {
+  MsgType.Volume volume= 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResGetLunList {
+  repeated MsgType.Lun lun = 1;
+  string targetName = 2;
+  MsgType.HccErrorStack hccErrorStack = 3;
+}
+
+message ReqMountHandler {
+  MsgType.Volume volume= 1;
+  int64 row = 2;
+  int64 page = 3;
+}
+
+message ResMountHandler {
+  bool result = 1; 
+  string errorMsg = 2;
+  MsgType.HccErrorStack hccErrorStack = 3;
 }
