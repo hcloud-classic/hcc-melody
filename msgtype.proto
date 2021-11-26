@@ -111,21 +111,47 @@ message VNC {
 }
 
 // Cello
+message Lun {
+  string    UUID = 1;
+  string    size = 2;
+  string    path = 3;
+  string    serverUUID = 4;
+  string    useType = 5;
+  string    userUUID = 6;
+  int64     groupID = 7;
+  string    pool = 8;
+  int64    Order = 9;
+  string name = 10;
+  string zfsname = 11;
+  string state = 12;
+}
+
 message Volume {
   string    UUID = 1;
   string    size = 2;
   string    filesystem = 3;
   string    serverUUID = 4;
-  string    use_type = 5;
+  string    useType = 5;
   string    userUUID = 6;
   int64     groupID = 7;
   google.protobuf.Timestamp created_at = 8;
   string    network_IP = 9;
-  string    gateway_ip = 10;
+  string    gateway_IP = 10;
   string    pool = 11;
   int64     lun  = 12;
   string    action  = 13;
-
+  string    state  = 14;
+}
+message VolumeQuota{
+  int64  groupID = 1;
+  string groupName = 2;
+  string userName =3;
+  string poolName = 4;
+  int32  limitSSDGB = 5;
+  int32  limitHDDGB = 6;
+  int32  availableQuota = 7;
+  int32  quotaLimit = 8;
+  int32  quotaUsed = 9;
 }
 
 message VolumeAttachment {
