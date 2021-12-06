@@ -111,7 +111,8 @@ message ResScaleUpServer {
 }
 
 message ReqDeleteServer {
-  string UUID = 1;
+  string serverUUID = 1;
+  string token = 2;
 }
 
 message ResDeleteServer {
