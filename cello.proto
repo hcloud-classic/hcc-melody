@@ -27,6 +27,7 @@ service Cello {
   rpc GetPoolList (ReqGetPoolList) returns (ResGetPoolList);
   rpc GetLunList (ReqGetLunList) returns (ResGetLunList);
   rpc MountHandler (ReqMountHandler) returns (ResMountHandler);
+  rpc AvailablePoolList (ReqAvailablePoolList) returns (ResAvailablePoolList);
 }
 
 message ReqVolumeHandler {
@@ -111,4 +112,19 @@ message ResMountHandler {
   bool result = 1; 
   string errorMsg = 2;
   MsgType.HccErrorStack hccErrorStack = 3;
+}
+
+
+
+
+message ReqAvailablePoolList {
+  MsgType.Pool pool = 1;
+  MsgType.Group group = 2;
+  int64 row = 3;
+  int64 page = 4;
+}
+
+message ResAvailablePoolList {
+  repeated  MsgType.Pool pool = 1;
+  MsgType.HccErrorStack hccErrorStack = 2;
 }
