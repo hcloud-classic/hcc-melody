@@ -20,155 +20,178 @@ package RpcFlute;
 
 import public "msgtype.proto";
 
+// 노드의 정보를 관리하고 노드의 전원 제어 및 상태 조회를 담당하는 모듈이다.
 service Flute {
-  // Node
-  rpc CreateNode (ReqCreateNode) returns (ResCreateNode);
-  rpc GetNode (ReqGetNode) returns (ResGetNode);
-  rpc GetNodeList (ReqGetNodeList) returns (ResGetNodeList);
-  rpc GetNodeNum (ReqGetNodeNum) returns (ResGetNodeNum);
-  rpc UpdateNode (ReqUpdateNode) returns (ResUpdateNode);
-  rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode);
-  // NodeDetail
-  rpc CreateNodeDetail (ReqCreateNodeDetail) returns (ResCreateNodeDetail);
-  rpc GetNodeDetail (ReqGetNodeDetail) returns (ResGetNodeDetail);
-  rpc UpdateNodeDetail (ReqUpdateNodeDetail) returns (ResUpdateNodeDetail);
-  rpc DeleteNodeDetail (ReqDeleteNodeDetail) returns (ResDeleteNodeDetail);
-  // IPMI
-  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl);
-  rpc GetNodePowerState (ReqNodePowerState) returns (ResNodePowerState);
-  // NodeUptime
-  rpc GetNodeUptime (ReqGetNodeUptime) returns (ResGetNodeUptime);
+  rpc CreateNode (ReqCreateNode) returns (ResCreateNode); // 새로운 노드를 등록한다.
+  rpc GetNode (ReqGetNode) returns (ResGetNode); // 하나의 노드에 대한 정보를 조회한다.
+  rpc GetNodeList (ReqGetNodeList) returns (ResGetNodeList); // 노드 목록을 조회한다.
+  rpc GetNodeNum (ReqGetNodeNum) returns (ResGetNodeNum); // 노드의 개수를 조회한다.
+  rpc UpdateNode (ReqUpdateNode) returns (ResUpdateNode); // 노드의 정보를 업데이트 한다.
+  rpc DeleteNode (ReqDeleteNode) returns (ResDeleteNode); // 노드를 삭제한다.
+
+  rpc CreateNodeDetail (ReqCreateNodeDetail) returns (ResCreateNodeDetail); // 노드의 상세 정보를 등록한다.
+  rpc GetNodeDetail (ReqGetNodeDetail) returns (ResGetNodeDetail); // 하나의 노드에 대한 상세 정보를 조회한다.
+  rpc UpdateNodeDetail (ReqUpdateNodeDetail) returns (ResUpdateNodeDetail); // 노드의 상세 정보를 업데이트 한다.
+  rpc DeleteNodeDetail (ReqDeleteNodeDetail) returns (ResDeleteNodeDetail); // 노드의 상세 정보를 삭제한다.
+
+  rpc NodePowerControl (ReqNodePowerControl) returns (ResNodePowerControl); // 노드의 전원을 제어한다.
+  rpc GetNodePowerState (ReqNodePowerState) returns (ResNodePowerState); //  노드의 전원 상태를 조회한다.
+
+  rpc GetNodeUptime (ReqGetNodeUptime) returns (ResGetNodeUptime); // 특정 날짜의 노드의 총 가동시간을 조회한다.
 }
 
-// Node
+// 새로운 노드를 등록하는 요청
 message ReqCreateNode {
-  MsgType.Node node = 1;
-  string nic_detail_data = 2;
+  MsgType.Node node = 1; // 노드의 정보를 담고 있는 객체 (필수값 : nodeName, bmcIP, nic_speed_mbps, description, ipmiUserID, ipmiUserPassword)
+  string nic_detail_data = 2; // 노드의 NIC 상세 정보 (필수값)
 }
 
+// 새로운 노드를 등록하는 요청에 대한 응답
 message ResCreateNode {
-  MsgType.Node node = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Node node = 1; // 노드의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 하나의 노드에 대한 정보를 조회하는 요청
 message ReqGetNode {
-  string UUID = 1;
+  string UUID = 1; // 노드의 UUID (필수값)
 }
 
+// 하나의 노드에 대한 정보를 조회하는 요청에 대한 응답
 message ResGetNode {
-  MsgType.Node node = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Node node = 1; // 노드의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 노드 목록을 조회하는 요청
 message ReqGetNodeList {
-  MsgType.Node node = 1;
-  int64 row = 2;
-  int64 page = 3;
+  MsgType.Node node = 1; // 검색 하고자 하는 노드의 정보를 담고 있는 객체. 비어있는 경우 전체 목록을 조회한다.
+  int64 row = 2; // 한 페이지에 몇 개의 정보를 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
+  int64 page = 3; // 몇번째 페이지의 목록을 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
 }
 
+// 노드 목록을 조회하는 요청에 대한 응답
 message ResGetNodeList {
-  repeated MsgType.Node node = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  repeated MsgType.Node node = 1; // 여러 노드의 정보를 담고 있는 노드 객체 목록
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 노드의 개수를 조회하는 요청
 message ReqGetNodeNum {
-  int64 groupID = 1;
+  int64 groupID = 1; // 그룹 ID. 비어 있는 경우 전체 노드의 개수가 반환된다.
 }
 
+// 노드의 개수를 조회하는 요청에 대한 응답
 message ResGetNodeNum {
-  int64 num = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  int64 num = 1; // 요청한 그룹에 대한 노드 개수
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 노드의 정보를 업데이트하는 요청
 message ReqUpdateNode {
-  MsgType.Node node = 1;
+  MsgType.Node node = 1; // 노드의 정보를 담고 있는 객체 (필수값 : UUID)
 }
 
+// 노드의 정보를 업데이트하는 요청에 대한 응답
 message ResUpdateNode {
-  MsgType.Node node = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Node node = 1; // 삭제된 노드의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 노드를 삭제하는 요청
 message ReqDeleteNode {
-  string UUID = 1;
+  string UUID = 1; // 노드의 UUID (필수값)
 }
 
+// 노드를 삭제하는 요청에 대한 응답
 message ResDeleteNode {
-  MsgType.Node node = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Node node = 1; // 삭제된 노드의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
-// NodeDetail
+// 노드의 상세 정보를 등록하는 요청
 message ReqCreateNodeDetail {
-  MsgType.NodeDetail node_detail = 1;
+  MsgType.NodeDetail node_detail = 1; // 노드의 상세 정보를 담고 있는 객체 (필수값 : nodeUUID, node_detail_data, nic_detail_data)
 }
 
+// 노드의 상세 정보를 등록하는 요청에 대한 응답
 message ResCreateNodeDetail {
-  MsgType.NodeDetail node_detail = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.NodeDetail node_detail = 1; // 노드의 상세 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 하나의 노드에 대한 상세 정보를 조회하는 요청
 message ReqGetNodeDetail {
-  string nodeUUID = 1;
+  string nodeUUID = 1; // 노드의 UUID (필수값)
 }
 
+// 하나의 노드에 대한 상세 정보를 조회하는 요청에 대한 응답
 message ResGetNodeDetail {
-  MsgType.NodeDetail node_detail = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.NodeDetail node_detail = 1; // 노드의 상세 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 노드의 상세 정보를 업데이트 하는 요청
 message ReqUpdateNodeDetail {
-  MsgType.NodeDetail node_detail = 1;
+  MsgType.NodeDetail node_detail = 1; // 노드의 상세 정보를 담고 있는 객체 (필수값 : nodeUUID)
 }
 
+// 노드의 상세 정보를 업데이트 하는 요청에 대한 응답
 message ResUpdateNodeDetail {
-  MsgType.NodeDetail node_detail = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.NodeDetail node_detail = 1; // 노드의 상세 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 노드의 상세 정보를 삭제하는 요청
 message ReqDeleteNodeDetail {
-  string nodeUUID = 1;
+  string nodeUUID = 1; // 노드의 UUID (필수값)
 }
 
+// 노드의 상세 정보를 삭제하는 요청에 대한 응답
 message ResDeleteNodeDetail {
-  MsgType.NodeDetail node_detail = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.NodeDetail node_detail = 1; // 노드의 상세 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
-// IPMI
+// 노드의 전원 상태
 enum PowerState {
-  ON = 0;
-  OFF = 1;
-  FORCE_OFF = 2;
-  FORCE_RESTART = 3;
+  ON = 0; // 노드 전원 켜기
+  OFF = 1; // 노드 전원 끄기 (시스템 종료)
+  FORCE_OFF = 2; // 노드 전원 강제 끄기
+  FORCE_RESTART = 3; // 노드 전원 강제 재기동
 }
 
+// 노드의 전원을 제어하는 요청
 message ReqNodePowerControl {
-  repeated MsgType.Node node = 1;
-  PowerState power_state = 2;
+  repeated MsgType.Node node = 1; // 노드의 정보를 담고 있는 객체 (필수값 : UUID)
+  PowerState power_state = 2; // 노드에 전달할 전원 상태 (필수값)
 }
 
+// 노드의 전원을 제어하는 요청에 대한 응답
 message ResNodePowerControl {
-  repeated string result = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  repeated string result = 1; // 노드 전원 제어 IPMI 요청에 대한 응답
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 노드의 전원 상태를 조회하는 요청
 message ReqNodePowerState {
-  string UUID = 1;
+  string UUID = 1; // 노드의 UUID (필수값)
 }
 
+// 노드의 전원 상태를 조회하는 요청에 대한 응답
 message ResNodePowerState {
-  string result = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  string result = 1; // 노드 전원 상태 조회 IPMI 요청에 대한 응답
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
-// NodeUptime
+// 특정 날짜의 노드의 총 가동시간을 조회하는 요청
 message ReqGetNodeUptime {
-  string nodeUUID = 1;
-  string day = 2;
+  string nodeUUID = 1; // 노드 UUID (필수값)
+  string day = 2; // 날짜 지정 (필수값)
 }
 
+// 특정 날짜의 노드의 총 가동시간을 조회하는 요청에 대한 응답
 message ResGetNodeUptime {
-  MsgType.NodeUptime nodeUptime = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.NodeUptime nodeUptime = 1; // 노드의 총 가동 시간
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
