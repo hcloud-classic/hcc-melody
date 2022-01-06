@@ -109,8 +109,8 @@ message ReqMountHandler {
 }
 
 message ResMountHandler {
-  bool result = 1; 
-  string errorMsg = 2;
+  MsgType.Volume volume= 1;
+  bool result = 2; 
   MsgType.HccErrorStack hccErrorStack = 3;
 }
 
