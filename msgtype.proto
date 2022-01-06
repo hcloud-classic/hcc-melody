@@ -294,27 +294,6 @@ message ScheduleServer {
   int32 numOfNodes =2;
 }
 
-// tuba
-message Task {
-  string    CMD        = 1;
-  string    state      = 2;
-  int64     PID        = 3;
-  int64     PPID       = 4;
-  int64     PGID       = 5;
-  int64     SID        = 6;
-  int64     priority   = 7;
-  int64     nice       = 8;
-  int64     numThreads = 9;
-  string    startTime  = 10;
-  repeated MsgType.Task children = 11;
-  repeated MsgType.Task threads  = 12;
-  string    CPUUsage   = 13;
-  string    memUsage   = 14;
-  string    EPMType    = 15;
-  int64     EPMSource  = 16;
-  int64     EPMTarget  = 17;
-}
-
 // piccolo
 message Group {
   int64  id = 1;

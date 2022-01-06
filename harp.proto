@@ -20,244 +20,285 @@ package RpcHarp;
 
 import public "msgtype.proto";
 
+// 네트워크 담당 모듈이다. isc-dhcp-server 를 통해 DHCP 서버를 구성하고, VnStat 을 통해 외부 트래픽량을 측정한다.
 service Harp {
-  // Subnet
-  rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet);
-  rpc ValidCheckSubnet (ReqValidCheckSubnet) returns (ResValidCheckSubnet);
-  rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet);
-  rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer);
-  rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList);
-  rpc GetAvailableSubnetList (ReqGetAvailableSubnetList) returns (ResGetAvailableSubnetList);
-  rpc GetSubnetNum (ReqGetSubnetNum) returns (ResGetSubnetNum);
-  rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet);
-  rpc DeleteSubnet (ReqDeleteSubnet) returns (ResDeleteSubnet);
-  // AdaptiveIP
-  rpc CreateAdaptiveIPSetting (ReqCreateAdaptiveIPSetting) returns (ResCreateAdaptiveIPSetting);
-  rpc GetAdaptiveIPSetting (MsgType.Empty) returns (ResGetAdaptiveIPSetting);
-  rpc GetAdaptiveIPAvailableIPList (MsgType.Empty) returns (ResGetAdaptiveIPAvailableIPList);
-  rpc CreateAdaptiveIPServer (ReqCreateAdaptiveIPServer) returns (ResCreateAdaptiveIPServer);
-  rpc GetAdaptiveIPServer (ReqGetAdaptiveIPServer) returns (ResGetAdaptiveIPServer);
-  rpc GetAdaptiveIPServerList (ReqGetAdaptiveIPServerList) returns (ResGetAdaptiveIPServerList);
-  rpc GetAdaptiveIPServerNum (ReqGetAdaptiveIPServerNum) returns (ResGetAdaptiveIPServerNum);
-  rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer);
-  rpc CreatePortForwarding (ReqCreatePortForwarding) returns (ResCreatePortForwarding);
-  rpc GetPortForwardingList (ReqGetPortForwardingList) returns (ResGetPortForwardingList);
-  rpc DeletePortForwarding (ReqDeletePortForwarding) returns (ResDeletePortForwarding);
-  // Traffic
-  rpc GetTraffic (ReqGetTraffic) returns (ResGetTraffic);
-  // DHCPD
-  rpc CreateDHCPDConf (ReqCreateDHCPDConf) returns (ResCreateDHCPDConf);
-  rpc DeleteDHCPDConf (ReqDeleteDHCPDConf) returns (ResDeleteDHCPDConf);
+  rpc CreateSubnet (ReqCreateSubnet) returns (ResCreateSubnet); // 서브넷을 생성한다.
+  rpc ValidCheckSubnet (ReqValidCheckSubnet) returns (ResValidCheckSubnet); // 생성 또는 업데이트 하고자 하는 서브넷이 유효한지, 다른 서브넷 또는 네트워크 인터페이스와 겹치지 않는지 확인한다.
+  rpc GetSubnet (ReqGetSubnet) returns (ResGetSubnet); // 서브넷의 정보를 조회한다.
+  rpc GetSubnetByServer (ReqGetSubnetByServer) returns (ResGetSubnetByServer); // 서버의 UUID 로 서브넷을 조회한다.
+  rpc GetSubnetList (ReqGetSubnetList) returns (ResGetSubnetList); // 서브넷 목록을 조회한다.
+  rpc GetAvailableSubnetList (ReqGetAvailableSubnetList) returns (ResGetAvailableSubnetList); // 서버에서 사용중이지 않은 사용가능한 서브넷 목록을 조회한다.
+  rpc GetSubnetNum (ReqGetSubnetNum) returns (ResGetSubnetNum); // 서브넷의 개수를 조회한다.
+  rpc UpdateSubnet (ReqUpdateSubnet) returns (ResUpdateSubnet); // 서브넷의 정보를 업데이트 한다,
+  rpc DeleteSubnet (ReqDeleteSubnet) returns (ResDeleteSubnet); // 서브넷을 삭제한다.
+
+  rpc CreateAdaptiveIPSetting (ReqCreateAdaptiveIPSetting) returns (ResCreateAdaptiveIPSetting); // AdaptiveIP 설정을 저장한다.
+  rpc GetAdaptiveIPSetting (MsgType.Empty) returns (ResGetAdaptiveIPSetting); // AdaptiveIP 설정을 조회한다.
+  rpc GetAdaptiveIPAvailableIPList (MsgType.Empty) returns (ResGetAdaptiveIPAvailableIPList); // AdaptiveIP 로 설정이 가능한 사용한 IP 목록을 조회한다.
+  rpc CreateAdaptiveIPServer (ReqCreateAdaptiveIPServer) returns (ResCreateAdaptiveIPServer); // AdaptiveIP 를 생성한다.
+  rpc GetAdaptiveIPServer (ReqGetAdaptiveIPServer) returns (ResGetAdaptiveIPServer); // AdaptiveIP 정보를 조회한다.
+  rpc GetAdaptiveIPServerList (ReqGetAdaptiveIPServerList) returns (ResGetAdaptiveIPServerList); // AdaptiveIP 목록을 조회한다.
+  rpc GetAdaptiveIPServerNum (ReqGetAdaptiveIPServerNum) returns (ResGetAdaptiveIPServerNum); // AdaptiveIP 개수를 조회한다.
+  rpc DeleteAdaptiveIPServer (ReqDeleteAdaptiveIPServer) returns (ResDeleteAdaptiveIPServer); // AdaptiveIP 를 삭제한다.
+  rpc CreatePortForwarding (ReqCreatePortForwarding) returns (ResCreatePortForwarding); // AdaptiveIP 에 포트포워딩을 추가한다.
+  rpc GetPortForwardingList (ReqGetPortForwardingList) returns (ResGetPortForwardingList); // AdaptiveIP 에 추가된 포트포워딩 목록을 조회한다.
+  rpc DeletePortForwarding (ReqDeletePortForwarding) returns (ResDeletePortForwarding); // AdaptiveIP 에서 포트포워딩을 제거한다.
+
+  rpc GetTraffic (ReqGetTraffic) returns (ResGetTraffic); // AdaptiveIP 의 트래픽 사용량을 조회한다.
+
+  rpc CreateDHCPDConf (ReqCreateDHCPDConf) returns (ResCreateDHCPDConf); // DHCP 설정 파일을 생성한다.
+  rpc DeleteDHCPDConf (ReqDeleteDHCPDConf) returns (ResDeleteDHCPDConf); // DHCP 설정 파일을 삭제한다.
 }
 
-// Subnet
+// 서브넷을 생성하는 요청
 message ReqCreateSubnet {
-  MsgType.Subnet subnet = 1;
+  MsgType.Subnet subnet = 1; // 서브넷의 정보를 담고 있는 객체 (필수값 : groupID, networkIP, netmask, gateway, next_server, name_server, subnet_name)
 }
 
+// 서브넷을 생성하는 요청에 대한 응답
 message ResCreateSubnet {
-  MsgType.Subnet subnet = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Subnet subnet = 1; // 서브넷의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 생성 또는 업데이트 하고자 하는 서브넷이 유효한지, 다른 서브넷 또는 네트워크 인터페이스와 겹치지 않는지 확인하는 요청
 message ReqValidCheckSubnet {
-  MsgType.Subnet subnet = 1;
-  bool isUpdate = 2;
+  MsgType.Subnet subnet = 1; // 서브넷의 정보를 담고 있는 객체 (필수 : networkIP, netmask, gateway)
+  bool isUpdate = 2; // 업데이트 인지 여부
 }
 
+// 생성 또는 업데이트 하고자 하는 서브넷이 유효한지, 다른 서브넷 또는 네트워크 인터페이스와 겹치지 않는지 확인하는 요청에 대한 응답
 message ResValidCheckSubnet {
-  int64 errorCode = 1;
+  int64 errorCode = 1; // 생성 또는 업데이트 하고자 하는 서브넷이 유효하지 않을 경우 반환되는 에러 코드
 }
 
+// 서브넷의 정보를 조회하는 요청
 message ReqGetSubnet {
-  string UUID = 1;
+  string UUID = 1; // 서브넷의 UUID (필수값)
 }
 
+// 서브넷의 정보를 조회하는 요청에 대한 응답
 message ResGetSubnet {
-  MsgType.Subnet subnet = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Subnet subnet = 1; // 서브넷의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 서버의 UUID 로 서브넷을 조회하는 요청
 message ReqGetSubnetByServer {
-  string serverUUID = 1;
+  string serverUUID = 1; // 서버의 UUID (필수값)
 }
 
+// 서버의 UUID 로 서브넷을 조회하는 요청에 대한 응답
 message ResGetSubnetByServer {
-  MsgType.Subnet subnet = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Subnet subnet = 1; // 서브넷의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 서브넷 목록을 조회하는 요청
 message ReqGetSubnetList {
-  MsgType.Subnet subnet = 1;
-  int64 row = 2;
-  int64 page = 3;
+  MsgType.Subnet subnet = 1; // 검색 하고자 하는 서브넷의 정보를 담고 있는 객체. 비어있는 경우 전체 목록을 조회 한다.
+  int64 row = 2; // 한 페이지에 몇 개의 정보를 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
+  int64 page = 3; // 몇번째 페이지의 목록을 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
 }
 
+// 서브넷 목록을 조회하는 요청에 대한 응답
 message ResGetSubnetList {
-  repeated MsgType.Subnet subnet = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  repeated MsgType.Subnet subnet = 1; // 서브넷의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 서버에서 사용중이지 않은 사용가능한 서브넷 목록을 조회하는 요청
 message ReqGetAvailableSubnetList {
-  int64 groupID = 1;
+  int64 groupID = 1; // 그룹 ID (필수값)
 }
 
+// 서버에서 사용중이지 않은 사용가능한 서브넷 목록을 조회하는 요청에 대한 응답
 message ResGetAvailableSubnetList {
-  repeated MsgType.Subnet subnet = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  repeated MsgType.Subnet subnet = 1; // 서브넷의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 서브넷의 개수를 조회하는 요청
 message ReqGetSubnetNum {
-  int64 groupID = 1;
+  int64 groupID = 1; // 그룹 ID. 비어 있는 경우 전체 서브넷의 개수가 반환된다.
 }
 
+// 서브넷의 개수를 조회하는 요청에 대한 응답
 message ResGetSubnetNum {
-  int64 num = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  int64 num = 1; //
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 서브넷의 정보를 업데이트하는 요청
 message ReqUpdateSubnet {
-  MsgType.Subnet subnet = 1;
+  MsgType.Subnet subnet = 1; // 서브넷의 정보를 담고 있는 객체 (필수값 : UUID)
 }
 
+// 서브넷의 정보를 업데이트하는 요청에 대한 응답
 message ResUpdateSubnet {
-  MsgType.Subnet subnet = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Subnet subnet = 1; // 서브넷의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 서브넷을 삭제하는 요청
 message ReqDeleteSubnet {
-  string UUID = 1;
+  string UUID = 1; // 서브넷의 UUID (필수값)
 }
 
+// 서브넷을 삭제하는 요청에 대한 응답
 message ResDeleteSubnet {
-  MsgType.Subnet subnet = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Subnet subnet = 1; // 서브넷의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
-// AdaptiveIP
+
+// AdaptiveIP 설정을 저장하는 요청
 message ReqCreateAdaptiveIPSetting {
-  MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
+  MsgType.AdaptiveIPSetting adaptiveip_setting = 1; // AdaptiveIP 의 설정값들을 담고 있는 객체 (필수값 : 전체)
 }
 
+// AdaptiveIP 설정을 저장하는 요청에 대한 응답
 message ResCreateAdaptiveIPSetting {
-  MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.AdaptiveIPSetting adaptiveip_setting = 1; // AdaptiveIP 의 설정값들을 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// AdaptiveIP 설정을 조회하는 요청에 대한 응답 (요청 데이터 존재하지 않음.)
 message ResGetAdaptiveIPSetting {
-  MsgType.AdaptiveIPSetting adaptiveip_setting = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.AdaptiveIPSetting adaptiveip_setting = 1; // AdaptiveIP 의 설정값들을 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// AdaptiveIP 로 설정이 가능한 사용가능한 외부 IP 목록을 조회하는 요청에 대한 응답 (요청 데이터 존재하지 않음.)
 message ResGetAdaptiveIPAvailableIPList {
-  MsgType.AdaptiveIPAvailableIPList adaptiveip_availableip_list = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.AdaptiveIPAvailableIPList adaptiveip_availableip_list = 1; // AdaptiveIP 로 설정이 가능한 사용가능한 외부 IP 목록을 담고있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// AdaptiveIP 를 생성하는 요청
 message ReqCreateAdaptiveIPServer {
-  string serverUUID = 1;
-  int64  groupID = 2;
-  string publicIP = 3;
+  string serverUUID = 1; // 서버의 UUID (필수값)
+  int64  groupID = 2; // 그룹 ID (필수값)
+  string publicIP = 3; // 외부 IP (필수값)
 }
 
+// AdaptiveIP 를 생성하는 요청에 대한 응답
 message ResCreateAdaptiveIPServer {
-  MsgType.AdaptiveIPServer adaptiveip_server = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.AdaptiveIPServer adaptiveip_server = 1; // AdaptiveIP 의 정보를 담고있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// AdaptiveIP 정보를 조회하는 요청
 message ReqGetAdaptiveIPServer {
-  string serverUUID = 1;
+  string serverUUID = 1; // 서버의 UUID (필수값)
 }
 
+// AdaptiveIP 정보를 조회하는 요청에 대한 응답
 message ResGetAdaptiveIPServer {
-  MsgType.AdaptiveIPServer adaptiveip_server = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.AdaptiveIPServer adaptiveip_server = 1; // AdaptiveIP 의 정보를 담고있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// AdaptiveIP 목록을 조회하는 요청
 message ReqGetAdaptiveIPServerList {
-  MsgType.AdaptiveIPServer adaptiveip_server = 1;
-  int64 row = 2;
-  int64 page = 3;
+  MsgType.AdaptiveIPServer adaptiveip_server = 1;  // 검색하고자 하는 AdaptiveIP 의 정보를 담고있는 객체. 비어있는 경우 전체 목록을 조회한다.
+  int64 row = 2; // 한 페이지에 몇 개의 정보를 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
+  int64 page = 3; // 몇번째 페이지의 목록을 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
 }
 
+// AdaptiveIP 목록을 조회하는 요청에 대한 응답
 message ResGetAdaptiveIPServerList {
-  repeated MsgType.AdaptiveIPServer adaptiveip_server = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  repeated MsgType.AdaptiveIPServer adaptiveip_server = 1; // 여러 AdaptiveIP 의 정보를 담고 있는 AdaptiveIP 객체 목록
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// AdaptiveIP 개수를 조회하는 요청
 message ReqGetAdaptiveIPServerNum {
-  int64 groupID = 1;
+  int64 groupID = 1; // 그룹 ID (필수값)
 }
 
+// AdaptiveIP 개수를 조회하는 요청에 대한 응답
 message ResGetAdaptiveIPServerNum {
-  int64 num = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  int64 num = 1; // 지정한 그룹의 AdaptiveIP 의 개수
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// AdaptiveIP 를 삭제하는 요청
 message ReqDeleteAdaptiveIPServer {
-  string serverUUID = 1;
+  string serverUUID = 1; // 서버의 UUID (필수값)
 }
 
+// AdaptiveIP 를 삭제하는 요청에 대한 응답
 message ResDeleteAdaptiveIPServer {
-  string serverUUID = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  string serverUUID = 1; // 서버의 UUID
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// AdaptiveIP 에 포트포워딩을 추가하는 요청
 message ReqCreatePortForwarding {
-  MsgType.PortForwarding portForwarding = 1;
+  MsgType.PortForwarding portForwarding = 1; // 포트포워딩 정보를 담고 있는 객체 (필수값 : serverUUID, forwardTCP 또는 forwardUDP 또는 둘다, external_port, internal_port, description)
 }
 
+// AdaptiveIP 에 포트포워딩을 추가하는 요청에 대한 응답
 message ResCreatePortForwarding {
-  MsgType.PortForwarding portForwarding = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.PortForwarding portForwarding = 1; // 포트포워딩 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// AdaptiveIP 에 추가된 포트포워딩 목록을 조회하는 요청
 message ReqGetPortForwardingList {
-  MsgType.PortForwarding portForwarding = 1;
-  int64 row = 2;
-  int64 page = 3;
+  MsgType.PortForwarding portForwarding = 1; // 검색하고자 하는 포트포워딩 정보를 담고 있는 객체 (필수값 : serverUUID)
+  int64 row = 2; // 한 페이지에 몇 개의 정보를 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
+  int64 page = 3; // 몇번째 페이지의 목록을 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
 }
 
+// AdaptiveIP 에 추가된 포트포워딩 목록을 조회하는 요청에 대한 응답
 message ResGetPortForwardingList {
-  repeated MsgType.PortForwarding portForwarding = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  repeated MsgType.PortForwarding portForwarding = 1; // 여러 포트포워딩 정보를 담고 있는 포트포워딩 객체 목록
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// AdaptiveIP 에서 포트포워딩을 제거하는 요청
 message ReqDeletePortForwarding {
-  MsgType.PortForwarding portForwarding = 1;
+  MsgType.PortForwarding portForwarding = 1; // 포트포워딩 정보를 담고 있는 객체 (필수값 : serverUUID, external_port)
 }
 
+// AdaptiveIP 에서 포트포워딩을 제거하는 요청에 대한 응답
 message ResDeletePortForwarding {
-  string serverUUID = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  string serverUUID = 1; // 서버의 UUID
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
-// Traffic
+// 특정 날짜의 AdaptiveIP 의 트래픽 사용량을 조회하는 요청
 message ReqGetTraffic {
-  string serverUUID = 1;
-  string day = 2;
+  string serverUUID = 1; // 서버의 UUID (필수값)
+  string day = 2; // 날짜 지정 (필수값)
 }
 
+// 특정 날짜의 AdaptiveIP 의 트래픽 사용량을 조회하는 요청에 대한 응답
 message ResGetTraffic {
-  MsgType.Traffic traffic = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Traffic traffic = 1; // AdaptiveIP 의 총 외부 트래픽량
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
-// DHCPD
+// DHCP 설정 파일을 생성하는 요청
 message ReqCreateDHCPDConf {
-  string subnetUUID = 1;
+  string subnetUUID = 1; // 서브넷의 UUID (필수값)
 }
 
+// DHCP 설정 파일을 생성하는 요청에 대한 응답
 message ResCreateDHCPDConf {
-  string result = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  string result = 1; // 수행 결과 메세지
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// DHCP 설정 파일을 삭제하는 요청
 message ReqDeleteDHCPDConf {
-  string subnetUUID = 1;
+  string subnetUUID = 1; // 서브넷의 UUID (필수값)
 }
 
+// DHCP 설정 파일을 삭제하는 요청에 대한 응답
 message ResDeleteDHCPDConf {
-  string result = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  string result = 1; // 수행 결과 메세지
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
