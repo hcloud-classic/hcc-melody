@@ -181,6 +181,7 @@ message ResDeleteServerNodeByServerUUID {
 
 message ReqCreatePemKey {
   string serverUUID=1;
+  string token=2;
 }
 
 message ResCreatePemKey {
