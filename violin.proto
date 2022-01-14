@@ -37,6 +37,11 @@ service Violin {
   rpc GetServerNodeNum (ReqGetServerNodeNum) returns (ResGetServerNodeNum);
   rpc DeleteServerNode (ReqDeleteServerNode) returns (ResDeleteServerNode);
   rpc DeleteServerNodeByServerUUID (ReqDeleteServerNodeByServerUUID) returns (ResDeleteServerNodeByServerUUID);
+  // Viola
+  rpc RecvPemKey (ReqRecvPemKey) returns (ResRecvPemKey);
+  rpc CreatePemKey (ReqCreatePemKey) returns (ResCreatePemKey);
+  rpc GetPemKey (ReqGetPemKey) returns (ResGetPemKey);
+
 }
 
 // Server
@@ -172,4 +177,30 @@ message ReqDeleteServerNodeByServerUUID {
 message ResDeleteServerNodeByServerUUID {
   string serverUUID = 1;
   MsgType.HccErrorStack hccErrorStack = 2;
+}
+
+message ReqCreatePemKey {
+  string serverUUID=1;
+}
+
+message ResCreatePemKey {
+  string serverUUID=1;
+  string result = 2;
+}
+message ReqRecvPemKey {
+  string serverUUID=1;
+  string pemKey=2;
+}
+
+message ResRecvPemKey {
+  string result = 1;
+}
+
+message ReqGetPemKey {
+  string serverUUID=1;
+}
+
+message ResGetPemKey {
+  string serverUUID=1;
+  string pemKey=2;
 }
