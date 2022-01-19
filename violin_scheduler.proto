@@ -22,6 +22,7 @@ import public "msgtype.proto";
 
 service Scheduler {
   rpc ScheduleHandler (ReqScheduleHandler) returns (ResScheduleHandler);
+  rpc ScheduleTester (ReqScheduleHandler) returns (ResScheduleHandler);
 
 }
 
