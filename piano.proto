@@ -20,34 +20,39 @@ package RpcPiano;
 
 import public "msgtype.proto";
 
+// 단일 가상 서버의 자원들에 대한 모니터링 정보를 제공하고 과금 정보를 제공하는 모듈이다.
 service Piano {
-  rpc Telegraph (ReqMetricInfo) returns (ResMonitoringData);
-  rpc GetBillingData (ReqBillingData) returns (ResBillingData);
-  rpc GetBillingDetail (ReqBillingData) returns (ResBillingData);
+  rpc Telegraph (ReqMetricInfo) returns (ResMonitoringData); // 단일 가상 서버의 자원에 대한 모니터링 정보를 조회한다.
+  rpc GetBillingData (ReqBillingData) returns (ResBillingData); // 그룹별 과금 정보를 조회한다.
+  rpc GetBillingDetail (ReqBillingData) returns (ResBillingData); // 그룹별 과금 정보에 대한 상세 내역을 조회한다.
 }
 
+// 단일 가상 서버의 자원에 대한 모니터링 정보를 조회하는 요청
 message ReqMetricInfo {
-  MsgType.MetricInfo metricInfo = 1;
+  MsgType.MetricInfo metricInfo = 1; // 모니터링 하고자 하는 자원의 정보를 담고있는 객체
 }
 
+// 단일 가상 서버의 자원에 대한 모니터링 정보를 조회하는 요청에 대한 응답
 message ResMonitoringData {
-  MsgType.MonitoringData monitoringData = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.MonitoringData monitoringData = 1; // 모니터링 정보를 담고있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 그룹별 과금 정보를 조회하는 요청
 message ReqBillingData {
-  string billingType = 1;
-  repeated int64 groupID = 2;
-  string dateStart = 3;
-  string dateEnd = 4;
-  int64 row = 5;
-  int64 page = 6;
+  string billingType = 1; // 과금 정보를 조회할 방식 (년, 월, 일)
+  repeated int64 groupID = 2; // 그룹 ID
+  string dateStart = 3; // 조회 기간의 시작 날짜
+  string dateEnd = 4; // 조회 기간의 마지막 날짜
+  int64 row = 5; // 한 페이지에 몇 개의 정보를 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
+  int64 page = 6; // 몇번째 페이지의 목록을 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
 }
 
+// 그룹별 과금 정보를 조회하는 요청에 대한 응답
 message ResBillingData {
-  string billingType = 1;
-  repeated int64 groupID = 2;
-  bytes result = 3;
-  MsgType.HccErrorStack hccErrorStack = 4;
-  int32 totalNum = 5;
+  string billingType = 1; // 과금 정보를 조회한 방식 (년, 월, 일)
+  repeated int64 groupID = 2; // 그룹 ID
+  bytes result = 3; // 과금 정보를 담고있는 데이터
+  MsgType.HccErrorStack hccErrorStack = 4; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
+  int32 totalNum = 5; // 과금 정보의 개수
 }
