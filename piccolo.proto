@@ -20,56 +20,61 @@ package RpcPiccolo;
 
 import public "msgtype.proto";
 
+// API Gateway 모듈. Oboe 포탈로 부터 받은 GraphQL 요청을 받아서 각 미들웨어 모듈로 필요한 요청을 gRPC 로 전달한다.
 service Piccolo {
-  // Group
-  rpc GetGroupList(MsgType.Empty) returns (ResGetGroupList);
-  // Quota
-  rpc GetQuota(ReqGetQuota) returns (ResGetQuota);
-  // Charge
-  rpc GetCharge(ReqGetCharge) returns (ResGetCharge);
-  // ServerAction
-  rpc WriteServerAction (ReqWriteServerAction) returns (ResWriteServerAction);
-  // ServerAlarm
-  rpc WriteServerAlarm (ReqWriteServerAlarm) returns (ResWriteServerAlarm);
+  rpc GetGroupList(MsgType.Empty) returns (ResGetGroupList); // 그룹 리스트 조회
+  rpc GetQuota(ReqGetQuota) returns (ResGetQuota); // 쿼터 리스트 조회
+  rpc GetCharge(ReqGetCharge) returns (ResGetCharge); // 과금 리스트 조회
+  rpc WriteServerAction (ReqWriteServerAction) returns (ResWriteServerAction); // 서버에 수행된 기록 조회
+  rpc WriteServerAlarm (ReqWriteServerAlarm) returns (ResWriteServerAlarm); // 서버 알람 조회
 }
 
+// 그룹 리스트를 조회하는 요청에 대한 응답
 message ResGetGroupList {
-  repeated MsgType.Group group = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  repeated MsgType.Group group = 1; // 그룹
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 그룹별 과금 정보를 조회하는 요청
 message ReqGetCharge {
-  int64 groupID = 1;
+  int64 groupID = 1; // 그룹 ID
 }
 
+// 그룹별 과금 정보를 조회하는 요청에 대한 응답
 message ResGetCharge {
-  MsgType.Charge charge = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Charge charge = 1; // 과금 정보
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 그룹별 쿼터 정보를 조회하는 요청
 message ReqGetQuota {
-  int64 groupID = 1;
+  int64 groupID = 1; // 그룹 ID
 }
 
+// 그룹별 쿼터 정보를 조회하는 요청에 대한 응답
 message ResGetQuota {
-  MsgType.GroupQuota quota = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.GroupQuota quota = 1; // 쿼터 정보
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 서버의 로그를 작성하는 요청
 message ReqWriteServerAction {
-  string serverUUID = 1;
-  MsgType.ServerAction server_action = 2;
+  string serverUUID = 1; // 서버 UUID
+  MsgType.ServerAction server_action = 2; // 서버에 수행된 동작에 대한 정보
 }
 
+// 서버의 로그를 작성하는 요청에 대한 응답
 message ResWriteServerAction {
-  string result = 1;
+  string result = 1; // 서버의 로그가 정상적으로 입력 되었는지에 대한 결과
 }
 
+// 서버의 알람을 작성하는 요청
 message ReqWriteServerAlarm {
-  string serverUUID = 1;
-  MsgType.ServerAlarm server_alarm = 2;
+  string serverUUID = 1; // 서버 UUID
+  MsgType.ServerAlarm server_alarm = 2; // 서버의 알람에 대한 정보를 담고 있는 객체
 }
 
+// 서버의 알람을 작성하는 요청에 대한 응답
 message ResWriteServerAlarm {
-  string result = 1;
+  string result = 1; // 서버의 알람이 정상적으로 입력 되었는지에 대한 결과
 }
