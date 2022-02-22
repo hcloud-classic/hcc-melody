@@ -20,16 +20,19 @@ package RpcScheduler;
 
 import public "msgtype.proto";
 
+// 단일 가상 서버의 노드 선택을 스케줄 해주는 모듈이다.
 service Scheduler {
   rpc ScheduleHandler (ReqScheduleHandler) returns (ResScheduleHandler);
-
+  rpc ScheduleTester (ReqScheduleHandler) returns (ResScheduleHandler);
 }
 
+// 단일 가상 서버의 노드 선택 스케줄링 요청
 message ReqScheduleHandler {
-  MsgType.ScheduleServer server = 1;
+  MsgType.ScheduleServer server = 1; // 스케줄링 대상 단일 가상 서버의 정보와 요청 노드 개수를 담고 있는 객체
 }
 
+// 단일 가상 서버의 노드 선택 스케줄링 요청에 대한 응답
 message ResScheduleHandler {
-  MsgType.ScheduledNodes nodes = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.ScheduledNodes nodes = 1; // 스케줄링된 노드의 정보를 담고 있는 객
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }

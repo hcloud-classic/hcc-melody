@@ -20,14 +20,15 @@ package RpcCello;
 
 import public "msgtype.proto";
 
+// 단일 가상 서버의 볼륨들을 관리하는 모듈
 service Cello {
-  rpc VolumeHandler (ReqVolumeHandler) returns (ResVolumeHandler);
-  rpc PoolHandler (ReqPoolHandler) returns (ResPoolHandler);
-  rpc GetVolumeList (ReqGetVolumeList) returns (ResGetVolumeList);
-  rpc GetPoolList (ReqGetPoolList) returns (ResGetPoolList);
-  rpc GetLunList (ReqGetLunList) returns (ResGetLunList);
-  rpc MountHandler (ReqMountHandler) returns (ResMountHandler);
-  rpc AvailablePoolList (ReqAvailablePoolList) returns (ResAvailablePoolList);
+  rpc VolumeHandler (ReqVolumeHandler) returns (ResVolumeHandler); // 볼륨 정보에 대해 생성, 조회, 업데이트, 삭제를 수행한다.
+  rpc PoolHandler (ReqPoolHandler) returns (ResPoolHandler); // 볼륨의 Pool 정보에 대해서 생성, 삭제를 수행한다.
+  rpc GetVolumeList (ReqGetVolumeList) returns (ResGetVolumeList); // 단일 가상 서버의 볼륨 목록을 조회한다.
+  rpc GetPoolList (ReqGetPoolList) returns (ResGetPoolList); // Pool 리스트를 조회한다.
+  rpc GetLunList (ReqGetLunList) returns (ResGetLunList); // Lun 리스트를 조회한다.
+  rpc MountHandler (ReqMountHandler) returns (ResMountHandler); // 볼륨의 마운트를 제어한다.
+  rpc AvailablePoolList (ReqAvailablePoolList) returns (ResAvailablePoolList); // 사용가능한 Pool 목록을 조회한다.
 }
 
 message ReqVolumeHandler {
@@ -109,8 +110,8 @@ message ReqMountHandler {
 }
 
 message ResMountHandler {
-  bool result = 1; 
-  string errorMsg = 2;
+  MsgType.Volume volume= 1;
+  bool result = 2; 
   MsgType.HccErrorStack hccErrorStack = 3;
 }
 

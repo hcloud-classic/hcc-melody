@@ -336,3 +336,10 @@ message ServerAlarm {
   string reason = 1;
   string detail = 2;
 }
+
+
+// Viola
+message SSHKey{
+  string serverUUID=1;
+  string pemKey=2;
+}

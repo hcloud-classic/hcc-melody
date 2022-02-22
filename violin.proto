@@ -20,156 +20,222 @@ package RpcViolin;
 
 import public "msgtype.proto";
 
+// 단일 가상 서버를 관리하는 모듈이다.
 service Violin {
-  // Server
-  rpc CreateServer (ReqCreateServer) returns (ResCreateServer);
-  rpc GetServer (ReqGetServer) returns (ResGetServer);
-  rpc GetServerList (ReqGetServerList) returns (ResGetServerList);
-  rpc GetServerNum (ReqGetServerNum) returns (ResGetServerNum);
-  rpc UpdateServer (ReqUpdateServer) returns (ResUpdateServer);
-  rpc UpdateServerNodes (ReqUpdateServerNodes) returns (ResUpdateServerNodes);
-  rpc ScaleUpServer (ReqScaleUpServer) returns (ResScaleUpServer);
-  rpc DeleteServer (ReqDeleteServer) returns (ResDeleteServer);
-  // ServerNode
-  rpc CreateServerNode (ReqCreateServerNode) returns (ResCreateServerNode);
-  rpc GetServerNode (ReqGetServerNode) returns (ResGetServerNode);
-  rpc GetServerNodeList (ReqGetServerNodeList) returns (ResGetServerNodeList);
-  rpc GetServerNodeNum (ReqGetServerNodeNum) returns (ResGetServerNodeNum);
-  rpc DeleteServerNode (ReqDeleteServerNode) returns (ResDeleteServerNode);
-  rpc DeleteServerNodeByServerUUID (ReqDeleteServerNodeByServerUUID) returns (ResDeleteServerNodeByServerUUID);
+  rpc CreateServer (ReqCreateServer) returns (ResCreateServer); // 단일 가상 서버를 생성한다.
+  rpc GetServer (ReqGetServer) returns (ResGetServer); // 단일 가상 서버의 정보를 조회한다.
+  rpc GetServerList (ReqGetServerList) returns (ResGetServerList); // 단일 가상 서버 목록을 조회한다.
+  rpc GetServerNum (ReqGetServerNum) returns (ResGetServerNum); // 단일 가상 서버의 개수를 조회한다.
+  rpc UpdateServer (ReqUpdateServer) returns (ResUpdateServer); // 단일 가상 서버의 정보를 업데이트 한다.
+  rpc UpdateServerNodes (ReqUpdateServerNodes) returns (ResUpdateServerNodes); // 단일 가상 서버의 노드 개수를 변경하여 업데이트 한다.
+  rpc ScaleUpServer (ReqScaleUpServer) returns (ResScaleUpServer); // 단일 가상 서버를 Scale Up 한다.
+  rpc DeleteServer (ReqDeleteServer) returns (ResDeleteServer); // 단일 가상 서버를 삭제한다.
+
+  rpc CreateServerNode (ReqCreateServerNode) returns (ResCreateServerNode); // 단일 가상 서버를 구성하는 노드에 대한 정보를 추가한다.
+  rpc GetServerNode (ReqGetServerNode) returns (ResGetServerNode); // 단일 가상 서버를 구성하는 노드에 대한 정보를 조회한다.
+  rpc GetServerNodeList (ReqGetServerNodeList) returns (ResGetServerNodeList); // 단일 가상 서버를 구성하는 노드의 목록을 조회한다.
+  rpc GetServerNodeNum (ReqGetServerNodeNum) returns (ResGetServerNodeNum); // 단일 가상 서버를 구성하는 노드의 개수를 조회한다.
+  rpc DeleteServerNode (ReqDeleteServerNode) returns (ResDeleteServerNode); // 단일 가상 서버를 구성하는 노드에 대한 정보를 삭제한다.
+  rpc DeleteServerNodeByServerUUID (ReqDeleteServerNodeByServerUUID) returns (ResDeleteServerNodeByServerUUID); // 특정 서버에 대해 단일 가상 서버를 구성하는 모든 노드들에 대한 정보를 삭제한다.
+
+  rpc RecvPemKey (ReqRecvPemKey) returns (ResRecvPemKey); // 단일 가상 서버의 SSH 접속을 위한 개인키를 DB에 새로 등록하거나 업데이트 한다.
+  rpc CreatePemKey (ReqCreatePemKey) returns (ResCreatePemKey); // 단일 가상 서버의 SSH 접속을 위한 개인키를 생성한다.
+  rpc GetPemKey (ReqGetPemKey) returns (ResGetPemKey); // 단일 가상 서버의 SSH 접속을 위한 개인키를 조회한다.
+
 }
 
-// Server
+// 단일 가상 서버를 생성하는 요청
 message ReqCreateServer {
-  MsgType.Server server = 1;
-  int32 nrNode = 2;
-  string token = 3;
+  MsgType.Server server = 1; // 서버의 정보를 담고 있는 객체 (필수값 : groupID, subnetUUID, OS, server_name, server_desc, disk_size, userUUID)
+  int32 nrNode = 2; // 단일 가상 서버를 구성할 노드의 개수 (Portal 에서 노드의 개수로 서버를 생성하는 'Number of Nodes' Schedule Method 가 선택되었을 때만 해당된다.)
+  string token = 3; // Portal 로그인시 사용한 Token 값
 }
 
+// 단일 가상 서버를 생성하는 요청에 대한 응답
 message ResCreateServer {
-  MsgType.Server server = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Server server = 1; // 서버의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버의 정보를 조회하는 요청
 message ReqGetServer {
-  string UUID = 1;
+  string UUID = 1; // 서버의 UUID (필수값)
 }
 
+// 단일 가상 서버의 정보를 조회하는 요청에 대한 응답
 message ResGetServer {
-  MsgType.Server server = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Server server = 1;// 서버의 정보를 담고 있는 객체 (필수값 : UUID)
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버 목록을 조회하는 요청
 message ReqGetServerList {
-  MsgType.Server Server = 1;
-  int64 row = 2;
-  int64 page = 3;
+  MsgType.Server Server = 1; // 검색 하고자 하는 서버의 정보를 담고 있는 객체. 비어있는 경우 전체 목록을 조회 한다.
+  int64 row = 2; // 한 페이지에 몇 개의 정보를 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
+  int64 page = 3; // 몇번째 페이지의 목록을 표시할지. row 와 page 가 비어있는 경우 전체 목록이 표시된다.
 }
 
+// 단일 가상 서버 목록을 조회하는 요청에 대한 응답
 message ResGetServerList {
-  repeated MsgType.Server server = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  repeated MsgType.Server server = 1; // 서버의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버의 개수를 조회하는 요청
 message ReqGetServerNum {
-  int64 groupID = 1;
+  int64 groupID = 1; // 그룹 ID. 비어 있는 경우 전체 서브넷의 개수가 반환된다.
 }
 
+// 단일 가상 서버의 개수를 조회하는 요청에 대한 응답
 message ResGetServerNum {
-  int64 num = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  int64 num = 1; // 요청한 그룹에 대한 단일 가상 서버의 개수
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버의 정보를 업데이트하는 요청
 message ReqUpdateServer {
-  MsgType.Server server = 1;
+  MsgType.Server server = 1; // 서버의 정보를 담고 있는 객체 (필수값 : UUID)
 }
 
+// 단일 가상 서버의 정보를 업데이트 하는 요청에 대한 응답
 message ResUpdateServer {
-  MsgType.Server server = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Server server = 1; // 서버의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버의 노드 개수를 변경하여 업데이트하는 요청
 message ReqUpdateServerNodes {
-  string serverUUID = 1;
-  string selectedNodes = 2;
-  string token = 3;
+  string serverUUID = 1; // 서버의 UUID (필수값)
+  string selectedNodes = 2; // 선택된 노드들의 UUID
+  string token = 3; // Portal 로그인시 사용한 Token 값
 }
 
+// 단일 가상 서버의 노드 개수를 변경하여 업데이트하는 요청에 대한 응답
 message ResUpdateServerNodes {
-  MsgType.Server server = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Server server = 1; // 서버의 UUID
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버를 Scale Up 하는 요청
 message ReqScaleUpServer {
-  string serverUUID = 1;
-  string token = 2;
+  string serverUUID = 1; // 서버의 UUID (필수값)
+  string token = 2; // Portal 로그인시 사용한 Token 값
 }
 
+// 단일 가상 서버를 Scale Up 하는 요청에 대한 응답
 message ResScaleUpServer {
-  MsgType.Server server = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Server server = 1; // 서버의 UUID
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버를 삭제하는 요청
 message ReqDeleteServer {
-  string serverUUID = 1;
-  string token = 2;
+  string serverUUID = 1; // 서버의 UUID (필수값)
+  string token = 2; // Portal 로그인시 사용한 Token 값
 }
 
+// 단일 가상 서버를 삭제하는 요청에 대한 응답
 message ResDeleteServer {
-  MsgType.Server server = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.Server server = 1; // 서버의 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버를 구성하는 노드에 대한 정보를 추가하는 요청
 message ReqCreateServerNode {
-  MsgType.ServerNode server_node = 1;
+  MsgType.ServerNode server_node = 1; // 단일 가상 서버를 구성하는 노드에 대한 정보를 담고 있는 객체 (필수값 : serverUUID, nodeUUID)
 }
 
+// 단일 가상 서버를 구성하는 노드에 대한 정보를 추가하는 요청에 대한 응답
 message ResCreateServerNode {
-  MsgType.ServerNode server_node = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.ServerNode server_node = 1; // 단일 가상 서버를 구성하는 노드에 대한 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버를 구성하는 노드에 대한 정보를 조회하는 요청
 message ReqGetServerNode {
-  string UUID = 1;
+  string UUID = 1; // 서버의 UUID
 }
 
+// 단일 가상 서버를 구성하는 노드에 대한 정보를 조회하는 요청에 대한 응답
 message ResGetServerNode {
-  MsgType.ServerNode server_node = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.ServerNode server_node = 1; // 단일 가상 서버를 구성하는 노드에 대한 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버를 구성하는 노드의 목록을 조회하는 요청
 message ReqGetServerNodeList {
-  string serverUUID = 1;
+  string serverUUID = 1; // 서버의 UUID (필수값)
 }
 
+// 단일 가상 서버를 구성하는 노드의 목록을 조회하는 요청에 대한 응답
 message ResGetServerNodeList {
-  repeated MsgType.ServerNode server_node = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  repeated MsgType.ServerNode server_node = 1; // 단일 가상 서버를 구성하는 노드에 대한 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버를 구성하는 노드의 개수를 조회하는 요청
 message ReqGetServerNodeNum {
-  string serverUUID = 1;
+  string serverUUID = 1; // 서버의 UUID (필수값)
 }
 
+// 단일 가상 서버를 구성하는 노드의 개수를 조회하는 요청에 대한 응답
 message ResGetServerNodeNum {
-  int64 num = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  int64 num = 1; // 단일 가상 서버를 구성하는 노드의 개수
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 단일 가상 서버를 구성하는 노드에 대한 정보를 삭제하는 요청
 message ReqDeleteServerNode {
-  string UUID = 1;
+  string UUID = 1; // 서버의 UUID (필수값)
 }
 
+// 단일 가상 서버를 구성하는 노드에 대한 정보를 삭제하는 요청에 대한 응답
 message ResDeleteServerNode {
-  MsgType.ServerNode server_node = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  MsgType.ServerNode server_node = 1; // 단일 가상 서버를 구성하는 노드에 대한 정보를 담고 있는 객체
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
+// 특정 서버에 대해 단일 가상 서버를 구성하는 모든 노드들에 대한 정보를 삭제하는 요청
 message ReqDeleteServerNodeByServerUUID {
-  string serverUUID = 1;
+  string serverUUID = 1; // 서버의 UUID (필수값)
 }
 
+// 특정 서버에 대해 단일 가상 서버를 구성하는 모든 노드들에 대한 정보를 삭제하는 요청에 대한 응답
 message ResDeleteServerNodeByServerUUID {
-  string serverUUID = 1;
-  MsgType.HccErrorStack hccErrorStack = 2;
+  string serverUUID = 1; // 서버의 UUID
+  MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
+}
+
+// 단일 가상 서버의 SSH 접속을 위한 개인키를 생성하는 요청
+message ReqCreatePemKey {
+  string serverUUID = 1; // 서버의 UUID (필수값)
+  string token = 2; // Portal 로그인시 사용한 Token 값 (필수값)
+}
+
+// 단일 가상 서버의 SSH 접속을 위한 개인키를 생성하는 요청에 대한 응답
+message ResCreatePemKey {
+  string serverUUID = 1;  // 서버의 UUID
+  string result = 2; // SSH 개인키 생성에 대한 결과 (에러가 발생한 경우 에러 메세지 포함.)
+}
+
+// 단일 가상 서버의 SSH 접속을 위한 개인키를 DB에 새로 등록하거나 업데이트하는 요청
+message ReqRecvPemKey {
+  string serverUUID = 1; // 서버의 UUID (필수값)
+  string pemKey = 2; // SSH 접속 개인키
+}
+
+// 단일 가상 서버의 SSH 접속을 위한 개인키를 DB에 새로 등록하거나 업데이트하는 요청에 대한 응답
+message ResRecvPemKey {
+  string result = 1; // DB 등록에 대한 결과 (에러가 발생한 경우 에러 메세지 포함.)
+}
+
+// 단일 가상 서버의 SSH 접속을 위한 개인키를 조회하는 요청
+message ReqGetPemKey {
+  string serverUUID = 1; // 서버의 UUID (필수값)
+}
+
+// 단일 가상 서버의 SSH 접속을 위한 개인키를 조회하는 요청에 대한 응답
+message ResGetPemKey {
+  string serverUUID = 1; // 서버의 UUID (필수값)
+  string pemKey = 2; // SSH 접속 개인키
 }

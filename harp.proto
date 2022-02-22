@@ -125,7 +125,7 @@ message ReqGetSubnetNum {
 
 // 서브넷의 개수를 조회하는 요청에 대한 응답
 message ResGetSubnetNum {
-  int64 num = 1; //
+  int64 num = 1; // 요청한 그룹에 대한 서브넷의 개수
   MsgType.HccErrorStack hccErrorStack = 2; // 에러가 발생하였을 경우 에러메세지를 담고 있는 객체
 }
 
